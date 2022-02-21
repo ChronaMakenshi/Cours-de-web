@@ -1,0 +1,40 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>Envoi d'Information</title>
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <!-- <form action="page2.html" method="get"> -->
+        <div id="maDiv">
+            <h2>Première page</h2>
+            <p>
+                Un nombre SVP : <input type="number" id="nombre" />
+            </p>
+            <p>
+                Un texte SVP : <input type="text" id="texte" />
+            </p>
+            <input type="submit" value="Envoyer du texte dans une autre page !" id="monbouton" />
+        </div>
+    <!-- </form> -->
+    <script>
+    var monbouton = document.getElementById("monbouton");
+   
+
+    monbouton.addEventListener("click", function() {
+
+        var txt = document.getElementById('texte').value;
+        var nombre = document.getElementById('nombre').value;
+        location.href = "page2.html?t=" + txt + "&n=" + nombre;
+
+       // location.replace(encodeURI("page2.html?t=" + txt + "&n=" + nombre));
+
+    });
+    </script>
+</body>
+
+</html>

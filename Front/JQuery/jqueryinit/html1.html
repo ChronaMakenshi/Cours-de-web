@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <title>JavaScript V JQuery</title>
+    <link href="css/bootstrap.css" rel="stylesheet" />
+    <style>
+
+    </style>
+
+    <script src="js/jquery-3.4.1.js"></script>
+    <script>
+        $(document).ready(function() {
+            $.ajax({
+                url: 'pays.json',
+                type: 'GET',
+                dataType: 'json',
+                // Paramétre success de retour qui est exécuté lorsque la requête Ajax est une réussite
+                success: function(monjson, statut) {
+                    var html = "";
+                    monjson.forEach(element => {
+
+                        html += "<li id='" + element.id + "'>" + element.nom_fr_fr + "<br></li>";
+
+                    });
+                    $("#pays").show();
+                    $("#pays").empty();
+                    $("#pays").append(html);
+                },
+                // Paramétre error de retour qui est exécuté lorsqu'il y a une erreur 
+                error: function(resultat, statut, erreur) {
+
+                    erreur = alert("Il y a eu un problème avec votre requête Ajax !!!");
+                },
+
+                complete: function(resultat, statut) {
+                    console.log(resultat.responseJSON);
+                }
+            });
+        });
+    </script>
+
+</head>
+
+<body>
+    <h1>Requête AJAX et JQuery</h1><br>
+    <ul name="pays" id="pays"></ul>
+</body>
+
+</html>

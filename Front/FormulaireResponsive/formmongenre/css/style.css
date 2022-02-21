@@ -1,0 +1,31 @@
+body {
+    margin: 0px;
+    padding: 0px;
+    background-color: rgb(114, 169, 223);
+}
+
+h1 {
+    text-align: center;
+}
+
+#erreur,
+#valide {
+    visibility: hidden;
+}
+
+#madiv {
+    width: 50%;
+    margin: auto;
+}
+
+.form_error {
+    display: inline-block;
+    color: rgb(207, 22, 22);
+    padding: 10px;
+}
+
+#tdconteneur {
+    text-align: center;
+    /* display: table-cell; */
+    /* vertical-align: middle; */
+}

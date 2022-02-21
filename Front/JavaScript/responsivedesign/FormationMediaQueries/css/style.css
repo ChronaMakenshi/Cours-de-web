@@ -1,0 +1,180 @@
+/* Styles généraux */
+
+body {
+    font-family: Sans-serif;
+    font-size: 100%;
+    background: #ccc;
+}
+
+#intro {
+    padding-left: 130px;
+    font-size: 30px;
+    min-height: 150px;
+}
+
+#container {
+    border: 1px groove #808080;
+    font: 75% Georgia;
+    font-weight: bold;
+    line-height: 1.7;
+    color: #006600;
+    background: url("../img/logo.png") no-repeat left top;
+    margin: 0;
+    position: relative;
+    background-color: #FFFFFF;
+    border-radius: 10px;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    box-shadow: 8px 8px 12px #aaa;
+    -moz-box-shadow: 8px 8px 12px #aaa;
+    -webkit-box-shadow: 8px 8px 12px #aaa;
+    filter: progid: DXImageTransform.Microsoft.Shadow(color='#aaaaaa', Direction=135, Strength=12);
+    font-weight: normal;
+    clear: both;
+}
+
+img,
+object,
+embed,
+canvas,
+video,
+audio,
+picture {
+    max-width: 100%;
+    height: auto;
+}
+
+.titre {
+    text-align: center;
+    padding-right: 40px;
+    font-family: Mistral;
+    font-size: 2em;
+    font-weight: bold;
+    color: #006600;
+}
+
+#souligne {
+    padding-left: 40px;
+    max-width: 100%;
+}
+
+a {
+    color: rgb(156, 22, 123);
+    text-decoration: none;
+}
+
+p.mention {
+    margin: 1em;
+    color: #666;
+    clear: both;
+    padding-top: 2em;
+}
+
+h1 {
+    padding: 0;
+    color: #fff;
+    text-shadow: 1px 1px 1px #aaa;
+    margin-bottom: 0;
+    margin: 1em;
+}
+
+h2 {
+    background: #B2D33A;
+    color: #fff;
+    margin: 0;
+    padding: 4px;
+}
+
+#menu ul,
+#menu li {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+#menu li {
+    float: left;
+    width: 20%;
+    text-align: center;
+}
+
+#menu a {
+    display: block;
+    background: #444;
+    color: #fff;
+    border-bottom: 1px;
+    text-decoration: none;
+    line-height: 200%;
+    padding: 0 2em;
+}
+
+#menu a:hover {
+    background: #222;
+}
+
+#fin {
+    margin-right: 10px;
+    padding: 3px;
+}
+
+
+/* par défaut les éléments sont l'un en dessous de l'autre */
+
+#main,
+#annexe {
+    float: left;
+    background: #fff;
+    min-height: 300px;
+    overflow: auto;
+    width: 100%;
+    clear: both;
+}
+
+#aside {
+    background: #eee;
+}
+
+#menu {
+    width: 100%;
+    overflow: auto;
+}
+
+#fin {
+    margin-top: 10px;
+}
+
+
+/* max-width pour moyennes résolutions, les éléments sont côte à côte */
+
+@media screen and (max-width: 992px) {
+    #main {
+        width: 60%;
+        clear: none;
+    }
+    #annexe {
+        width: 40%;
+        clear: none;
+    }
+}
+
+
+/* max-width pour faibles résolutions, les éléments sont l'un en dessous de l'autre */
+
+@media screen and (max-width: 767px) {
+    #menu a {
+        display: block;
+    }
+    #menu li {
+        float: none;
+        width: 100%;
+    }
+    #main,
+    #annexe,
+    #menu {
+        clear: both;
+        width: 100%;
+    }
+    .titre {
+        font-size: 1em;
+    }
+}

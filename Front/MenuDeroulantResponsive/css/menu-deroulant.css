@@ -1,0 +1,172 @@
+/* On supprime les marges internes et externes */
+body{
+    font-family: Verdana, Calibri, sans-serif;
+    margin: 0px;
+    padding: 0px;
+    background-image: url(bg.jpg);
+}
+
+nav > ul {
+    margin: 0px;
+    padding: 0px;
+}
+
+/* On supprime les puces devant tous les éléments des li */
+nav li {
+
+    list-style-type: none;
+}
+
+/* On place tous les éléments de la liste principale en ligne sans toucher aux éléments des li des menus inférieurs*/
+nav > ul > li {
+    float: left;
+    position: relative;
+}
+
+/* On cache les éléments des menus inférieurs */
+.submenu {
+    display: none;
+}
+
+/*On rend notre case à cocher invisible ainsi que le nom Menu */
+nav input[type=checkbox] {
+    display: none;
+}
+
+/* On cache aussi le bouton affichant le menu-mobile */
+.menu-mobile {
+    display: none;
+}
+
+/* On va étirer le menu sur toute la surface disponible */
+nav {
+    width: 100%;
+    background-color:#424558;
+}
+
+nav > ul::after {
+    content: '';
+    display: table;
+    clear: both;
+}
+
+nav a {
+    display: inline-block;
+    text-decoration: none;
+}
+
+nav > ul > li > a {
+
+    padding: 20px 30px;
+    color : #fff;
+}
+
+/* On gére maintenant l'affichage des sous-menus au passage de la souris sur les en-têtes */
+nav li:hover .submenu {
+
+    display: inline-block;
+    position: absolute;
+    top: 100%;
+    left: 0px;
+    padding: 0px;
+    z-index: 10000;
+
+}
+
+.submenu li {
+    border-bottom: 1px solid #ccc;
+}
+
+.submenu li a {
+    padding: 15px 30px;
+    font-size: 13px;
+    color: #222538;
+    width: 270px;
+}
+
+.menu-html:hover {
+    border-top: 5px solid #e44d26;
+    background-color: RGBa(228,77,38, 0.15);
+}
+.menu-css:hover {
+    border-top: 5px solid #0070bb;
+    background-color: RGBa(000,112,192, 0.15);
+}
+
+.menu-js:hover {
+    border-top: 5px solid #f1dc4f;
+    background-color: RGBa(241,211,79, 0.15);
+}
+
+.contact a:hover {
+    border-top: 5px solid #222538;
+    background-color: RGBa(52, 73, 94, 0.15);
+}
+
+nav > ul > li:hover a {
+    padding: 15px 30px 20px 30px;
+}
+
+/* On va maintenant habiller les sou-menus */
+.menu-html .submenu {
+    background-color: RGB(230, 100, 40);
+}
+
+.menu-css .submenu {
+    background-color: RGB(000, 160, 240);
+}
+
+.menu-js .submenu {
+    background-color: RGB(251, 216, 99);
+}
+
+.submenu li:hover a {
+    color: #eee;
+    font-weight: bold;
+}
+
+.menu-html .submenu li:hover {
+    background-color: RGB(210,77,60);
+}
+
+.menu-css .submenu li:hover {
+    background-color: RGB(000,115,200);
+}
+
+.menu-js .submenu li:hover {
+    background-color: RGB(200,165,75);
+}
+
+
+/* On va gérer maintenant le Responsive Design pour les écrans de résolution plus petite que 680px */
+
+/* Lorsqu'un utilisateur appuie sur le bouton Menu, le Menu entier s'affiche */
+nav input[type=checkbox]:checked ~ ul {
+    display: block;
+}
+
+/* On modifie l'apparence du menu pour assurer le Responsive pour les écrans dont la résolution est inférieure 680px */
+@media (max-width: 680px){
+    .menu-mobile {   
+        display: block;
+        color: #fff;
+        background-color: rgba(29,197,151,0.97);
+        text-align: center;
+        padding: 12px 0;
+    }
+    nav ul {
+        display: none;
+    }
+    nav ul li, nav ul li a {
+        width: 100%;
+        text-align: center;
+    }
+    nav ul li a, nav ul li:hover a {
+        padding: 10px 0px 10px 0px;
+    }
+    nav li:hover .submenu {
+        display: block;
+        position: static;
+    }
+
+}

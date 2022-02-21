@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Equation du Second Degré</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="css/monstyle.css">
+    <script>
+        window.addEventListener("load", function () {
+            var resultat = document.getElementById("resultat");
+            var btnResolution = document.getElementById("resolution");
+            var monElet=document.getElementsByClassName("moninput");
+
+            var monRegEx = /^[1-9]{1,}e|E?[1-9]{1,}$/g
+            
+            for(let i=0; i<monElet.length; i++){
+                monElet[i].addEventListener("keyup", function(){
+
+                    console.log( monElet[i].value);
+                    if(!monElet[i].value.match(monRegEx)){
+                        console.log("C'est Interdit !!!");
+                    }else{
+                        console.log("C'est OK !!!");
+                    }
+                });
+            }
+
+            function verifier_num(param) {
+                if (isNaN(param.value) == true) {
+                    param.style.borderColor = "red";
+                    throw "Vous devez saisir un numérique !!!";
+                    return false;
+                } else {
+                    param.style.borderColor = "#fff";
+                    return true;
+                }
+            }
+
+            btnResolution.addEventListener("click", resoudre);
+
+            function resoudre() {
+
+                var a = document.getElementById("a");
+                var b = document.getElementById("b");
+                var c = document.getElementById("c");
+
+                try {
+
+                    // Gestion du cas interdit a=0
+                    if (a.value == 0) {
+                        a.style.borderColor = "red";
+                        throw "La valeur du coefficient <b>a</b> ne peut être nulle !!!";
+                    }
+
+                    verifier_num(a);
+                    verifier_num(b);
+                    verifier_num(c);
+
+                    if ((a.value == '') || (b.value == '') || (c.value == '')) {
+                        throw "Vous avez oublié de saisir un nombre !!!";
+                    } else {
+                        msg.innerHTML = "<div style='color:#ffffff'>Vos saisies sont valides</div>";
+                    }
+
+                    var delta = (Math.pow(b.value, 2) - 4 * a.value * c.value);
+
+                    if (resultat.style.display == "none") {
+                        resultat.style.display = "block";
+                    } else {
+                        resultat.style.display = "none";
+                    }
+
+                    if (delta == 0) {
+
+                        var racine0 = -b.value / (2 * a.value);
+
+                        resultat.innerHTML = "La valeur de delta est : " + delta + "<br>La racine double de l'équation  " + a.value + "X<sup>2</sup> +" + b.value + "X  +" + c.value + " = 0" + " est : " + "<br><br>X0 = " + racine0;
+                    }
+
+                    if (delta < 0) {
+                        resultat.innerHTML = "Il n'y a pas de racine réelle à cette équation  " + a.value + "X<sup>2</sup> +" + b.value + "X +" + c.value + " = 0";
+                    }
+
+                    if (delta > 0) {
+
+                        var racine1 = (-b.value - Math.sqrt(delta)) / (2 * a.value);
+                        var racine2 = (-b.value + Math.sqrt(delta)) / (2 * a.value);
+
+                        resultat.innerHTML = "La valeur de delta est : " + delta + "<br>Les racines de l'équation  " + a.value + "X<sup>2</sup> +" + b.value + "X +" + c.value + " = 0" + " sont : " + "<br><br>X1 = " + racine1 + "<br><br>X2 = " + racine2;
+                    }
+                } catch (e) {
+
+                    msg.innerHTML = e;
+                }
+            }
+
+        });
+    </script>
+</head>
+<body>
+    <h1 class="center-bandeau">Résolution d'une équation du Second degré de la forme : <br>aX<sup>2</sup> + bX + c = 0
+    </h1>
+    <br>
+    <p id="msg"></p>
+    <br><br>
+    <div id="container">
+        <input class="moninput" type="number" id="a" name="a"> X<sup>2</sup> +
+        <input class="moninput" type="number" id="b" name="b"> X +
+        <input class="moninput" type="number" id="c" name="c"> = 0
+        <br><br>
+        <input type="button" id="resolution" value="Résolution">
+    </div>
+    <br>
+    <div id="resultat" class="center-div" style="display:none;"></div>
+
+</body>
+</html>

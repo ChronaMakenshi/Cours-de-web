@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>DatePicker JQuery en Français</title>
+
+    <link rel="stylesheet" href="css/jquery-ui.css">
+    <link rel="stylesheet" href="css/jquery-ui.theme.css">
+    <link rel="stylesheet" href="css/monstyle.css">
+
+    <script src="js/jquery.js"></script>
+    <script src="js/jquery-ui.js"></script>
+
+    <script src="js/moment.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var monage;
+            $("#age").hide();
+
+            $("#datepicker").datepicker({
+                altField: "#datepicker",
+                closeText: 'Fermer',
+                firstDay: 1,
+                prevText: 'Précédent',
+                nextText: 'Suivant',
+                currentText: 'Aujourd\'hui',
+                monthNames: ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'],
+                monthNamesShort: ['Janv.', 'Févr.', 'Mars', 'Avril', 'Mai', 'Juin', 'Juil.', 'Août', 'Sept.', 'Oct.', 'Nov.', 'Déc.'],
+                dayNames: ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'],
+                dayNamesShort: ['Dim.', 'Lun.', 'Mar.', 'Mer.', 'Jeu.', 'Ven.', 'Sam.'],
+                dayNamesMin: ['D', 'L', 'M', 'M', 'J', 'V', 'S'],
+                weekHeader: 'Sem.',
+                dateFormat: 'dd/mm/yy'
+            });
+
+            function chrono() {
+                var d = new Date();
+                var t = d.toLocaleTimeString();
+                document.getElementById("horloge").innerHTML = t;
+            }
+
+            $("#datepicker").on("change", function() {
+                var madatenaissance = $("#datepicker").val();
+                //console.log("Date FR : " + madatenaissance);
+
+                var monArray = madatenaissance.split('/');
+                var jour, mois, annee;
+
+                jour = monArray[0];
+                mois = monArray[1];
+                annee = monArray[2];
+
+                datenaissanceGbr = mois + "/" + jour + "/" + annee;
+                //console.log("Date GBR : " + datenaissanceGbr);
+
+                monage = new Number((new Date().getTime() - new Date(datenaissanceGbr).getTime()) / 31536000000).toFixed(0);
+
+            });
+
+            $("#btnSubmit").on("click", function() {
+                $("#tonage").empty();
+                $("#age").show();
+                $("#tonage").append(monage);
+
+                //setInterval(function() {
+                //    chrono();
+                //}, 1000);
+            });
+        });
+    </script>
+</head>
+
+<body>
+    <h1>DatePicker JQuery en français et théme associé ...</h1><br><br>
+    <p>Date de Naissance : <input type="text" id="datepicker" value=""><button id="btnSubmit">Valider</button></p>
+    <p id="age">Ton Age : <span id="tonage"></span> an(s)</p>
+    <p id="horloge"></p>
+</body>
+
+</html>

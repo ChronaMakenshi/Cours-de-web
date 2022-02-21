@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Requête Ajax en JQuery</title>
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <h1>Requête AJAX en JQuery</h1>
+    <br><br><br><br>
+    <div class="container">
+        <div class="row">
+            <div class="col-6"><button class= "btn btn-warning" id="btnReqAjax">Exécuter Requête Ajax</button></div>
+            <div class="col-6"><ul id="maliste"></ul></div>
+        </div>
+    </div>
+  
+    <script src="js/jquery.js"></script>
+    <script>
+
+        $("#btnReqAjax").on("click", function(){
+
+            $.ajax({
+
+                url : "test.json",
+                type : "GET",
+                dataType : "JSON",
+
+                success : function(data){
+
+                    let fluxHTML ="";
+                    console.log(data);
+                    let tabFilter = data.filter(elt => elt.type === "Félin").sort((a,b)=>{
+                        let nomA = a.nom.toUpperCase();
+                        let nomB = b.nom.toUpperCase();
+
+                        if(nomA < nomB) return -1;
+                        if(nomA > nomB) return 1;
+                        return 0;
+                    });
+
+                    tabFilter.forEach(element => {
+                        fluxHTML += "<li>"+ element.nom + "</li>";  
+                    });
+                    
+                    $("#maliste").empty();
+                    $("#maliste").append(fluxHTML);
+
+                },
+
+
+                error : function(resultat, statut, erreur){
+
+                    console.log(resultat.statusText);
+                    erreur = alert("Probléme avec votre reqête AJAX !!!");
+                },
+
+                complete : function(resultat){
+
+                    //console.log("Objet total :" + resultat.responseText);
+                }
+
+            });
+
+        });
+
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Tennis</title>
+    <link rel="icon" type="image/png" href="img/BalleTennis.png">
+    <link href="css/bootstrap.css" rel="stylesheet" />
+    <link href="css/style.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+    <img id="imageBalle" src="img/balleTennis.png" />
+    <h1 id="montitre" class="colorElement">Tennis en JavaScript</h1>
+    <br><br>
+    <div id="contenu">
+        <canvas id="MonCanvas" width="640" height="480"></canvas>
+        <input type="button" id="monboutonJouer" value="Jouer">
+        <input type="button" id="monboutonArreter" value="Arreter">
+    </div>
+    <script src="js/jquery.js"></script>
+    <script>
+        var nomsCodes = {
+            32: "espace",
+            37: "gauche",
+            38: "haut",
+            39: "droite",
+            40: "bas"
+        };
+
+        var canvas = document.getElementById("MonCanvas");
+        var ctx = canvas.getContext("2d");
+        var largeur = canvas.width;
+        var hauteur = canvas.height;
+        var rayonBalle = 30;
+        var raquetteHauteur = 70;
+        var raquetteLargeur = 15;
+        var raquetteX = (largeur - 60);
+        var score = 3;
+        var maRequeteExecution;
+
+        //document.getElementById("MonCanvas").style.backgroundColor = "#1F6A0E";
+        document.getElementById("MonCanvas").style.backgroundImage = "url('img/terrainTennis.png')";
+
+        // Fonction cercle pour dessiner un cercle plein ou vide (coeur de cible)
+        var cercle = function(x, y, rayon, cerclePlein) {
+            ctx.beginPath();
+            ctx.arc(x, y, rayon, 0, Math.PI * 2, false);
+            if (cerclePlein) {
+                ctx.fill();
+            } else {
+                ctx.stroke();
+            }
+        };
+
+        var Balle = function(x, y) {
+            this.x = x;
+            this.y = y;
+            this.xVitesse = -10;
+            this.yVitesse = -10;
+        }
+
+        Balle.prototype.dessinerBalle = function() {
+
+            //ctx.fillStyle = "#FFFFFF";				// Couleur du remplissage de la Balle
+            //cercle( this.x, this.y, 10, true);		// Dessin du cercle plein
+            //ctx.closePath();
+
+            var img = document.getElementById("imageBalle");
+            ctx.beginPath();
+            ctx.drawImage(img, this.x, this.y, rayonBalle, rayonBalle);
+            ctx.closePath();
+        }
+
+        Balle.prototype.deplacerBalle = function() {
+            this.x += this.xVitesse;
+            this.y += this.yVitesse;
+        }
+
+        Balle.prototype.verifierCollision = function(raquettex, raquettey) {
+
+            if (this.y < 0 || this.y + rayonBalle > hauteur) {
+                this.yVitesse = -this.yVitesse;
+            }
+
+            if (this.x < 0 || this.x > (largeur - rayonBalle)) {
+                this.xVitesse = -this.xVitesse;
+            }
+
+            if (this.x + rayonBalle > raquettex && this.x + rayonBalle < raquettex + raquetteLargeur && this.y + rayonBalle > raquettey && this.y + rayonBalle < raquettey + raquetteHauteur) {
+                score++;
+                jouerSon("img/CollisionRaquette.mp3");
+                this.xVitesse = -this.xVitesse;
+            }
+
+            if (this.x > largeur - rayonBalle) {
+                score = score - 2;
+                jouerSon("img/CollisionMurDroit.mp3");
+            }
+
+            if (score <= 0) {
+                //clearInterval(monID);
+                jouerSon("img/GameOver.mp3");
+                ecrireGameOver();
+                //pageloadEvery(2000);
+                document.location.reload();
+            }
+        }
+
+        function pageloadEvery(t) {
+            setTimeout('document.location.reload(true)', t);
+        }
+
+        // Constructeur de la Raquette  
+        var Raquette = function(y) {
+            this.x = raquetteX;
+            this.y = y;
+            this.yVitesse = 100;
+        }
+
+        // Dessin dans le Canvas de la "raquette"
+        Raquette.prototype.dessinerRaquette = function() {
+            ctx.beginPath();
+            ctx.rect(raquetteX, this.y, raquetteLargeur, raquetteHauteur);
+            ctx.fillStyle = "#FFFFFF";
+            ctx.fill();
+            ctx.closePath();
+        }
+
+        Raquette.prototype.directionRaquette = function(direction) {
+
+            if (direction === "haut" && this.y > canvas.offsetTop - raquetteHauteur) {
+                this.y -= this.yVitesse;
+            }
+
+            if (direction === "bas" && this.y < hauteur - raquetteHauteur) {
+                this.y += this.yVitesse;
+            }
+        }
+
+        var raquette = new Raquette(0);
+        var balle = new Balle((7 * largeur + 200) / 8, hauteur / 2);
+
+        document.addEventListener("mousemove", mouseMoveHandler, false);
+
+        function mouseMoveHandler(evenement) {
+            // Coordonnée Y de la raquette dans le repère du Canvas (Coordonnée Y de la souris
+            // dans le repère lié au Navigateur - la distance entre le bord supérieur du Canvas 
+            // etle bord supérieur de la fenêtre du Navigateur)
+            var relativeY = evenement.clientY - canvas.offsetTop;
+            // Faire un dessin pour comprendre ...
+            if (relativeY > 0 && relativeY < hauteur - raquetteHauteur) {
+                raquette.y = relativeY;
+                //console.log("Coordonnée Raquette Y : " + raquette.y);
+            }
+        }
+
+        // Ecriture du Score dans le Canvas
+        function ecrireScore() {
+            ctx.font = "16px Arial";
+            ctx.fillStyle = "#FFFFFF";
+            ctx.fillText("Score: " + score, largeur - 100, 20);
+        }
+
+        function jouerSon(url) {
+            var audio = document.createElement('audio');
+            audio.style.display = "none";
+            audio.src = url;
+            audio.autoplay = true;
+            audio.onended = function() {
+                audio.remove() //Supprimer elemt <audio> quand audio.src a été joué !!!
+            };
+            document.body.appendChild(audio);
+        }
+
+        // Ecriture de Game Over dans le Canavas (quand score === 0)
+        function ecrireGameOver() {
+
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = '#FFFFFF';
+            ctx.font = '50px sans-serif';
+            ctx.fillText('Game Over', ((largeur / 2) - (ctx.measureText('Game Over').width / 2)), hauteur / 2);
+
+        }
+
+        document.getElementById("imageBalle").hide;
+
+        //Solution alternative afin d 'utiliser requestAnimationFrame plutôt que setInterval.
+
+        function execute() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            raquette.dessinerRaquette();
+            balle.dessinerBalle();
+            balle.deplacerBalle();
+            ecrireScore();
+            balle.verifierCollision(raquette.x, raquette.y);
+
+            maRequeteExecution = window.requestAnimationFrame(execute);
+
+        }
+        document.getElementById("monboutonJouer").onclick = execute;
+        document.getElementById("monboutonArreter").onclick = function() {
+            window.cancelAnimationFrame(maRequeteExecution);
+            maRequeteExecution = undefined;
+        };
+
+        maRequeteExecution = requestAnimationFrame(execute);
+
+        // monID = setInterval(function() {
+        //     ctx.clearRect(0, 0, canvas.width, canvas.height);
+        //     raquette.dessinerRaquette();
+        //     balle.dessinerBalle();
+        //     balle.deplacerBalle();
+        //     ecrireScore();
+        //     balle.verifierCollision(raquette.x, raquette.y);
+        // }, 20);
+    </script>
+</body>
+
+</html>

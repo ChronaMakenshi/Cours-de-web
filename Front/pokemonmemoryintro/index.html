@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="img/dessus.png">
+    <title>Pokemon Memory Intro</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="js/jquery.transit.js"></script>
+    <script>
+        $(window).on("load", function () {
+        
+            $("#macarte").on("click", function () {
+
+                // $(this).transition({ rotateY: '90deg' }, {
+                //     complete: function () {
+                //         $(this).css({
+                //             "background": "url(img/dessous.png) no-repeat center center / contain",
+                //             "backgroundColor": "rgb(217, 219, 226)", "borderRadius": "30px", "border": "1px solid black"
+                //         })
+                //     }
+                
+                // }); 
+                $(this).css({
+                    animation: "spin 1.2s ease"
+                }).transition({}, {
+                    complete: function () {
+                        $(this).css({
+                            "background": "url(img/dessous.png) no-repeat center center / contain",
+                            "backgroundColor": "rgb(217, 219, 226)", "borderRadius": "30px", "border": "1px solid black"
+                        })
+                    }
+                });
+
+            });
+
+        });
+    </script>
+</head>
+<body>
+    <h1>Pokémon Memory Intro</h1>
+    <br>
+    <div id="macarte"></div>
+</body>
+
+</html>

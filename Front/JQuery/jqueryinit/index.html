@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <title>JQuery</title>
+    <link href="css/bootstrap.css" rel="stylesheet" />
+    <style>
+        .petitcadre {
+            height: 100px;
+            width: 100px;
+            float: left;
+            margin: 20px;
+            position: relative;
+            padding: 20px;
+            background: #eeeeee;
+            border: 1px solid #bbbbbb;
+            border-radius: 10px;
+            -moz-border-radius: 10px;
+            -webkit-border-radius: 10px;
+            text-align: center;
+        }
+    </style>
+    <script src="js/jquery-3.4.1.js"></script>
+    <script>
+        $(document).ready(function() {
+
+            $("input[type=radio]").on("change", function() {
+
+                var choixChecked = $(this).val();
+                $(".petitcadre").css({
+                    backgroundColor: choixChecked,
+                    color: "white"
+                });
+
+            });
+
+        });
+    </script>
+</head>
+
+<body>
+    <h1>Evènement et méthode css()</h1>
+    <br>
+
+    <div class="petitcadre">Couleur</div>
+
+    <input type="radio" name="monChoix" checked value="#eeeeee">Gris clair<br>
+    <input type="radio" name="monChoix" value="purple">Pourpre<br>
+    <input type="radio" name="monChoix" value="grey">Gris<br>
+    <input type="radio" name="monChoix" value="indigo">Indigo<br>
+    <input type="radio" name="monChoix" value="orange">Orange<br>
+
+</body>
+
+</html>

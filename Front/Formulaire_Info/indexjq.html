@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Informations Personnelles</title>
+    <link href="css/bootstrap.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" media="screen" href="css/style.css" />
+    <!-- jQuery Library -->
+    <!-- <script src="js/jquery-3.3.1.min.js"></script> -->
+    <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+  crossorigin="anonymous"></script>
+    <script>
+        $(document).ready(function() {
+
+            function validate(pinput, msgerreur, regexp, erreurreg){
+
+                let valid = true;
+
+                if(pinput.val()=="")
+                {
+                    valid = false;
+                    pinput.parent().siblings(".tderreur").children(".erreur").fadeIn().text(msgerreur);
+
+                }else if(!pinput.val().match(regexp)){
+                    
+                    valid = false;
+                    pinput.parent().siblings(".tderreur").children(".erreur").fadeIn().text(erreurreg);
+
+                }else{
+                    valid = true;
+                    pinput.parent().siblings(".tderreur").children(".erreur").fadeOut();
+                }
+
+                return valid;
+            }
+            
+            
+            $("#envoyer").on("click", function(e){
+
+               let reponse;
+
+               reponse = validate($("#nom"),"Veuillez saisir un Nom",/^[A-Za-z0-9ÀÁÂÃÄÅàáâãäåÒÓÔÕÖØòóôõöøÈÉÊËèéêëÇçÌÍÎÏìíîïÙÚÛÜùúûüÿÑñ]{4,}/, "Attention, au minimum 4 caractères" );
+               reponse = validate($("#prenom"),"Veuillez saisir un Prénom", /^[A-Za-z0-9ÀÁÂÃÄÅàáâãäåÒÓÔÕÖØòóôõöøÈÉÊËèéêëÇçÌÍÎÏìíîïÙÚÛÜùúûüÿÑñ]{4,}/, "Attention, au minimum 4 caractères")&&reponse;
+               reponse = validate($("#email"),"Veuillez saisir une Adresse Email", /^[a-z0-9\-_.]+@[a-z0-9\-_.]+\.[a-z]{2,3}$/i, "Veuillez vérifier votre adresse mail")&&reponse;
+               reponse = validate($("#date"),"Veuillez saisir une Date", "", "")&&reponse;
+
+
+               if(reponse){
+                    return true;
+               }else{
+                    e.preventDefault();
+               }
+               
+            });
+
+        });
+    </script>
+</head>
+<body>
+    <h1>Mes Infos Personnelles</h1><br><br>
+    <form method="post" action="#">
+        <div class="container">
+            <div class="row">
+                <table class="table table-bordered table-dark ">
+                    <tr>
+                        <td><label for="nom">Nom : </label></td>
+                        <td><input type="text" id="nom" name="nom" class="champ" autocomplete="off"></td>
+                        <td class="tderreur"><span class="erreur"></span></td>
+                    </tr>
+                    <tr>
+                        <td><label for="prenom">Prénom : </label></td>
+                        <td><input type="text" id="prenom" name="prenom" class="champ" autocomplete="off"></td>
+                        <td class="tderreur"><span class="erreur"></span></td>
+                    </tr>
+                    <tr>
+                        <td><label for="email">Email : </label></td>
+                        <td><input type="text" id="email" name="email" class="champ" autocomplete="off"></td>
+                        <td class="tderreur"><span class="erreur"></span></td>
+                    </tr>
+                    <tr>
+                        <td><label for="naissance">Date de Naissance : </label></td>
+                        <td><input type="date" id="date" name="date" class="champ" autocomplete="off"></td>
+                        <td class="tderreur"><span class="erreur"></span></td>
+                    </tr>
+
+                    <tr>
+                        <td><input type='submit' class="btn btn-sample" id='envoyer' name='envoyer' value='Envoyer' /></td>
+                        <td><input type='reset' class="btn btn-sample" id='annuler' name='annuler' value='Annuler' /></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </form>
+    
+</body>
+</html>

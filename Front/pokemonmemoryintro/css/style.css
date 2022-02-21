@@ -1,0 +1,45 @@
+
+@font-face
+{
+    font-family: "Pokemon_Solid";
+    src: url("Pokemon_Solid.ttf") format("truetype");
+}
+
+@keyframes spin { 30% { transform: rotateY(90deg); } }
+
+body{
+    margin: 0;
+    padding: 0;
+    background-color: #ACAEB5;
+}
+
+h1{
+    text-align: center;
+    font-weight: bolder;
+    color: rgb(255,204,3);
+    letter-spacing: 8px;
+    font-family: "Pokemon_Solid";
+    text-shadow: 2px 0 0 rgb(59,89,167), 2px 2px 0 rgb(59,89,167), 0 2px 0 rgb(59,89,167), -2px 2px 0 rgb(59,89,167), -2px 0 0 rgb(59,89,167), -2px -2px 0 rgb(59,89,167), 0 -2px 0 rgb(59,89,167), 2px -2px 0 rgb(59,89,167);
+}
+
+#macarte{
+    display: block;
+    width: 250px;
+    height: 350px;
+    margin: 0 auto;
+    z-index: 2;
+    background: url('../img/dessus.png') no-repeat center center / contain;
+    border-radius: 30px;
+    border: 1px solid black;
+   
+}
+
+/* :target{
+    transform: rotateY(180deg);
+    background: url('../img/dessous.png') no-repeat center center / contain;
+   
+} */
+
+
+
+

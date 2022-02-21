@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Formulaire avec JQuery</title>
+    <link href="css/bootstrap.css" rel="stylesheet" />
+    <style>
+        body {
+            background-image: url("./img/bg.jpg");
+        }
+        
+        h1 {
+            text-align: center;
+            color: white;
+        }
+    </style>
+    <script src="js/jquery-3.4.1.js"></script>
+    <script>
+        // window.addEventListener("load", function() {
+
+        //     document.getElementById("fruits").addEventListener("change", function() {
+        //         document.getElementById("pass").value = this.value;
+        //     });
+
+        //     var recupInput = document.querySelectorAll("input");
+        //     for (var i = 0; i < recupInput.length; i++) {
+        //         recupInput[i].style.backgroundColor = "purple";
+        //     }
+
+        // });
+
+        $(document).ready(function() {
+
+            $("input").not("input[type=submit], input[type=reset]").css("background", "#882288");
+
+            $("input[type=submit], input[type=reset]").css("background", "green");
+
+            $("img").css({
+                "width": "200px",
+                "background": "grey",
+                "border": "3px dashed red"
+            });
+
+            $("#nom").focus();
+
+            $(".champ").on("keyup", function() {
+
+                $(this).css({
+                    "background": "orange",
+                    "color": "black"
+                });
+            });
+
+            $("input[name=sexe]").on("click", function() {
+                $("#nom").val($(this).val());
+            });
+
+            $("#fruits").on("change", function() {
+                $("#pass").val($(this).val());
+            });
+
+        });
+    </script>
+</head>
+
+<body>
+    <h1>Formulaire avec JQuery</h1>
+    <form action="#" method="POST">
+        <div class="container">
+            <div class="row">
+                <table class="table table-bordered table-dark ">
+                    <tr>
+                        <td><label for="nom"> Nom d'utilisateur : </label></td>
+                        <td><input type="text" id="nom" name="nom" class="champ" autocomplete="off"></td>
+                    </tr>
+                    <tr>
+                        <td><label for="pass">Mot de passe : </label></td>
+                        <td><input type="text" id="pass" name="pass" class="champ" autocomplete="off"></td>
+                    </tr>
+                    <tr>
+                        <td><label for="sexe">Sexe  : </label></td>
+                        <td>Homme<input type="radio" name="sexe" value="H" checked> Femme <input type="radio" name="sexe" value="F"></td>
+                    </tr>
+                    <tr>
+                        <td><label for="email">Commentaires : </label></td>
+                        <td><textarea rows="3" name="commentaires" placeholder="Tapez vos commentaires ici" class="champ" autocomplete="off"></textarea></td>
+                    </tr>
+                    <tr>
+                        <td><img src="img/Pokemon22.png"></td>
+                        <td>Nos amis les Fruits : <select name="fruits" id="fruits">
+                                <option value="Ananas">Ananas</option>
+                                <option value="Pomme">Pomme</option>
+                                <option value="Poire">Poire</option>
+                                <option value="Kiwi">Kiwi</option>
+                                <option value="Banane">Banane</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><input type='submit' class="btn btn-sample" id='envoyer' name='envoyer' value='Envoyer' /></td>
+                        <td><input type='reset' class="btn btn-sample" id='annuler' name='annuler' value='Annuler' /></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </form>
+</body>
+
+</html>

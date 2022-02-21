@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Formulaire Web</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="css/bootstrap.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" media="screen" href="css/style.css" />
+    <!-- jQuery Library -->
+    <script src="js/jquery-3.3.1.min.js"></script>
+    <script src="js/script.js"></script>
+    <script>
+        $(document).ready(function() {
+
+            function check_form(id_input, regex, msg_vide, erreur) {
+                valid = true;
+
+                if ($("#" + id_input).val() === "") {
+                    $("#" + id_input).parent().siblings(".tderreur").children(".erreur").fadeIn().text(msg_vide);
+                    valid = false;
+                } else if (!$("#" + id_input).val().match(regex)) {
+                    valid = false;
+                    $("#" + id_input).parent().siblings(".tderreur").children(".erreur").fadeIn().text(erreur);
+                } else
+                    $("#" + id_input).parent().siblings(".tderreur").children(".erreur").fadeOut();
+                return valid;
+            }
+
+            $("#envoyer").on("click", function() {
+                var res = check_form("nom", /^[A-Za-z0-9ÀÁÂÃÄÅàáâãäåÒÓÔÕÖØòóôõöøÈÉÊËèéêëÇçÌÍÎÏìíîïÙÚÛÜùúûüÿÑñ]{3,}/, "Champ vide", "3 caractéres minimum, chiffres et lettres");
+                res = check_form("prenom", /^[A-Za-z0-9ÀÁÂÃÄÅàáâãäåÒÓÔÕÖØòóôõöøÈÉÊËèéêëÇçÌÍÎÏìíîïÙÚÛÜùúûüÿÑñ]{3,}/, "Champ vide", "3 caractéres minimum, chiffres et lettres") && res;
+                res = check_form("email", /^[a-z0-9\-_.]+@[a-z0-9\-_.]+\.[a-z]{2,3}$/i, "Champ vide", "Adresse mail non valide !") && res;
+                res = check_form("date", /./, "Champ vide", "") && res;
+                return res;
+            });
+
+            // function valider(pChamp){
+            //     valid = true;
+            //     if(($("#" + pChamp).val()==="")){
+            //         $("#" + pChamp).parent().siblings(".tderreur").children(".erreur").fadeIn().text("Veuillez saisir un(e) "+pChamp);
+            //         valid = false;
+            //     }else{
+            //         $("#" + pChamp).parent().siblings(".tderreur").children(".erreur").fadeOut();
+            //         valid = true;
+            //     }
+            //     return valid;
+            // }
+
+            // $("#envoyer").on("click", function(e) {
+            //     var reponse = valider("nom");
+            //     reponse = valider("prenom") && reponse;
+            //     reponse = valider("email") && reponse;
+            //     reponse = valider("date") && reponse;
+
+            //     if(reponse){
+            //         return true;
+            //     }else{
+            //         e.preventDefault();
+            //     }
+            // });
+
+            $("#prenom").on("keyup", function() {
+
+                $(this).val($(this).val().charAt(0).toUpperCase() + $(this).val().substr(1).toLowerCase());
+
+            });
+
+            $("#nom").on("keyup", function() {
+
+                $(this).val($(this).val().toUpperCase());
+
+            });
+
+            $("#annuler").on("click", function() {
+
+                $(".erreur").fadeOut();
+
+            });
+
+        });
+    </script>
+</head>
+
+<body>
+    <h1>Mes Infos Personnelles</h1><br><br>
+    <form method="post" action="#">
+        <div class="container">
+            <div class="row">
+                <table class="table table-bordered table-dark ">
+                    <tr>
+                        <td><label for="nom">Nom : </label></td>
+                        <td><input type="text" id="nom" name="nom" class="champ" autocomplete="off"></td>
+                        <td class="tderreur"><span class="erreur"></span></td>
+                    </tr>
+                    <tr>
+                        <td><label for="prenom">Prénom : </label></td>
+                        <td><input type="text" id="prenom" name="prenom" class="champ" autocomplete="off"></td>
+                        <td class="tderreur"><span class="erreur"></span></td>
+                    </tr>
+                    <tr>
+                        <td><label for="email">Email : </label></td>
+                        <td><input type="text" id="email" name="email" class="champ" autocomplete="off"></td>
+                        <td class="tderreur"><span class="erreur"></span></td>
+                    </tr>
+                    <tr>
+                        <td><label for="naissance">Date de Naissance : </label></td>
+                        <td><input type="date" id="date" name="date" class="champ" autocomplete="off"></td>
+                        <td class="tderreur"><span class="erreur"></span></td>
+                    </tr>
+
+                    <tr>
+                        <td><input type='submit' class="btn btn-sample" id='envoyer' name='envoyer' value='Envoyer' /></td>
+                        <td><input type='reset' class="btn btn-sample" id='annuler' name='annuler' value='Annuler' /></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </form>
+</body>
+
+</html>

@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Introduction à Ajax (JQuery)</title>
+    <link rel="icon" type="image/png" href="img/jquery-logo.png">
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.3/dist/leaflet.css">
+    <script src="https://unpkg.com/leaflet@1.0.3/dist/leaflet.js"></script>
+    <script src="https://tiles.unwiredmaps.com/js/leaflet-unwired.js"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="css/bootstrap.css" />
+    <style>
+        body {
+            margin: 0px;
+            padding: 0px;
+            background-image: url("./img/fond.png");
+            color: white;
+        }
+        
+        #madiv {
+            width: 40%;
+            margin: auto;
+            height: 100px;
+           
+        }
+        
+        h1 {
+            text-align: center;
+            color: #F50EB6;
+        }
+        
+        #chercher {
+            background-color: rgb(55, 56, 59);
+            color: white;
+        }
+
+        .container{
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        ul {
+            list-style-type: none;
+            border: 2px solid rgb(123, 162, 221);
+            border-top: 1px solid rgb(123, 162, 221);
+            width: 400px;
+            margin-left: 42px;
+            height: 200px;
+            overflow-y: scroll;
+            background-color: rgb(55, 56, 59);
+            position: absolute;
+            z-index: 1000;
+            
+        }
+        
+        li {
+            margin-left: -40px;
+            color: white;
+        }
+        
+        li:hover {
+            background-color: #F50EB6;
+            margin-left: -40px;
+            cursor: pointer;
+        }
+
+        #carte {
+            width: 50%;
+            height : 60vh;
+            z-index: 1;
+        }
+        
+        #datapays {
+            padding-left: 100px;
+        }
+    </style>
+
+    <script>
+        $(document).ready(function() {
+            
+            // Masquage de la liste lorsque l'utilisateur clique dans le body de la page
+            $("body").on("click", function() {
+                $("#pays").hide();
+            })
+
+            // Sur le relâchement d'une touche du clavier une requête Ajax est envoyée au serveur local.
+            // La valeur du champ de saisi est envoyé ...
+            $("#chercher").on("keyup", function() { 
+                ajaxPays($(this).val());
+            });
+
+            // Par défaut, la liste des pays est masquée.
+            $("#pays").hide();
+
+            function ajaxPays(mot) {
+                console.clear();
+                console.log("Mot saisi : " + mot);
+
+                $.ajax({
+                    url: 'pays.json',
+                    type: 'GET',
+                    dataType: 'json',
+                    // Paramétre success de retour qui est exécuté lorsque la requête Ajax est une réussite
+                    success: function(monjson, statut) {
+
+                        console.log("HTTP status = " + statut);
+                        console.log("**********************************************");
+
+                        var html = "";
+
+                        monjson.forEach(element => {
+
+                            var position = element.nom_fr_fr.substring(0,mot.length).toUpperCase().search(mot.toUpperCase());
+                            // var position = element.nom_fr_fr.toUpperCase().search(mot.toUpperCase());
+                             if (position !== -1) {
+                                console.log(element.nom_fr_fr);
+                                 html += "<li id='" + element.alpha2 + "'>" + element.nom_fr_fr + "<br></li>";
+                            }
+                        });
+                        $("#pays").show();
+                        $("#pays").empty();
+                        $("#pays").append(html);
+                    },
+                    // Paramétre error de retour qui est exécuté lorsqu'il y a une erreur 
+                    error: function(resultat, statut, erreur) {
+
+                        console.log(resultat.statusText);
+                        erreur = alert("Il y a eu un problème avec votre requête Ajax !!!");
+                    },
+
+                    complete: function(resultat, statut) {
+
+                        console.log(resultat.responseJSON);
+
+                    }
+
+                });
+            }
+
+            // Utilisation de la délégation d'évènement.
+            $('#pays').on('mousedown', 'li', function() {
+                // $(this) désigne ici l'élément li sur lequel a lieu l'événement click
+                $('#chercher').val($(this).text());
+                // Préparation de l'input pour pouvoir requetter sur le Service Web des Pays
+                // lors du click sur le bouton Envoyer 
+                $('#chercher').attr("value", $(this).attr("id"));
+                $('#pays').hide();
+            });
+
+            // Gestion des données du pays selectionné qui sont renvoyées par le Service Web distant ...
+            $('#btnEnvoyer').on("click", function() {
+
+                $('#datapays').empty();
+                var map = undefined;
+
+                $.getJSON('https://restcountries.eu/rest/v2/alpha/' + $('#chercher').attr("value"), function(d) {
+
+                    console.log(d);
+                    $('#datapays').append('<img src=' + d.flag + ' width="180px" height="120px"/>');
+                    $('#datapays').append('<br>Code Pays : ' + d.alpha2Code + '<br>');
+                    $('#datapays').append('Nom du Pays : ' + d.name + '<br>');
+                    $('#datapays').append('Capitale du Pays : ' + d.capital + '<br>');
+                    $('#datapays').append('Surface du Pays : ' + d.area + ' km<sup>2</sup><br>');
+                    $('#datapays').append('Population du Pays : ' + d.population + ' habitants<br>');
+                    $('#datapays').append('Code du Pays : ' + d.numericCode + '<br>');
+                    $('#datapays').append('Région du Pays : ' + d.region + '<br>');
+                    $('#datapays').append('Monnaie du Pays : ' + d.currencies[0].name + '<br>Symbole de la Monnaie : <b>' + d.currencies[0].symbol + '</b><br>');
+
+                    var lattitude = d.latlng[0];
+                    console.log(lattitude);
+                    var longitude = d.latlng[1];
+                    console.log(longitude);
+
+                    // Avant d'initialiser la carte, vérifier si elle est déjà active.
+                    // Ce qui permet de rafraichir l'affichage sur une autre recherche.
+                    var container = L.DomUtil.get('carte');
+                    if(container != null){
+                        container._leaflet_id = null;
+                    }
+
+                    map = L.map('carte').setView([lattitude, longitude], 5);//lattitude, longitude, niveau de zoom
+                    //console.log(map);
+
+                    //création du calques images
+                    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                        maxZoom: 20,
+                    }).addTo(map);
+
+                    // création d'un marqueur sur la carte
+                    var marker = L.marker([lattitude, longitude]).addTo(map);
+                    var popup = marker.bindPopup('<b>Vous êtes ici</b><br />');
+
+                });
+            });
+        });
+    </script>
+</head>
+
+<body>
+    <h1>Introduction à Ajax (JQuery)</h1>
+    <br><br>
+    <div id="madiv">
+        Pays : <input type="text" id="chercher" name="chercher" autocomplete="off" size="40"><button id="btnEnvoyer">Envoyer</button>
+        <ul name="pays" id="pays"></ul>
+    </div>
+    <br>
+    <div class="container">
+        <div id="datapays"></div>
+        <div id="carte"></div> 
+    </div> 
+</body>
+</html>

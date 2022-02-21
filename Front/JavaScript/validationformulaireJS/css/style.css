@@ -1,0 +1,22 @@
+body {
+    margin: 0px;
+    padding: 0px;
+    background-image:url(../img/bg.jpg);
+    color: rgb(224, 20, 173);
+}
+
+h1 {
+	text-align: center;
+	color: rgb(224, 20, 173);
+}
+
+label {
+    display: inline-block;
+    width: 150px;
+}
+
+#monContainer{
+    margin: 80px auto;
+    width: 700px;
+}
+

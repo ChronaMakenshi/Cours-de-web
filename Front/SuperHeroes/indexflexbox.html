@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Super - Header en FlexBox et nav aussi</title>
+    <!-- appel du CSS de font-awesome pour les icones -->
+    <script src="https://kit.fontawesome.com/28690b22ca.js" crossorigin="anonymous"></script>
+    <!-- Police de google font -->
+    <link href='https://fonts.googleapis.com/css?family=Oswald' rel='stylesheet' type='text/css'>
+    <!-- on appelle toujours son CSS en dernier -->
+    <link rel="icon" type="image/png" href="img/super.png">
+    <link rel="stylesheet" href="css/normalize.css">
+    <style>
+        body {
+            background-image: url(img/fond.png);
+        }
+
+        header {
+            display: flex;
+            flex-wrap: wrap;
+            max-width: 750px;
+            margin: auto;
+            background-color: #F4E49F;
+        }
+
+        header>a {
+            /* border: 1px solid green; */
+            flex-basis: 42%;
+            padding: 3px;
+        }
+
+        header>nav {
+            /* border: 1px solid rgb(153, 11, 106); */
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+
+        }
+
+        header>nav>a {
+            text-transform: uppercase;
+            text-decoration: none;
+            font-family: "Oswald";
+            font-size: 18px;
+            padding: 15px;
+            margin-top: 10px;
+            color: darkorange;
+        }
+
+        header>nav>a:hover {
+            border-bottom: 1px solid darkorange;
+        }
+
+
+        @media screen and (max-width: 732px) {
+
+            header>a {
+                padding: 3px;
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            header>nav {
+                flex-basis: 100%;
+                justify-content: space-between;
+
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!--HEADER-->
+    <header>
+        <a href="#"><img src="img/super.png" alt="logo Super" /></a>
+        <nav>
+            <a href="#">Qui sommes-nous</a>
+            <a href="#">A propos de nous</a>
+            <a href="#">Contact</a>
+        </nav>
+    </header>
+</body>
+
+</html>

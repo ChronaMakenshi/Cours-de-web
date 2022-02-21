@@ -1,0 +1,82 @@
+body {
+    background-image: url(../img/bg.jpg);
+    font-size: 100%;
+}
+
+h1 {
+    font-family: 'Fredericka the Great', cursive;
+    font-size: 3.8em;
+    color: #F50EB6;
+    text-align: center;
+}
+
+h2 {
+    font-family: 'Fredericka the Great', cursive;
+    color: #F50EB6;
+}
+
+h3 {
+    font-family: 'Fredericka the Great', cursive;
+    color: rgb(231, 243, 227);
+    font-size: 1.3em;
+}
+
+h4 {
+    font-family: 'Fredericka the Great', cursive;
+    color: rgb(231, 243, 227);
+    font-size: 1.3em;
+}
+
+span {
+    color: rgb(136, 212, 22);
+    font-size: 0.9em;
+}
+
+table {
+    width: 800px;
+    margin: auto;
+    background-color: #2E2C2C;
+}
+
+td {
+    color: #FFFFFF;
+    padding: 10px;
+}
+
+#tderreur {
+    text-align: center;
+}
+
+.erreur {
+    display: none;
+    background-color: #070006;
+    color: pink;
+    text-align: center;
+    margin-left: 20px;
+    padding: 10px;
+}
+
+.erreurajout {
+    color: rgb(218, 51, 112);
+}
+
+#perreur {
+    text-align: center;
+    color: greenyellow;
+}
+
+#tdcompte {
+    text-align: right;
+}
+
+input[type="submit"],
+input[type="reset"] {
+    background-color: #F50EB6;
+    color: #FFFFFF;
+}
+
+a:visited,
+a:hover {
+    text-decoration: none;
+    color: #F50EB6;
+}

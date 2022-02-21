@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Calcul de Prix</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <!-- Popper JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+    <style type="text/css">
+        #alerte {
+            display: none;
+        }
+    </style>
+    <h1>Bienvenue</h1>
+    <form action="index.html" method="post" name="formulaire_test">
+        <div id="alerte" class="alert alert-danger"></div>
+        <label>Prix 1 * : </label><input type="text" name="prix1" value="" id="prix1">
+        <label>Prix 2 * : </label><input type="text" name="prix2" value="" id="prix2">
+        <input type="button" name="btn_valider" onclick="calculer_prix();" value="Valider">
+        <label>Total : </label><input type="text" name="total" value="" id="total">
+    </form>
+    <script type="text/javascript" src="js/script.js"></script>
+</body>
+
+</html>

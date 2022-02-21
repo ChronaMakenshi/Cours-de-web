@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Validation Formulaire en JavaScript</title>
+    <link rel="icon" type="image/png" href="img/logo_JavaScript.png">
+    <link href="css/bootstrap.css" rel="stylesheet" />
+    <link href="css/style.css" rel="stylesheet" type="text/css" />
+    <script>
+        // Ainsi, le script attend le chargement du DOM avant d'exécuter le JavaScript
+        window.onload = function() {
+            // Rcupération des champs significatifs du formulaire.
+            var prenom = document.getElementById("prenom");
+            var email = document.getElementById("mail");
+            var telephone = document.getElementById("tel");
+
+            var valider = document.getElementById("m_valider");
+
+            function ValidateEmail(mail) {
+                // Utilisation d'une Expression régulière pour contrôler le format
+                // de l'adresse Mail.
+                var patternMail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+                if (patternMail.test(mail)) {
+                    return (true)
+                }
+                //alert("Adresse Email pas valide !!!")
+                return (false)
+            }
+
+            function ValidateTelephone(tel) {
+                // Utilisation d'une Expression régulière pour contrôler le format
+                // du Numéro de Téléphone (sur 10 digits).
+                var patternTel = /^\d{10}$/;
+                if (patternTel.test(tel)) {
+                    return (true)
+                }
+                //alert("Numéro de Téléphone pas valide !!!")
+                return (false)
+            }
+
+            // Gestionnaire d'événements sur la soumission du formulaire
+            valider.addEventListener("click", Valider, false);
+
+            function Valider(event) {
+                if (prenom.validity.valueMissing) {
+                    // Permet de rejeter la soumission du formulaire.
+                    event.preventDefault();
+                    prenom.style.border = "3px dashed orange";
+                    document.getElementById("p_erreur").innerHTML = "Entrez un prénom !!!";
+                    document.getElementById("p_erreur").style.color = "orange";
+                    prenom.focus();
+                } else if (!ValidateEmail(email.value)) {
+                    event.preventDefault();
+                    email.style.border = "3px dashed orange";
+                    document.getElementById("e_erreur").innerHTML = "Entrez une adresse mail valide !!!";
+                    document.getElementById("e_erreur").style.color = "orange";
+                    email.focus();
+                } else if (!ValidateTelephone(tel.value)) {
+                    event.preventDefault();
+                    telephone.style.border = "3px dashed orange";
+                    document.getElementById("t_erreur").innerHTML = "Entrez un numéro de téléphone valide !!!";
+                    document.getElementById("t_erreur").style.color = "orange";
+                    telephone.focus();
+                } else {
+                    alert("Vos Données sont valides !!!");
+                }
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <h1>Validation de Formulaire en JavaScript</h1>
+    <form method="post" action="#">
+        <div id="monContainer">
+            <label for="prenom">Prénom : </label>
+            <input type="text" name="prenom" id="prenom" required>
+            <span id="p_erreur"></span>
+            <br>
+
+            <label for="mail">Email : </label>
+            <input type="email" name="mail" id="mail">
+            <span id="e_erreur"></span>
+            <br>
+
+            <label for="tel">Téléphone : </label>
+            <input type="tel" name="tel" id="tel">
+            <span id="t_erreur"></span>
+            <br><br>
+
+            <input type="submit" value="Valider" id="m_valider">
+            <input type="reset" value="Annuler" id="m_annuler">
+        </div>
+    </form>
+</body>
+
+</html>

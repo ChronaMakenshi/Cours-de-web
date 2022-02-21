@@ -1,0 +1,104 @@
+* {
+    box-sizing: border-box;
+    outline: none;
+}
+
+body{
+    background: rgb(28, 139, 143);
+    font-family: "Open Sans", Arial;
+    margin: 0;
+    color: #ecf0f5;
+    line-height: 1.8;
+    text-align: justify;
+}
+
+h1, h2, h3 {
+    font-family: "PT Sans Narrow";
+    font-weight: normal;
+    font-size: 1.4em;
+    text-transform: uppercase;
+    background-color: #532519;
+    color: white;
+    padding: 5px 10px;
+    text-align: center;
+    -moz-border-radius:10px 10px;
+    -webkit-border-radius:10px 10px;
+    border-radius:10px 10px;
+}
+
+.container {
+    max-width: 80%;
+    margin: 0 auto;
+}
+
+main.container{
+    display: flex;
+    
+}
+
+main>section{
+    width: 70%;
+    background-color: rgba(114, 118, 126, 0.438);
+    padding: 10px;
+
+}
+
+main>aside{
+    width: 30%;
+    background-color: white;
+    color: black;
+    padding: 20px;
+    text-align: justify;
+}
+
+
+section img{
+    max-width: 100%;
+    -moz-border-radius:10px 10px;
+    -webkit-border-radius:10px 10px;
+    border-radius:10px 10px;
+    margin-bottom: 20px;
+}
+
+header{
+    max-width: 750px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+header a {
+    font-family: "PT Sans Narrow";
+    display: inline-block;
+    padding: 10px 20px;
+    color: white;
+    text-decoration: none;
+    transition: background-color .6s ease 0s;
+    font-size: 1.6em;
+    margin: 0 30px;
+}
+
+header a:hover {
+    background-color: #a79189;
+}
+
+nav{
+    background-color: #532519;
+}
+
+@media screen and (max-width: 960px) {
+    main.container{
+        flex-direction: column;
+    }
+    main>aside{
+        width: 100%;	
+    }
+    main>section{
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 560px) {
+    main>aside{
+        display: none;	
+    }
+}

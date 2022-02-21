@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Animation en JavaScript</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script>
+        window.addEventListener("load", function() {
+
+            let monboutonavancer = document.getElementById("btnAvancer");
+            let monboutonannuler = document.getElementById("btnAnnuler");
+            let monboutondisparaitre = document.getElementById("disparaitre");
+            let monboutonaparaitre = document.getElementById("apparaitre");
+
+            let x = 10;
+            let dx = 0;
+
+            monboutonavancer.addEventListener("click", function() {
+
+                dx = 30;
+                dx++;
+                let bloc = document.getElementById("bloc");
+                // on enregistre la nouvelle position
+                x += dx;
+                // on place le bloc
+                bloc.style.left = x + "px";
+
+            });
+
+            monboutonannuler.addEventListener("click", function() {
+                bloc.style.left = "10px";
+                x = 0;
+                dx = 0;
+            });
+
+            monboutondisparaitre.addEventListener("click", function() {
+                let bloc = document.getElementById("bloc");
+
+                bloc.style.display = "none";
+            });
+
+            monboutonaparaitre.addEventListener("click", function() {
+                let bloc = document.getElementById("bloc");
+
+                bloc.style.display = "block";
+            });
+
+        })
+    </script>
+</head>
+
+<body>
+    <div id="container">
+        <div id="bloc"></div>
+    </div>
+    <input type="submit" id="btnAvancer" value="Avancer">
+    <input type="reset" id="btnAnnuler" value="Annuler">
+    <input type="button" id="disparaitre" value="Disparaître">
+    <input type="button" id="apparaitre" value="Apparaitre">
+</body>
+
+</html>

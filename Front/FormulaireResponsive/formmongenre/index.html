@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Mon genre</title>
+    <link href="css/bootstrap.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+
+    <script src="js/jquery.js"></script>
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script> -->
+
+    <script>
+        $(document).ready(function() {
+
+            var $nom = $('#nom'),
+                $prenom = $('#prenom'),
+                $date = $('#datepick'),
+                $mail = $('#mail'),
+                $erreur = $('#erreur'),
+                $valide = $('#valide'),
+                $confirme = $('#confirme'),
+                $nul = $('#annuler'),
+                $sexe = $("[name=sexe]"),
+                $champ = $('.champ');
+
+
+                $sexe.on("change", function(){
+
+                    alert($(this).val());
+
+                });
+
+            var regEmail = new RegExp(/^([\w-\.]+)@((?:[\w]+\.)+)([a-zA-Z]{2,4})/i);
+            var regDate = new RegExp(/^([0-2][0-9]|(3)[0-1])(\/)(((0)[0-9])|((1)[0-2]))(\/)\d{4}$/i);
+
+            // Gestionnaire d'évènement sur le champ date
+            $date.keyup(function() {
+                var re = /(\d{2})[\s . -](\d{2})[\s . -](\d{4})/;
+                var nouvChn = $date.val().replace(re, "$1/$2/$3");
+                //console.log(nouvChn);
+                //$date.val(nouvChn);
+                console.log($(this).val(nouvChn).length);
+
+                if (!$(this).val().match(regDate)) {
+
+                    $(this).val(nouvChn);
+                    $(this).css({ // on rend le champ rouge
+                        borderColor: 'red',
+                        color: 'red'
+                    });
+                } else {
+                    $(this).val(nouvChn);
+                    if ($(this).val(nouvChn).length == 1) {
+                        $(this).css({ // on rend le champ vert
+                            borderColor: 'green',
+                            color: 'green'
+                        });
+                    }
+                }
+            });
+
+            // Gestionnaire d'évènement sur le champ email
+            $mail.keyup(function() {
+                if (!$(this).val().match(regEmail)) {
+                    $(this).css({ // on rend le champ rouge
+                        borderColor: 'red',
+                        color: 'red'
+                    });
+                } else {
+                    $(this).css({ // on rend le champ vert
+                        borderColor: 'green',
+                        color: 'green'
+                    });
+                }
+            });
+
+
+            $("#cwp_form").on("submit", function() {
+
+                var res = check_form("nom", /^[A-Za-z0-9ÀÁÂÃÄÅàáâãäåÒÓÔÕÖØòóôõöøÈÉÊËèéêëÇçÌÍÎÏìíîïÙÚÛÜùúûüÿÑñ]{3,}/, "Champ vide", "3 carac min, chiffres et lettres");
+                res = check_form("prenom", /^[A-Za-z0-9ÀÁÂÃÄÅàáâãäåÒÓÔÕÖØòóôõöøÈÉÊËèéêëÇçÌÍÎÏìíîïÙÚÛÜùúûüÿÑñ]{3,}/, "Champ vide", "3 carac min, chiffres et lettres") && res;
+                res = check_form("mail", /^[a-z0-9\-_.]+@[a-z0-9\-_.]+\.[a-z]{2,3}$/i, "Champ vide", "Adresse mail non valide !") && res;
+                return res;
+            });
+
+
+            function check_form(id_input, regex, msg_vide, erreur) {
+
+                valid = true;
+                if ($("#" + id_input).length === 0)
+                    return false;
+                if ($("#" + id_input).val() === "") {
+                    $("#" + id_input).parent().prev().children("span").fadeIn().text(msg_vide);
+                    valid = false;
+                } else if (!$("#" + id_input).val().match(regex)) {
+                    valid = false;
+                    $("#" + id_input).parent().prev().children("span").fadeIn().text(erreur);
+                } else
+                    $("#" + id_input).parent().prev().children("span").fadeOut();
+                return valid;
+            }
+        });
+    </script>
+</head>
+
+<body>
+    <h1>C'est mon genre</h1>
+
+    <form action="#" method="post" id="cwp_form">
+        <div id="madiv">
+            <table class="table table-hover table-bordered">
+                <tr>
+                    <!-- <td colspan="2"><img src="img/Sacha.jpg" alt="photo" class="mx-auto d-block"></td> -->
+                    <td colspan="2" id="tdconteneur"><img src="img/Sacha.jpg" alt="photo"></td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <h2>Qui étes vous ?</h2>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td><label for="nom">Nom : </label><span class="form_error"></span></td>
+                    <td><input type="text" id="nom" class="champ" /></td>
+                </tr>
+                <tr>
+                    <td><label for="prenom">Prénom : </label><span class="form_error"></span></td>
+                    <td><input type="text" id="prenom" class="champ" /></td>
+                </tr>
+                <tr>
+                    <td><label for="date">Date de naissance : </label></td>
+                    <td><input type="text" id="datepick" class="champ" placeholder="dd/mm/aaaa" /></td>
+                </tr>
+                <tr>
+                    <td><label for="mail">Email : </label><span class="form_error"></span></td>
+                    <td><input type="text" id="mail" class="champ" /></td>
+                </tr>
+
+                <tr>
+                    <td colspan="2">
+                        <h2>Quel est votre genre..?</h2>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="radio1"> Femme</label>
+                        <input type="radio" id="radio1" name="sexe" value="Femme" checked />
+
+                        <label for="radio2">Homme</label>
+                        <input type="radio" id="radio2" name="sexe" value="Homme" />
+
+                        <label for="radio3">Martien</label>
+                        <input type="radio" id="radio3" name="sexe" value="Martien">
+
+                        <label for="radio4">Autre</label>
+                        <input type="radio" id="radio4" name="sexe" value="Autre">
+
+                    </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td><input type="submit" id="confirme" value="Confirmer" /></td>
+                    <td><input type="submit" id="nul" value="Annuler"></td>
+                </tr>
+            </table>
+        </div>
+    </form>
+</body>
+
+</html>

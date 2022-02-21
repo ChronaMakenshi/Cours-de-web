@@ -1,0 +1,17 @@
+.container{
+    width: 50%;
+    margin: auto;
+}
+
+.erreur{
+    color: orangered;
+}
+
+.left{
+    float: left;
+    text-align: justify;
+}
+
+.clear{
+    clear: both;
+}

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Travail sur les arguments d'une fonction - Calcul du Périmétre</title>
+</head>
+
+<body>
+    <h1>Travail sur les arguments d'une fonction - Calcul du Périmétre</h1>
+    <script>
+
+
+        function perimetre() {
+            var perim = 0;
+            var forme = 0;
+
+            switch (arguments.length) {
+                case 0:
+                    return "Il faut un ou plusieurs arguments ...";
+                    break;
+                case 1:
+                    perim = arguments[0] * 4;
+                    forme = "carré";
+                    break;
+                case 2:
+                    perim = (arguments[0] * 2) + (arguments[1] * 2);
+                    forme = "rectangle";
+                    break;
+                case 3:
+                    perim = arguments[0] + arguments[1] + arguments[2];
+                    forme = "triangle";
+                    break;
+                default:
+                    for (i in arguments) {
+                        perim += arguments[i];
+                    };
+                    return "Vous avez envoyé " +
+                        arguments.length +
+                        " arguments, leur somme fait : " +
+                        perim;
+            }
+
+            return "Périmètre : " + perim + ", c'est un : " + forme;
+        } // fin de fonction perimetre
+
+        // script principal
+        console.log(perimetre());
+        console.log(perimetre(5));
+        console.log(perimetre(3, 2));
+        console.log(perimetre(5, 5, 5));
+        console.log(perimetre(10, 5, 4, 3, 5));
+    </script>
+</body>
+
+</html>

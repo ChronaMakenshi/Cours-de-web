@@ -1,0 +1,69 @@
+body {
+	color: #FFFFFF;
+}
+
+#monHeader{
+	background-color: #333333;
+}
+
+
+h1 {
+	font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+	text-align: center;
+	font-weight: bold;
+	color: #FFFFFF;
+	background-color: #333333;
+	text-transform: capitalize;
+}
+
+#navbar{
+	position: absolute;
+	bottom: 0; left:0px; right: 0px;
+	height: 60px;
+	line-height: 60px;
+	text-align: center;
+	background-color: #333333;
+}
+
+#maVille{
+	display:block;
+	color : white;
+	background-color: #333333;
+	text-align: center;
+	padding: 10px;
+	
+}
+
+#mesLigne{
+	background-color: #333333;
+	text-align: center;
+	padding: 2px;
+	color : white;
+}
+
+p {
+	font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+	text-align: justify;
+	text-transform: capitalize;
+}
+
+.ui-bar {
+    padding :5px 0px 5px 0px !important;
+	margin :5px 0px 5px 0px !important;
+	
+}
+
+.active{
+	border-top: 3px solid rgba(98, 167, 236, 0.4);	
+}
+
+.inactive{
+	border-top: 3px solid rgba(#373737, 0.4);
+}
+
+#monBtnPosition{
+	text-transform: capitalize;
+}
+#monBtnRechercher{
+	text-transform: capitalize;
+}

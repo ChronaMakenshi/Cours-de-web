@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="./css/bootstrap.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./css/index.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.js"></script>
+    <script src="./script/indexjs.js"></script>
+    <title>Formulaire de commande</title>
+</head>
+<body>
+    <h1>Formulaire de commande</h1>
+    <input type="button" value="Ajouter une ligne Produit" id="ajoutprd">
+    <table class="table-dark table" id="myTable">
+        <tr>
+            <td>Produit</td>
+            <td>Prix HT</td>
+            
+        </tr>
+        <tr id="ligneajout">
+            <td><select name="livre" size="1" class="select">
+            <option selected disabled >- Sélectionner un produit -</option>
+            <option value="39">Tout Javascript</option>
+            <option value="45">Jquery</option>
+            <option value="57.5">PHP par la pratique</option>
+            <option value="69">Angular</option></select></td>
+            <td><input type="text" class="affiche" readonly></td>
+            <td><button type="button" class="btntrash"><span class="glyphicon glyphicon-trash"></span></button></td>
+        </tr>
+        <tr>
+            <td class="azer">Total</td>
+            <td><input class="total" type="text" readonly> </td>
+            <td></td>
+        </tr>
+    </table>
+</body>
+</html>

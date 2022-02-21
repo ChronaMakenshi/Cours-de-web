@@ -1,0 +1,13 @@
+.content {
+    position: relative;
+    height: 200px;
+}
+
+.bloc {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: #ccc;
+    width: 150px;
+    height: 150px;
+}

@@ -1,0 +1,283 @@
+/*  VISUALISATION DES BLOCS  */
+
+/* div, header, section, article, aside, nav {
+	border: 1px dashed rgba(0,0,0,0.15);
+	background-color: rgba(0,0,0,0.05);
+} */
+
+/* .clear {
+	border: 1px dashed red;
+} */
+
+/*GLOBAL */
+body {
+	margin: 0;
+	color: #c4cedb;
+	line-height: 1.8;
+	font-family: "Open Sans";
+	background-image: url(../img/fond.jpg);
+}
+
+a {
+	text-decoration: none;
+}
+
+.container {
+	max-width: 1100px;
+	min-width: 800px;
+	margin: 0 auto;
+}
+
+h1, h2, h3 {
+	font-family: "Slabo 27px";
+	font-weight: normal;
+}
+
+/* CTA = Call To Action */
+.cta {
+	font-family: "Slabo 27px";
+	font-size: 1.1em;
+	color: white;
+	background-color:  rgb(98, 177, 132);
+	padding: 10px;
+	float: right;
+	margin-top: 15px;
+}
+
+.cta i {
+	margin-left: 10px;
+}
+
+/* HEADER */
+header {
+	
+	background-color: rgb(113, 150, 128);
+	padding: 0 0 15px;
+	border-top: 5px solid rgb(14, 61, 34);
+	border-bottom: 5px solid  rgb(14, 61, 34);
+	margin-top: 100px;
+}
+
+header nav {
+	text-align: center;
+}
+
+header li {
+	display: inline-block;
+	font-family: "Slabo 27px";
+	font-size: 1.4em;
+}
+
+header li a {
+	color: white;
+	padding: 15px;
+}
+
+/* MAIN */
+main.container {
+	margin-top: 50px;
+}
+
+main p {
+	margin: 15px 0;
+}
+
+section h1 {
+	text-align: center;
+	font-size: 2.5em;
+}
+
+article {
+	float: left;
+	width: 45%;
+	padding: 2.5%;
+}
+
+#presentation {
+	width: 750px;
+	margin: 0 auto;
+	text-align: center;
+}
+
+/* Rubrique Recette */
+
+#recipe {
+	width: 65%;
+	display: inline-block;
+	vertical-align: top;
+	background-color: rgb(45, 46, 48);
+	padding: 2.5%;
+	margin: 50px 2% 0 0;
+}
+
+#recipe h2 {
+	font-size: 2em;
+	margin: 0;
+	text-align: center;
+}
+
+#recipe span {
+	color: rgb(98, 177, 132);
+	font-size: 2em;
+}
+
+#recipe h3 {
+	text-align: center;
+	font-size: 1.8em;
+}
+
+#recipe h3 i {
+	color: goldenrod;
+	margin: 0 5px;
+	font-size: 0.7em;
+}
+
+#recipe img {
+	float: left;
+	margin-right: 10px;
+	border-radius: 50%;
+}
+
+/* Rubrique Evenement */
+aside {
+	width: 20%;
+	display: inline-block;
+	padding: 2.5%;
+	margin-top: 50px;
+	background-color: rgb(113, 150, 128);
+	color: white;
+	border: 5px solid  rgb(14, 61, 34);
+}
+
+aside h2 {
+	margin-top: 0;
+}
+
+aside span {
+	color:  rgb(14, 61, 34);
+}
+
+aside ul li {
+	list-style-type: none;
+}
+
+aside ul li a {
+	color: rgb(14, 61, 34);
+}
+
+aside ul li p {
+	font-size: 0.9em;
+	margin: 0 0 15px;
+}
+
+#vignette {
+	margin: -85px -75px 0 0;
+	float: right;
+}
+
+/* FOOTER */
+footer {
+	margin-top: 25px;
+	text-align: center;
+}
+
+/* Gestion de la Fenêtre Modale */
+
+p {
+    text-align: center;
+}
+
+.cf:before,
+.cf:after {
+    content: "";
+    display: table;
+}
+
+.cf:after {
+    clear: both;
+}
+
+.droite {
+    float: right;
+}
+
+.oModal {
+    position: fixed;
+    z-index: 99999;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.8);
+    opacity: 0;
+    -webkit-transition: opacity 400ms ease-in;
+    -moz-transition: opacity 400ms ease-in;
+    transition: opacity 400ms ease-in;
+    pointer-events: none;
+}
+
+.oModal:target {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.oModal:target>div {
+    margin: 5% auto;
+    transition: all 0.4s ease-in-out;
+    -moz-transition: all 0.4s ease-in-out;
+    -webkit-transition: all 0.4s ease-in-out;
+}
+
+.oModal>div {
+	max-width: 600px;
+	max-height: 600px;
+    position: relative;
+    margin: 1% auto;
+    padding: 8px 8px 8px 8px;
+    border-radius: 5px;
+	background: rgb(113, 150, 128);
+    transition: all 0.4s ease-in-out;
+    -moz-transition: all 0.4s ease-in-out;
+    -webkit-transition: all 0.4s ease-in-out;
+}
+
+.oModal>div header,
+.oModal>div footer {
+    /* border-bottom: 1px solid #e7e7e7; */
+    border-radius: 5px 5px 0 0;
+}
+
+.oModal .footer {
+    border: none;
+    border-top: 1px solid #e7e7e7;
+    border-radius: 0 0 5px 5px;
+}
+
+.oModal>div h2 {
+    margin: 0;
+}
+
+.oModal>div .btn {
+    float: right;
+}
+
+.oModal>div section,
+.oModal>div>header,
+.oModal>div>footer {
+    padding: 1px;
+}
+
+
+/* Fin de la gestion de la fenêtre Modale */
+
+#imagemodale{
+	width: 450px;
+	margin: auto;
+}
+
+#modaleheader{
+	background-color:  rgb(113, 150, 128);
+	color:white;
+	border: 2px solid  rgb(14, 61, 34);
+	text-align: center;
+}

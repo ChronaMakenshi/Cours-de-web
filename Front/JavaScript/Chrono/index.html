@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Chronométre</title>
+    <!-- <link rel="stylesheet" type="text/css" href="css/bootstrap.css"> -->
+    <style>
+        body {
+            font-size: 30px;
+            color: rgb(143, 136, 136);
+            background-color: rgb(33, 36, 33);
+        }
+        
+        h1 {
+            text-align: center;
+        }
+        
+        fieldset {
+            width: 25%;
+            text-align: center;
+            border-radius: 10px 10px 10px 10px;
+            margin: auto;
+            border: 2px solid rgb(21, 100, 21);
+        }
+        
+        input[type="button"] {
+            font-size: 30px;
+        }
+        
+        input {
+            border-radius: 5px 5px 5px 5px;
+        }
+        
+        input:hover {
+            cursor: pointer;
+        }
+        
+        #btnStart:hover {
+            background-color: rgb(39, 172, 39);
+            color: white;
+        }
+        
+        #btnPause:hover {
+            background-color: rgb(100, 100, 224);
+            color: white;
+        }
+        
+        #btnStop:hover {
+            background-color: rgb(218, 50, 20);
+            color: white;
+        }
+        
+        #chrono {
+            font-size: 2em;
+        }
+        
+        .invi {
+            display: none;
+        }
+        
+        .visi {
+            display: inline;
+        }
+        
+        .green {
+            color: rgb(22, 197, 22);
+        }
+        
+        .blue {
+            color: rgb(95, 95, 238);
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Le Chrono</h1>
+    <br />
+    <fieldset>
+        <legend>Mon chrono</legend>
+        <input type="button" id="btnStart" value="Start" />
+        <input type="button" id="btnPause" value="Pause" class="invi" />
+        <input type="button" id="btnStop" value="Stop" class="invi" />
+        <p id="chrono">
+            <span id="h">00</span>:<span id="m">00</span>:<span id="s">00</span>
+        </p>
+    </fieldset>
+    <br/>
+    <script>
+        // ajoute une propriété à l'objet button
+        var tpsEcoule = 0;
+        btnStart.paramTps = tpsEcoule;
+        var chronoP = document.getElementById("chrono");
+
+        // ajoute un car 0 si nécessaire en début de chaîne
+        function ajouteUnZero(temps) { // temps est de type numérique
+            var tpsAvecZero;
+            if (temps < 10) {
+                tpsAvecZero = "0" + temps; // concaténation avec conversion
+                //implicite
+            } else {
+                tpsAvecZero = temps;
+            }
+            return tpsAvecZero;
+        }
+
+        // fonction auto-exécution
+        (function() {
+            // capture évé clic sur btn start
+            btnStart.addEventListener("click", startChrono, false);
+            // ajoute une propriété aux objets button
+            btnStart.paramTps = 0;
+            btnPause.paramTps = 0;
+        })();
+
+        // démarre chrono et masque bouton start affiche boutons pause et stop
+        function startChrono(e) {
+
+            chronoP.setAttribute('class', "green"); // affiche en vert
+            btnStart.setAttribute('class', "invi"); // masque btn start
+            btnPause.setAttribute('class', "visi"); // affiche btn pause
+
+            // désactive évé bouton start
+            btnPause.removeEventListener("click", startChrono, false);
+
+            // active évé btn pause
+            btnPause.addEventListener("click", pauseChrono, false);
+            btnPause.value = "Pause"; // libellé btn pause
+
+            // active évé btn stop
+            btnStop.addEventListener("click", stopChrono, false);
+            btnStop.setAttribute('class', "visi"); // affiche btn stop
+            // algo de calcul de nombre heures, minutes et secondes écoulées
+            var startTime = new Date();
+            decompte = setInterval(function() {
+                // 1- Convertir en secondes :
+                var seconds = Math.round(
+                    (new Date().getTime() - startTime.getTime()) / 1000 +
+                    e.target.paramTps); // e représente l'event déclencheur
+                // e.target représente l'objet déclencheur
+                // ici : bouton start ou bouton pause
+                // (cette prop a été ajoutée aux boutons)
+                // 2- Extraire les heures:
+                var hours = parseInt(seconds / 3600);
+                seconds = seconds % 3600; // secondes restantes
+                // 3- Extraire les minutes:
+                var minutes = parseInt(seconds / 60);
+                seconds = seconds % 60; // secondes restantes
+                // 4- afficher dans le span
+                chronoP.innerHTML = ajouteUnZero(hours) +
+                    ":" + ajouteUnZero(minutes) +
+                    ":" + ajouteUnZero(seconds);
+                // 5- incrémenter le nombre de secondes
+                tpsEcoule += 1;
+
+            }, 1000); // fin de function anonyme dans setInterval() 
+        } // fin de function startChrono
+        // arrête le chrono et modifie texte bouton
+
+        function pauseChrono() {
+            chronoP.setAttribute('class', "blue");
+            // désactive timer
+            clearInterval(decompte);
+
+            btnPause.value = "Reprendre";
+            // bascule fonction pause en fonction start sur évé clic btn pause
+            btnPause.removeEventListener("click", pauseChrono, false);
+            btnPause.addEventListener("click", startChrono, false);
+
+            // renseigne la propriété ajpoutée à ce bouton
+            //(mémo du temps déjà écoulé pour reprise ultérieure)
+            btnPause.paramTps = tpsEcoule;
+        } // fin de function pauseChrono()
+
+        // stoppe chrono et masque boutons pause et stop
+        function stopChrono() {
+            // stop timer
+            clearInterval(decompte);
+
+            // active évé btn start
+            btnStart.addEventListener("click", startChrono, false);
+            // désactive évé btn pause et stop
+            btnPause.removeEventListener("click", startChrono, false);
+            btnStop.removeEventListener("click", stopChrono, false);
+
+            // réinitialise le temps écoulé 
+            tpsEcoule = 0;
+            btnStart.paramTps = tpsEcoule;
+
+            // réaffiche en couleur std
+            chronoP.removeAttribute('class');
+            // réinitialise l'affichage du span
+            chronoP.innerHTML = "00:00:00";
+            // masque boutons
+            btnPause.setAttribute('class', "invi");
+            btnStop.setAttribute('class', "invi");
+            // réaffiche btn start
+            btnStart.setAttribute('class', "visi");
+        } // fin de function stopChrono()
+    </script>
+</body>
+
+</html>

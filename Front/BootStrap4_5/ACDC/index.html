@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AC/DC</title>
+    <link rel="icon" type="image/png" href="img/logo-ac-dc.png" />
+
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=RocknRoll+One&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://kit.fontawesome.com/28690b22ca.js" crossorigin="anonymous"></script>
+
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark manav">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">AC<i class="fas fa-bolt"></i>DC</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
+                aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                <div class="navbar-nav">
+                    <a class="nav-link active" aria-current="page" href="#">Accueil</a>
+                    <a class="nav-link" href="#amembres">Membres</a>
+                    <a class="nav-link" href="#adiscographie">Discographie</a>
+                    <a class="nav-link" href="#adatesconcerts">Agenda des concerts</a>
+                    <a class="nav-link" href="#acontact">Contact</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <br><br><br><br>
+    
+    <div id="accueil">
+        <!-- Le Carrousel -->
+        <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-indicators">
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"
+                    aria-current="true" aria-label="Slide 1"></button>
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
+                    aria-label="Slide 2"></button>
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"
+                    aria-label="Slide 3"></button>
+            </div>
+            <div class="carousel-inner w-75">
+                <div class="carousel-item active">
+                    <img src="img/ac-dc-1.png" class="d-block w-100 mx-auto" alt="AC/DC">
+                    <!-- <div class="carousel-caption">
+                        <h3 class="text-default">
+                            Présentation
+                        </h3>
+                    </div> -->
+                </div>
+                <div class="carousel-item">
+                    <img src="img/ac-dc-2.png" class="d-block w-100 mx-auto" alt="AC/DC">
+                </div>
+                <div class="carousel-item">
+                    <img src="img/ac-dc-3.png" class="d-block w-100 mx-auto" alt="AC/DC">
+                </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
+                data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
+                data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+        <!-- Fin du Carrousel -->
+        <br><br>
+        <div class="monancre">
+            <p id="amembres">AC<i id="member" class="fas fa-bolt"></i>DC -- Les Membres du Groupe --</p>
+        </div>
+    </div>
+   
+    <div id="membres">
+        <div class="photos d-flex flex-wrap justify-content-around">
+            <figure>
+                <img src="img/brian-johnson.png" class="rounded img-thumbnail" alt="Brian Johnson">
+                <figcaption>Brian Johnson (Chant)</figcaption>
+            </figure>
+            <figure>
+                <img src="img/angus-young.png" class="rounded img-thumbnail" alt="Angus Young">
+                <figcaption>Angus Young (Guitare Solo)</figcaption>
+            </figure>
+            <figure>
+                <img src="img/steve-young.png" class="rounded img-thumbnail" alt="Steve Young">
+                <figcaption>Steve Young (Guitare)</figcaption>
+            </figure>
+            <figure>
+                <img src="img/cliff-williams.png" class="rounded img-thumbnail" alt="Cliff Williams">
+                <figcaption>Cliff Williams (Basse)</figcaption>
+            </figure>
+            <figure>
+                <img src="img/chris-slade.png" class="rounded img-thumbnail" alt="Chris Slade">
+                <figcaption>Chris Slade (Batterie)</figcaption>
+            </figure>
+        </div>
+        <div class="monancre">
+            <p id="adiscographie">AC<i class="fas fa-bolt"></i>DC -- La Discographie --</p>
+        </div>
+    </div>
+    <!-- Fin Membres -->
+
+    <div class="container" id="discographie">
+        <div class="row justify-content-around align-items-center m-3">
+            <div class="card col-4 mb-2" style="width: 18rem;">
+                <img src="img/Discographie/High-voltage-1975.jpg" class="card-img-top" alt="High Voltage">
+                <div class="card-body">
+                    <p class="card-text"><span class="date_sortie">1975 : High Voltage</span>Lorem, ipsum dolor sit amet
+                        consectetur adipisicing elit. Pariatur sed vel
+                        assumenda aliquid fuga? Repellat.</p>
+                    <button class="btn btn-red">Lire plus ...</button>
+                </div>
+            </div>
+
+            <div class="card col-4 mb-2" style="width: 18rem;">
+                <img src="img/Discographie/Highway-to-hell-1979.jpg" class="card-img-top" alt="Higway to Hell">
+                <div class="card-body">
+                    <p class="card-text"><span class="date_sortie">1979 : Higway to Hell</span>Lorem, ipsum dolor sit
+                        amet consectetur adipisicing elit. Pariatur sed vel
+                        assumenda aliquid fuga? Repellat.</p>
+                    <button class="btn btn-red">Lire plus ...</button>
+                </div>
+            </div>
+
+            <div class="card col-4 mb-2" style="width: 18rem;">
+                <img src="img/Discographie/Back-in-black-1980.jpg" class="card-img-top" alt="Back in Black">
+                <div class="card-body">
+                    <p class="card-text"><span class="date_sortie">1980 : Back in Black</span>Lorem, ipsum dolor sit
+                        amet consectetur adipisicing elit. Pariatur sed vel
+                        assumenda aliquid fuga? Repellat.</p>
+                    <button class="btn btn-red">Lire plus ...</button>
+                </div>
+            </div>
+
+            <div class="card col-4 mb-2" style="width: 18rem;">
+                <img src="img/Discographie/Who-made-who-1986.jpg" class="card-img-top" alt="Who Made Who">
+                <div class="card-body">
+                    <p class="card-text"><span class="date_sortie">1986 : Who made Who</span>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Pariatur sed vel
+                        assumenda aliquid fuga? Repellat.</p>
+                    <button class="btn btn-red">Lire plus ...</button>
+                </div>
+            </div>
+
+            <div class="card col-4 mb-2" style="width: 18rem;">
+                <img src="img/Discographie/Blow-up-your-video-1988.jpg" class="card-img-top" alt="Blow up your video">
+                <div class="card-body">
+                    <p class="card-text"><span class="date_sortie">1988 : Blow up your Video</span>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Pariatur sed vel
+                        assumenda aliquid fuga? Repellat.</p>
+                    <button class="btn btn-red">Lire plus ...</button>
+                </div>
+            </div>
+
+            <div class="card col-4 mb-2" style="width: 18rem;">
+                <img src="img/Discographie/Razor-edge-1990.jpg" class="card-img-top" alt="Razor's Edge">
+                <div class="card-body">
+                    <p class="card-text"><span class="date_sortie">1990 : Razor's Edge</span>Lorem, ipsum dolor sit amet
+                        consectetur adipisicing elit. Pariatur sed vel
+                        assumenda aliquid fuga? Repellat.</p>
+                    <button class="btn btn-red">Lire plus ...</button>
+                </div>
+            </div>
+
+            <div class="card col-4 mb-2" style="width: 18rem;">
+                <img src="img/Discographie/Ballbreaker-1995.jpg" class="card-img-top" alt="BallBreaker">
+                <div class="card-body">
+                    <p class="card-text"><span class="date_sortie">1995 : BallBreaker</span>Lorem, ipsum dolor sit
+                        amet consectetur adipisicing elit. Pariatur sed vel
+                        assumenda aliquid fuga? Repellat.</p>
+                    <button class="btn btn-red">Lire plus ...</button>
+                </div>
+            </div>
+
+            <div class="card col-4 mb-2" style="width: 18rem;">
+                <img src="img/Discographie/Stiff-upper-lip-2000.jpg" class="card-img-top" alt="Stiff Uper Lip">
+                <div class="card-body">
+                    <p class="card-text"><span class="date_sortie">2000 : Stiff Uper Lip</span>Lorem, ipsum dolor sit
+                        amet consectetur adipisicing elit. Pariatur sed vel
+                        assumenda aliquid fuga? Repellat.</p>
+                    <button class="btn btn-red">Lire plus ...</button>
+                </div>
+            </div>
+            <div class="card col-4 mb-2" style="width: 18rem;">
+                <img src="img/Discographie/Black-ice-2008.jpg" class="card-img-top" alt="Black Ice">
+                <div class="card-body">
+                    <p class="card-text"><span class="date_sortie">2008 : Black Ice</span>Lorem, ipsum dolor sit amet
+                        consectetur adipisicing elit. Pariatur sed vel
+                        assumenda aliquid fuga? Repellat.</p>
+                    <button class="btn btn-red">Lire plus ...</button>
+                </div>
+            </div>
+        </div>
+        <div class="monancre">
+            <p id="adatesconcerts">AC<i class="fas fa-bolt"></i>DC -- Les Dates des Concerts --</p>
+        </div>
+    </div>
+
+    <div class="container" id="datesconcerts">
+        <table class="table table-dark table-hover matable">
+            <thead>
+                <tr>
+                    <th scope="col">Date</th>
+                    <th scope="col">Heure</th>
+                    <th scope="col">Salle</th>
+                    <th scope="col">Ville</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td scope="row">08/06/2000</th>
+                    <td>21:00</td>
+                    <td>Stade deFrance</td>
+                    <td>Paris</td>
+                </tr>
+                <tr>
+                    <td scope="row">12/05/2002</th>
+                    <td>21:00</td>
+                    <td>Esplanade</td>
+                    <td>Singapour</td>
+                </tr>
+                <tr>
+                    <td scope="row">18/09/2009</th>
+                    <td>20:30</td>
+                    <td>Opera</td>
+                    <td>Sydney</td>
+                </tr>
+                <tr>
+                    <td scope="row">12/09/2021</th>
+                    <td>20:30</td>
+                    <td class="table-active"> Massey Hall</td>
+                    <td>Toronto</td>
+                </tr>
+                <tr>
+                    <td scope="row">12/09/2022</th>
+                    <td>20:30</td>
+                    <td >Madison Square Garden</td>
+                    <td>New York</td>
+                </tr>
+                <tr>
+                    <td scope="row">08/06/2023</th>
+                    <td>21:30</td>
+                    <td >Stade deFrance</td>
+                    <td>Paris</td>
+                </tr>
+            </tbody>
+        </table>
+
+
+        <div class="monancre">
+            <p id="acontact">AC<i class="fas fa-bolt"></i>DC -- Contact --</p>
+        </div>
+    </div>
+
+    <div id="contact" class="container">
+        <form id="contact">
+            <div class="row w-50 mx-auto">
+              <div class="col">
+                <input type="text" class="form-control" placeholder="Nom">
+              </div>
+              <div class="col">
+                <input type="text" class="form-control" placeholder="Prenom">
+              </div>
+              <div class="form-group mt-3">
+                <input type="email" class="form-control" placeholder="Email">
+              </div>
+              <div class="form-group mt-3">
+                <textarea class="form-control" rows="3" placeholder="Votre message"></textarea>
+              </div>
+              <div class="form-group mt-3 text-center">
+                <button type="submit" class="btn btn-red">Envoyer</button>
+                <button type="reset" class="btn btn-red">Annuler</button>
+              </div>
+            </div>
+          </form>
+        <!-- <form method="POST" action="#">
+                <div class="row justify-content-center">
+                    <div class="col-3 mb-3">
+                        <input type="text" class="form-control" placeholder="Nom" aria-label="Nom">
+                    </div>
+                    <div class="col-3 mb-3">
+                        <input type="text" class="form-control" placeholder="Prénom" aria-label="Prenom">
+                    </div>
+                </div>
+                <div class="row justify-content-center">
+                    <div class="col-6 mb-3">
+                        <input type="text" class="form-control" placeholder="Email" name="email" autocomplete="off">
+                    </div>
+                </div>
+                <div class="row justify-content-center">
+                    <div class="col-6 mb-3">
+                        <textarea class="form-control" placeholder="Votre message" name="message"></textarea>
+                    </div>
+                </div>
+                <div class="row justify-content-left">
+                    <div class="offset-3 col-4">
+                        <button class="btn btn-red" type="reset" id="annuler">Annuler</button>
+                        <button class="btn btn-red" type="submit" id="submit">Envoyer</button>
+                    </div>
+                </div>
+        </form> -->
+
+    </div>
+    <br><br><br><br>
+    <footer class="container">2021 - Sacha - AC<i class="fas fa-bolt"></i>DC
+        <br><br>
+        <address>
+            <strong>Sacha Corp.</strong><br>
+            25, rue des Alligators<br>
+            19240 Allassac<br>
+            <abbr title="Téléphone">Tel:</abbr> +33 1 40 40 19 68
+        </address>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous">
+    </script>
+</body>
+
+</html>

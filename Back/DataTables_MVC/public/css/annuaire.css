@@ -1,0 +1,47 @@
+body {
+    background-color: #4C98CC;
+}
+
+h1, h3 {
+    text-align: center;
+}
+
+h5 {
+    color: grey;
+}
+
+#pied {
+    display: flex;
+    justify-content: space-between;
+    margin-left: 4cm;
+    margin-right: 4cm;
+    text-align: center;
+}
+
+#ajout_cl {
+    color: white;
+}
+
+#affichage_connexion {
+    background-color: #255CAE;
+    width: 500px;
+    height: 180px;
+    margin: 0 auto;
+    margin-bottom: 15px;
+    text-align: left;
+    border-radius: 20px;
+    color: white;
+}
+
+#affichage_connexion>div {
+    margin: 6px;
+}
+
+#affichage_connexion>div>label {
+    display: inline-block;
+    width: 150px;
+}
+
+table.dataTable tbody tr {
+    background-color: #212529;
+}

@@ -1,0 +1,134 @@
+@font-face {
+    font-family: "Hard_Rock";
+    src: url("../img/HARD_ROCK.ttf") format("truetype");
+}
+
+
+@font-face {
+    font-family: "Rock-and-Roll";
+    src: url("../img/rocknroll_typo_crazy.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: "The_Dark";
+    src: url("../img/TheDark.ttf") format("truetype");
+}
+
+div.monancre{
+    animation-duration: 4s;
+    animation-name: slidein;
+}
+  
+@keyframes slidein {
+    from {
+      margin-left: 100%;
+      width: 300%;
+    }
+  
+    to {
+      margin-left: 0%;
+      width: 100%;
+    }
+}
+
+*{
+    box-sizing: border-box;
+    transition: all 0.2s ease 0.2s;
+}
+
+body{
+    font-family: 'RocknRoll One', sans-serif;
+    background: linear-gradient(118deg, rgb(17, 17, 17) 0%,rgb(17, 17, 17) 20%,#e92424 20%,#e92424 40%,black 40%,black 80%, #e92424 80%, #e92424 100%);    
+}
+
+i{
+    color: #ad1414;
+    text-shadow: 1px 0 0 rgb(22, 22, 22), 1px 1px 0 rgb(22, 22, 22), 0 1px 0 rgb(22, 22, 22), -1px 1px 0 rgb(22, 22, 22), -1px 0 0 rgb(22, 22, 22), -1px -1px 0 rgb(22, 22, 22), 0 -1px 0 rgb(22, 22, 22), 1px -1px 0 rgb(22, 22, 22);   
+}
+
+.navbar-brand{
+    font-family: "The_Dark";
+    font-size: 1.9em;
+}
+
+.manav{
+    position: fixed;
+    left: 0;
+    z-index: 2;
+    font-family: "The_Dark";
+    font-size: 1.2em;
+}
+
+.navbar-nav .nav-link {
+    color: rgb(196, 28, 28) !important;
+}
+
+.navbar-nav .nav-link:hover {
+    color: rgb(173, 173, 154) !important;
+}
+
+.carousel-inner{
+    width: 800px;
+    margin: 0 auto;
+    border-radius: 12px;
+}
+
+
+#membres img{
+    width: 250px;
+    height: 280px;
+}
+
+#discographie .date_sortie{
+    display: block;
+    font-weight: bold;
+    color:  #e92424;
+    padding-right: 3px;
+    text-align: center;
+}
+
+.card{
+    box-shadow: 15px 5px 15px 5px black;
+}
+
+figure{
+    display: inline-block;
+}
+
+figcaption, footer{
+    text-align: center;
+    color: white;
+}
+
+.matable thead tr th {
+    color: rgb(196, 28, 28) !important;
+}
+
+.table-active{
+    background-color:  rgb(196, 28, 28) !important;
+}
+
+.monancre p{
+    color:white;
+    text-align: center;
+    margin-top: 30px;
+    font-family: "The_Dark";
+    font-size: 1.6em;
+}
+
+.btn-red{
+    background-color: #d11c1c;
+    color: white;
+    /* float:right;
+    margin: 10px; */
+    font-family: "Rock-and-Roll";
+    font-size: 1.4em;
+    font-weight: bold;
+}
+
+
+.form-control::placeholder{
+    color: #e92424;
+    font-family: "Hard_Rock";
+    font-size: 1.5em;
+}

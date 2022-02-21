@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <title>jQuery.getJSON demo</title>
+  <link rel="icon" type="image/png" href="img/jquery-logo.png">
+  <link href="css/style.css" rel="stylesheet" type="text/css" />
+  <style>
+  img {
+    height: 200px;
+    float: left;
+  }
+  </style>
+  <script src="js/jquery-3.4.1.js"></script>
+  <script src="js/jquery.cycle.all.js"></script>
+  <script src="js/jquery.easing.1.3.js"></script>
+</head>
+<body>
+<h1>JSONP</h1>
+<h2>(Photos du Saillant)</h2>
+<br><br>
+<div id="images"></div>
+ 
+<script>
+(function() {
+  var flickerAPI = "https://api.flickr.com/services/feeds/photos_public.gne?jsoncallback=?";
+  $.getJSON( flickerAPI, {
+    tags: "le saillant",
+    tagmode: "any",
+    format: "json"
+  })
+    .done(function( data ) {
+      $.each( data.items, function( i, item ) {
+        $('#images').append("<img id='mesimages' src=" + item.media.m + " />").cycle({
+            fx:   'shuffle', 
+            easing: 'easeInOutBack', 
+            delay: -2000 
+        });
+        //$( "<img>" ).attr( "src", item.media.m ).appendTo( "#images" );
+      });
+    });
+})();
+</script>
+ 
+</body>
+</html>

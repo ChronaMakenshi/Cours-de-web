@@ -1,0 +1,84 @@
+
+@font-face
+{
+    font-family: "Pokemon_Solid";
+    src: url("Pokemon_Solid.ttf") format("truetype");
+}
+
+@keyframes spinon { 30% { transform: rotateY(90deg); } }
+
+@keyframes spinoff { 30% { transform: rotateY(-90deg); } }
+
+body{
+    background-color: rgb(80, 197, 90);
+}
+
+h1{
+    text-align: center;
+    font-size: 26px;
+    color: rgb(255,204,3);
+    color: rgb(233, 220, 220);
+    letter-spacing: 4px;
+    font-family: "Pokemon_Solid";
+    text-shadow: 2px 0 0 rgb(59,89,167), 2px 2px 0 rgb(59,89,167), 0 2px 0 rgb(59,89,167), -2px 2px 0 rgb(59,89,167), -2px 0 0 rgb(59,89,167), -2px -2px 0 rgb(59,89,167), 0 -2px 0 rgb(59,89,167), 2px -2px 0 rgb(59,89,167);
+}
+
+section{
+    display: flex;
+    flex-wrap: wrap;
+    width: 40%;
+    margin: 0 auto;
+}
+
+#gridscore{
+    
+    background-color: rgba(94, 102, 95, 0.3);
+    border-radius: 30px;
+    width: 150px;
+}
+
+p{
+    text-align: center;
+    font-family: "Pokemon_Solid";
+    font-size: 20px;
+    letter-spacing: 5px;
+    color: rgb(255,204,3);
+    text-shadow: 2px 0 0 rgb(59,89,167), 2px 2px 0 rgb(59,89,167), 0 2px 0 rgb(59,89,167), -2px 2px 0 rgb(59,89,167), -2px 0 0 rgb(59,89,167), -2px -2px 0 rgb(59,89,167), 0 -2px 0 rgb(59,89,167), 2px -2px 0 rgb(59,89,167);
+   
+}
+
+#score{
+    color: rgb(233, 236, 241);
+    font-size: 23px;
+    font-family: "Pokemon_Solid";
+    letter-spacing: 8px;
+}
+
+#gridext{
+    position: relative;
+    background-color: rgba(94, 102, 95, 0.3);
+    padding: 15px;
+    border-radius: 30px;   
+}
+
+#grid{
+    width: 100%;
+    margin: 0 auto;
+    padding: 10px;
+    justify-content: space-around;
+    display: flex;
+    flex-wrap: wrap;
+    background-color: rgb(94, 102, 95);
+    border-radius: 30px;
+    border: 2px dashed black;
+}
+
+#p1, #p2, #p3, #p4, #p5, #p6, #p7, #p8, #p9, #p10, #p11, #p12, #p13, #p14, #p15, #p16{
+    display: block;
+    width: 100px;
+    height: 125px;
+    margin: 2px; 
+    border-radius: 30px;
+    background-color: rgb(75, 70, 70);
+    border: 2px solid rgb(80, 197, 90);
+}

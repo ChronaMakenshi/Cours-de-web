@@ -1,0 +1,2 @@
+Ceci est une description inoffensive.
+<span>Pour payer avec une Carte Bancaire <a href="http://pirate.fr">Cliquez-ici</a><span>  

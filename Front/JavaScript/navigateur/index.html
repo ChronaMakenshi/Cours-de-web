@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <title>L'Objet Navigator</title>
+</head>
+
+<body>
+    <h2>L'objet Navigator</h2>
+    <div style=" width:90%; float: left;">
+        <form action="">
+            <!-- on va modifier la value des input en y mettant les differentes
+        propriétés de l’objet navigator -->
+            <fieldset>
+                <legend style="color:blue; text-align: center;"> Votre navigateur</legend>
+                <p> <input type="button" name="browscode" id="browscode" onclick="document.getElementById('inbrowscode').value=navigator.appCodeName;" value="APPcodeNAME :" />
+                    <input type="text" name="inbrowscode" id="inbrowscode" size="120" style="float:right;" /> </p>
+                <p> <input type="button" name="browsname" id="browsname" onclick="document.getElementById('inbrowsname').value=navigator.appName;" value="APPname :" />
+                    <input type="text" name="inbrowsname" id="inbrowsname" size="120" style="float:right;" /> </p>
+                <p> <input type="button" name="browsver" id="browsver" onclick="document.getElementById('inbrowsver').value=navigator.appVersion;" value="APPversion :" />
+                    <input type="text" name="inbrowsver" id="inbrowsver" size="120" style="float:right;" /> </p>
+                <p> <input type="button" name="browsagent" id="browsagent" onclick="document.getElementById('inbrowsagent').value=navigator.userAgent;" value="USERagent :" />
+                    <input type="text" name="inbrowsagent" id="inbrowsagent" size="120" style="float:right;" /> </p>
+            </fieldset>
+        </form>
+    </div>
+    <script>
+    </script>
+</body>
+
+</html>

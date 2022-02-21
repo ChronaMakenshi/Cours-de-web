@@ -1,0 +1,364 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+/* http://css-tricks.com/examples/WebKitScrollbars/ */
+
+/* Let's get this party started */
+
+::-webkit-scrollbar {
+    width: 12px;
+}
+
+/* Track */
+
+::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgb(0, 0, 0);
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+}
+
+/* Handle */
+
+::-webkit-scrollbar-thumb {
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    background: #4D4D4D;
+    -webkit-box-shadow: inset 0 0 6px rgb(0, 0, 0);
+}
+
+::-webkit-scrollbar-thumb:window-inactive {
+    background: #4D4D4D;
+}
+
+html {
+    background: #5E5E5E;
+    background: url("bg.jpg");
+}
+
+body {
+    color: #E5E5E5;
+    font: 18px Helvetica-Neue, Helvetica, Arial, sans-serif;
+    background-image: url("bg.jpg");
+}
+
+canvas {
+    border: 2px solid black;
+    background: black;
+}
+
+a {
+    text-decoration: none;
+    border: none;
+    color: #aaa;
+    text-shadow: 0 2px 2px rgba(0, 0, 0, 0.5);
+    padding: 5px;
+}
+
+a:hover {
+    text-decoration: bold;
+    border: none;
+    color: #1E90FF;
+}
+
+textarea {
+    font: -webkit-small-control;
+    letter-spacing: normal;
+    word-spacing: normal;
+    line-height: normal;
+    text-transform: none;
+    text-indent: 0px;
+    text-shadow: none;
+    display: inline-block;
+    text-align: -webkit-auto;
+}
+
+code {
+    font-size: 0.9em;
+    color: #aaa;
+}
+
+pre {
+    border: 1px solid rgba(0, 0, 0, .2);
+    background: rgba(0, 0, 0, .2);
+    margin: 4px;
+    padding: 4px;
+}
+
+p {
+    color: #aaa;
+    margin: 10px;
+    line-height: 1.5em;
+    border: 1px solid #333;
+    background: #222;
+    padding: 4px;
+}
+
+h2 {
+    color: #BFBFBF;
+    font-size: .8em;
+    margin-bottom: 4px;
+}
+
+h3 {
+    color: #BFBFBF;
+    margin-bottom: 4px;
+    border-bottom: 1px solid #444;
+    padding-top: 2px;
+    padding-bottom: 4px;
+    margin-top: 8px;
+    margin-bottom: 8px;
+}
+
+ul {
+    list-style: none;
+}
+
+#adcomp {
+    float: right;
+    margin-top: 5px;
+    margin-right: 15px;
+}
+
+#page {
+    width: 1000px;
+    margin: 0 auto;
+    /*border: 1px solid #1A1A1A;*/
+}
+
+#header {
+    margin-bottom: 20px;
+    margin-top: 10px;
+}
+
+#header a {
+    font-family: 'Lobster', 'lobster-1', 'lobster-2', Cambria, Georgia, serif;
+    font-weight: normal;
+    font-size: 1.5em;
+    line-height: 130%;
+    color: #222;
+    text-decoration: none;
+    text-shadow: 0 2px 2px rgba(155, 155, 155, 0.5);
+}
+
+#header a i {
+    font-size: .4em;
+    color: #aaa;
+    text-shadow: 0 2px 2px rgba(0, 0, 0, 0.5);
+}
+
+#content {
+    background: rgba(0, 0, 0, .4);
+    padding: 16px;
+    border: 2px solid #222;
+    color: #aaa;
+    margin: 0px 30px;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    min-height: 400px;
+    margin-bottom: 25px;
+}
+
+#panel {
+    text-align: left;
+    margin-bottom: 8px;
+}
+
+#codeMainCol1 {
+    display: inline-block;
+    width: 560px;
+}
+
+.codeEditorBox {
+    position: relative;
+    border: 1px solid #111;
+    padding: 4px 6px 1px 4px;
+    background-color: #333;
+    box-sizing: border-box;
+}
+
+.codeEditor {
+    color: #eee;
+    font-size: 1.2em;
+    font-family: Courier;
+    background: #333;
+    border: 1px solid #333;
+    width: 100%;
+    height: 230px;
+    resize: none;
+    overflow: auto;
+}
+
+#codeMainCol2 {
+    display: inline-block;
+    margin-left: 25px;
+    vertical-align: top;
+}
+
+#canvasBox {
+    position: relative;
+    height: 360px;
+}
+
+#canvas {
+    border: 1px solid black;
+    background: white;
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+#codeEditorMain {}
+
+#mousePos {
+    margin-top: 55px;
+}
+
+#FPS {
+    margin-left: 20px;
+}
+
+input[type="range"] {
+    -webkit-appearance: none;
+    background-color: #4D4D4D;
+    border: 1px solid #444;
+    border-radius: 0;
+    box-shadow: inset 0 5px 1px rgba(255, 255, 255, 0.5), 0 1px 0 rgba(255, 255, 255, 0.3);
+    display: inline-block;
+    height: 4px;
+    /*
+	position: relative;
+*/
+    width: 200px;
+}
+
+input[type="range"]::-webkit-slider-thumb, input[type="range"]::-webkit-slider-thumb::after {
+    -webkit-appearance: none;
+    background: transparent;
+    border-color: transparent;
+    display: block;
+    cursor: ew-resize;
+    height: 12px;
+    position: relative;
+    width: 24px;
+    z-index: 2;
+}
+
+input[type="range"]::-webkit-slider-thumb::after {
+    background-color: #888;
+    background-image: -webkit-gradient(linear, left top, left 50%, from(rgba(255, 255, 255, 0.25)), to(rgba(255, 255, 255, 0)));
+    border: 1px solid #444;
+    border-radius: 3px;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.5), 0 1px 3px rgba(0, 0, 0, 0.2);
+    content: '.';
+    left: -1px;
+    position: absolute;
+    text-indent: -9999px;
+    top: -1px;
+}
+
+input[type="range"]::-webkit-slider-thumb::before {
+    background: #fff;
+    border: 1px solid #444;
+    border-width: 1px 0;
+    box-shadow: inset 0 5px 1px rgba(0, 0, 0, 0.2);
+    content: '.';
+    display: block;
+    height: 6px;
+    left: 0;
+    position: absolute;
+    top: 3px;
+    text-indent: -9999px;
+    /*
+	width: 100px;
+*/
+}
+
+#helpDiv {
+    display: none;
+    margin-top: 20px;
+    padding-bottom: 30px;
+}
+
+.spacer {
+    height: 20px;
+}
+
+.button {
+    font-size: 14px;
+    text-align: center;
+    border-radius: 4px;
+    display: inline-block;
+    padding: 4px;
+    color: #D3E1E6;
+    border: solid 1px #333333;
+}
+
+.button:hover {
+    cursor: hand;
+    color: #1E90FF;
+    background: rgba(50, 50, 50, .2);
+}
+
+.button:active {
+    border: solid 1px #4D4D4D;
+    color: #BFBFBF;
+}
+
+#DragMe {
+    /* non-drag */
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    /* this will work for QtWebKit in future */
+    -webkit-user-drag: none;
+    margin: 5px;
+    color: #1A1A1A;
+    text-align: center;
+    font-size: 14px;
+    border: 1px solid #222;
+    border-radius: 4px;
+}
+
+#DragMe:hover {
+    background: #222;
+    color: #555;
+    border: 1px solid #333;
+}
+
+.nodrag {
+    -moz-user-select: -moz-none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    /*
+	 Introduced in IE 10.
+	 See http://ie.microsoft.com/testdrive/HTML5/msUserSelect/
+	*/
+    -ms-user-select: none;
+    user-select: none;
+    /* this will work for QtWebKit in future */
+    -webkit-user-drag: none;
+}
+
+.error {
+    color: #f55;
+    font-size: .8em;
+}
+
+.error span {
+    color: #fcc;
+    font-weight: bold;
+}
+
+.hidden {
+    display: none;
+}
+
+.right {
+    text-align: right;
+}
+
+.clear {
+    clear: both;
+}

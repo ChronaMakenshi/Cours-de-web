@@ -1,0 +1,12 @@
+[
+    {"nom": "Lion", "type" : "Félin", "age" : 13},
+    {"nom": "Tigre","type" : "Félin", "age" : 8},
+    {"nom": "Panthère","type" : "Félin", "age" : 3},
+    {"nom": "Truite","type" : "Poisson", "age" : 3},
+    {"nom": "Guépard","type" : "Félin", "age" : 6},
+    {"nom": "Poisson Clown","type" : "Poisson", "age" : 1},
+    {"nom": "Dragon","type" : "Mythologique", "age" : 105},
+    {"nom": "Chat","type" : "Félin", "age" : 15},
+    {"nom": "Narval","type" : "Poisson", "age" : 56},
+    {"nom": "Baliste","type" : "Poisson", "age" : 12}
+]

@@ -1,0 +1,86 @@
+body {
+    margin: 0px;
+    padding: 0px;
+    background-image:url(../img/bg.jpg);
+    color: rgb(224, 20, 173);
+}
+
+h1, h2 {
+	text-align: center;
+}
+
+h6 {
+    color: white;
+    text-align:center;
+}
+
+.contenir{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.contenir>img {
+    flex: 1 1 auto;
+    width: auto;
+    height: auto;
+    max-width: 300px;
+    min-width: 130px;
+    margin: 3px;
+    object-fit: cover;
+    background-color: white;
+}
+
+.contenir img {
+    padding: 10px;
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+    transition: transform .4s;
+    border: 1px solid black;
+    background-color: white;
+}
+
+/* .contenir:hover img {
+    filter: blur(1px) brightness(.8) grayscale(.7);
+    transform: scale(0.8);
+} */
+
+.contenir img:hover {
+    filter: blur(0);
+    transform: scale(1);
+}
+
+#grenouilles {
+    margin:0 auto;
+    width:70%;
+}
+
+.monImage{
+    border: 1px solid white;
+    width: 300px;
+}
+
+.monImageDetail {
+    border: 1px solid white;
+    float: left;
+}
+
+button {
+    width: 100px;
+    height: 30px;
+    background-color: deeppink;
+    color: white;
+}
+button:hover {
+    cursor:pointer;
+}
+
+#detail_container{
+    width:60%;
+    float: right;
+    text-align: justify;
+    color:white;
+}
+

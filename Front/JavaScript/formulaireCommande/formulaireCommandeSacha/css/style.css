@@ -1,0 +1,31 @@
+body {
+    background-image: url("../img/fond.png");
+}
+
+#bt-add {
+    background-color: fuchsia;
+}
+
+h1 {
+    color: fuchsia;
+    text-align: center;
+}
+
+.remove_produit {
+    background-color: rgb(53, 48, 46);
+}
+
+#madiv {
+    width: 60%;
+    margin: auto;
+}
+
+.montd {
+    display: flex;
+}
+
+strong {
+    display: block;
+    width: 10px;
+    margin: auto;
+}

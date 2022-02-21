@@ -1,0 +1,67 @@
+
+@font-face
+{
+    font-family: "Pokemon_Solid";
+    src: url("Pokemon_Solid.ttf") format("truetype");
+}
+
+@keyframes spinon { 30% { transform: rotateY(90deg); } }
+
+@keyframes spinoff { 30% { transform: rotateY(-90deg); } }
+
+body{
+    background-color: rgb(12, 90, 179);
+}
+
+h1{
+    text-align: center;
+    font-size: 26px;
+    color: rgb(255,204,3);
+    color: rgb(233, 220, 220);
+    letter-spacing: 4px;
+    font-family: "Pokemon_Solid";
+    text-shadow: 2px 0 0 rgb(59,89,167), 2px 2px 0 rgb(59,89,167), 0 2px 0 rgb(59,89,167), -2px 2px 0 rgb(59,89,167), -2px 0 0 rgb(59,89,167), -2px -2px 0 rgb(59,89,167), 0 -2px 0 rgb(59,89,167), 2px -2px 0 rgb(59,89,167);
+}
+
+p{
+    text-align: center;
+    font-family: "Pokemon_Solid";
+    font-size: 20px;
+    letter-spacing: 5px;
+    color: rgb(255,204,3);
+    text-shadow: 2px 0 0 rgb(59,89,167), 2px 2px 0 rgb(59,89,167), 0 2px 0 rgb(59,89,167), -2px 2px 0 rgb(59,89,167), -2px 0 0 rgb(59,89,167), -2px -2px 0 rgb(59,89,167), 0 -2px 0 rgb(59,89,167), 2px -2px 0 rgb(59,89,167);
+   
+}
+
+#score{
+    color: rgb(233, 236, 241);
+    font-size: 23px;
+    font-family: "Pokemon_Solid";
+    letter-spacing: 8px;
+}
+
+.grid{
+    justify-content: space-around;
+   
+}
+
+#p1, #p2, #p3, #p4, #p5, #p6, #p7, #p8, #p9, #p10, #p11, #p12, #p13, #p14, #p15, #p16{
+    display: block;
+    width: 100px;
+    height: 125px;
+    border-radius: 30px;
+    background-color: rgb(221, 211, 211);
+    border: 2px solid rgb(6, 17, 1);
+}
+
+.btn-go{
+    background-color: rgb(6, 17, 1);
+    color: rgb(221, 211, 211);
+}
+
+.btn-go:hover{
+    background-color: rgb(6, 17, 1);
+    color: rgb(16, 212, 29);
+}
+
+

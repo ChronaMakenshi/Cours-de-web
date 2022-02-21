@@ -1,0 +1,32 @@
+    body {
+        font-family: "Comic Sans MS";
+        width: 33%;
+        margin: auto;
+    }
+    
+    label {
+        width: 150px;
+    }
+    
+    h1 {
+        font-weight: bold;
+        font-size: 150%;
+        color: white;
+        text-align: center;
+        background-color: rgb(94, 96, 230);
+        padding: 15px;
+    }
+    
+    form {
+        width: 800px;
+    }
+    
+    a:visited {
+        text-decoration: underline;
+        color: rgb(15, 129, 223);
+    }
+    
+    a:hover {
+        text-decoration: underline;
+        color: greenyellow;
+    }

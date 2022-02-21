@@ -1,0 +1,2 @@
+titre=Bienvenue
+invites=Quel est votre nom ?

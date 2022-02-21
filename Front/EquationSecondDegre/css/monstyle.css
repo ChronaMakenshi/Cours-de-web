@@ -1,0 +1,60 @@
+body {
+    background-image: url(images/bg.jpg);
+    font-size: 100%;
+    color: #ffffff;
+}
+
+h1 {
+    color: #164bdd;
+    font-weight: bold;
+    text-align: center;
+    height: 120px;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+}
+
+.center-bandeau {
+    margin: 0 auto;
+    width: 900px;
+}
+
+p {
+    color: #ffffff;
+    text-align: center;
+    font-size: 20px;
+}
+
+#msg {
+    color: tomato;
+}
+
+
+/* Gestion du fichier EquationDegre2JavaScript.html */
+
+#container {
+    text-align: center;
+    font-size: xx-large;
+}
+
+#a,
+#b,
+#c {
+    width: 80px;
+}
+
+#resultat {
+    padding: 15px;
+    font-family: 'Courier New', Courier, monospace;
+    border: 1px solid rgb(82, 216, 127);
+    color: lavenderblush;
+    font-size: 20px;
+    width: 800px;
+    height: 200px;
+    background-image: linear-gradient(180deg, rgb(45, 45, 51), rgb(70, 71, 128) 40%, rgb(38, 39, 65));
+}
+
+.center-div {
+    margin: 0 auto;
+    width: 100px;
+}

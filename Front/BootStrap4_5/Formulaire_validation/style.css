@@ -1,0 +1,35 @@
+body {
+    background-color: rgb(41, 43, 46);
+    color: white;
+}
+
+h1 {
+    text-align: center;
+}
+
+.container {
+    width: 450px;
+    margin: auto;
+}
+
+.form-control.valid {
+    border-color: green;
+}
+
+.form-control.invalid {
+    border-color: red;
+}
+
+/* .invalid-feedback {
+    color: red;
+    opacity: 0;
+    height: 0;
+    transition: opacity .4s ease-out;
+}
+
+.valid-feedback {
+    color: rgb(60, 192, 34);
+    opacity: 0;
+    height: 0;
+    transition: opacity .4s ease-out;
+} */

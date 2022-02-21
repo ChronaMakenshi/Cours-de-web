@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>jQuery UI Progressbar - Default functionality</title>
+    <link rel="stylesheet" href="css/jquery-ui.css">
+    <!-- <link rel="stylesheet" href="/resources/demos/style.css"> -->
+
+    <script src="js/jquery.js"></script>
+    <script src="js/jquery-ui.js"></script>
+    <script>
+        $(function() {
+
+            $("#progress").progressbar({
+                value: 50
+            });
+
+            var value = 50;
+            countdown();
+
+            function countdown() {
+
+                value++;
+                $("#progress").progressbar("option", "value", value);
+                $("#countdown").text(value);
+
+                if (value < 100) {
+                    setTimeout(countdown, 100);
+
+                } else {
+
+                    $("#countdown").text("complété");
+                    $("#progress").progressbar("disable");
+
+                }
+
+            }
+
+
+        });
+    </script>
+</head>
+
+<body>
+    <h1>Exemple d'une Barre de Progression</h1>
+
+    <div id="progress"></div>
+    <div id="countdown"></div>
+
+
+</body>
+
+</html>

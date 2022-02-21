@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Tous Les Pays</title>
+    <link href="https://fonts.googleapis.com/css?family=Cabin+Sketch" rel="stylesheet">
+    <link rel="stylesheet" href="css/jquery-ui.css">
+
+    <script src="js/jquery.js"></script>
+    <script src="js/jquery-ui.js"></script>
+    <script src="js/jquery.easy-autocomplete.min.js"></script>
+
+    <link rel="stylesheet" href="css/easy-autocomplete.min.css" />
+    <link rel="stylesheet" href="css/easy-autocomplete.themes.css" />
+    <link rel="stylesheet" href="css/bootstrap.css" />
+    <link rel="stylesheet" href="css/style.css" />
+
+    <script src='https://maps.googleapis.com/maps/api/js?v=3.exp&key=AIzaSyA0vtKyhmxPzSNGcxiGh8Qkqwl0s4n2Nno'></script>
+    <div id="msgmap"><a href='http://mapswebsite.net/fr'>Maps Generator</a></div>
+    <script type='text/javascript' src='https://embedmaps.com/google-maps-authorization/script.js?id=25d1d9009b1bf7250f72695ac45493d8fe109a66'></script>
+    <script>
+        function init_map(param1, param2) {
+            var myOptions = {
+                zoom: 5,
+                center: new google.maps.LatLng(param1, param2),
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+            };
+            map = new google.maps.Map(document.getElementById('zone1'), myOptions);
+            marker = new google.maps.Marker({
+                map: map,
+                position: new google.maps.LatLng(param1, param2)
+            });
+            infowindow = new google.maps.InfoWindow({
+                content: ''
+            });
+            setTimeout(function() {
+                infowindow.close();
+            }, 500);
+            google.maps.event.addListener(marker, 'click', function() {
+                infowindow.open(map, marker);
+            });
+            //infowindow.open(map,marker);
+        }
+    </script>
+
+    <script>
+        $(function() {
+
+            //$('#lecture').on('click', function () {
+            //Masquer le bouton de lecture
+            //$('#lecture').css({ 'display': 'none' });
+
+            // Mise en place du composant EasyAutocomplete de JQuery qui permet d'exposer une liste qui s'auto
+            // compléte au moment de la saisie d'un nom de Pays ou d'un Code alpha 2. La source de données initiale
+            // provient des données de l'application (fichier pays.json initilal).
+            var options = {
+                url: "pays.json",
+                getValue: "nom_en_gb",
+
+                template: {
+                    type: "description",
+                    fields: {
+                        description: "alpha2"
+                    }
+                },
+
+                list: {
+                    match: {
+                        enabled: true
+
+                    },
+                    maxNumberOfElements: 6
+
+                },
+                theme: "plate-dark"
+                    //theme: "funky"
+            };
+            $("#name_pays").easyAutocomplete(options);
+
+            // Masquage des zones d'affichage des différentes entitées.
+            $('#zone').css('visibility', "hidden");
+            $('#zone1').css('visibility', "hidden");
+
+            // Masquage du message d'erreur lorsque l'input #name_pays reçoit le focus
+            $("#name_pays").focusin(function() {
+                $('#message').hide();
+            });
+
+            $('#lecture').on('click', function() {
+                //Masquer le bouton de lecture
+                //$('#lecture').css({ 'display': 'none' });
+                //lire_message_texte();
+                //lire_fichier_json(); 
+                lire_avec_completion($("#name_pays").val());
+                lire_carte_pays($("#name_pays").val());
+            });
+
+        });
+
+
+        // Fonction qui renvoie les informations sur un pays donné, on passe le code pays au moment de
+        // l'évènement Click sur le bouton Infos Supplémentaires. 
+        function recup_evenement(event) {
+
+            var prefixe = "madiv" + event.data.nom;
+
+            // Masquer le bouton de soumission Infos Supplémentaires, les infos et afficher le bouton Masquer Infos
+            // $('#'+prefixe).css({'display':'inline'});
+            // $('#masquer'+event.data.nom).show(1500);
+            // $('#'+event.data.nom).hide(1500);
+
+            $('#' + prefixe).show(1500);
+            $('#' + event.data.nom).css({
+                'display': 'none'
+            });
+            $('#masquer' + event.data.nom).css({
+                'display': 'inline'
+            });
+
+
+            // On supprime le contenu existant dans la div avant de la renseigner avec la requête Ajax.
+            $('#' + prefixe).empty();
+
+            $.getJSON('https://restcountries.eu/rest/v2/alpha/' + event.data.nom, function(data2) {
+
+                $('#' + prefixe).append('Capitale du Pays : ' + data2.capital + '<br>');
+                $('#' + prefixe).append('Surface du Pays : ' + data2.area + ' km<sup>2</sup><br>');
+                $('#' + prefixe).append('Population du Pays : ' + data2.population + ' habitants<br>');
+                $('#' + prefixe).append('Code du Pays : ' + data2.numericCode + '<br>');
+                $('#' + prefixe).append('Région du Pays : ' + data2.region + '<br>');
+                $('#' + prefixe).append('Monnaie du Pays : ' + data2.currencies[0].name + '<br>Symbole de la Monnaie : <b>' + data2.currencies[0].symbol + '</b><br>');
+
+
+                $('#masquer' + event.data.nom).click(function() {
+
+                    $('#' + prefixe).hide(1000);
+                    $('#' + event.data.nom).css({
+                        'display': 'inline'
+                    });
+                    $('#masquer' + event.data.nom).css({
+                        'display': 'none'
+                    });
+
+                    // $('#'+prefixe).hide(1000);
+                    // $('#masquer'+event.data.nom).hide(1500);
+                    // $('#'+event.data.nom).show(1500);
+
+                });
+
+                // Version full CSS
+                // $('#masquer'+event.data.nom).click(function(){
+                //     $('#'+event.data.nom).css({'display':'inline'});
+                //     $('#'+prefixe).css({'display':'none'});
+                //     $('#masquer'+event.data.nom).css({'display':'none'});
+                // });
+
+
+            });
+
+        }
+
+        // Fonction sollicitée lorsque l'utilisateur clique sur le bouton Lecture. Elle renvoie la liste
+        // de tous les pays du Monde. Pour obtenir les indormations supplémentaires, il faut solliciter 
+        // la fonction recup_evenement() qui permet d'interroger l'API Countries et d'exposer les informations
+        // supplémentaires par Pays.
+        function lire_fichier_json() {
+            compteur = 0;
+            $.getJSON('pays.json', function(data) {
+                $('#zone').css('visibility', "visible");
+                $.each(data, function(index, d) {
+
+                    compteur += 1;
+
+                    $('#zone').append('<img src= flags/' + d.alpha2.toLowerCase() + '.png width="180px" height="120px"/>');
+                    $('#zone').append('<br>Code Pays : ' + d.alpha2 + '<br>');
+                    $('#zone').append('Nom du Pays : ' + d.nom_fr_fr + '<br>');
+                    $('#zone').append('<div id=madiv' + d.alpha2.toLowerCase() + '></div>');
+                    $('#zone').append('<button id= "' + d.alpha2.toLowerCase() + '" style="display:inline">Infos Supplémentaires</button>');
+                    $('#zone').append('<button id= "masquer' + d.alpha2.toLowerCase() + '" style="display:none">Masquer Infos</button><br><br>');
+                    $('#zone').append('<hr>');
+
+                    $("#" + d.alpha2.toLowerCase()).on("click", {
+                        nom: d.alpha2.toLowerCase()
+                    }, recup_evenement);
+
+                });
+                console.log(compteur);
+            });
+        }
+
+        // Fonction sollicitée dans le cadre de l'auto-complétion, elle renvoie les valeurs pour un nom de Pays
+        // passé en paramétre.
+        function lire_avec_completion(param) {
+            compteur = 0;
+
+            $.getJSON('https://restcountries.eu/rest/v2/name/' + param + '?fullText=true', function(data) {
+
+                $('#zone').css('visibility', "visible");
+                // On supprime les éléments déjà inséré dans la div zone afin d'obtenir uniquement les données
+                // en lien avec la recherche.
+                $('#zone').empty();
+
+                // Masquage du message d'erreur en cas de relance de la recherche après une recherche infructueuse
+                $('#message').hide();
+
+                console.log(data);
+
+                $.each(data, function(index, d) {
+                    compteur += 1;
+                    var code3 = d.alpha3Code.toLowerCase();
+
+                    $('#zone').append('<img src= https://restcountries.eu/data/' + code3 + '.svg width="180px" height="120px"/>');
+                    $('#zone').append('<br>Code Pays : ' + d.alpha2Code + '<br>');
+                    $('#zone').append('Nom du Pays : ' + d.name + '<br>');
+                    $('#zone').append('Capitale du Pays : ' + d.capital + '<br>');
+                    $('#zone').append('Surface du Pays : ' + d.area + ' km<sup>2</sup><br>');
+                    $('#zone').append('Population du Pays : ' + d.population + ' habitants<br>');
+                    $('#zone').append('Code du Pays : ' + d.numericCode + '<br>');
+                    $('#zone').append('Région du Pays : ' + d.region + '<br>');
+                    $('#zone').append('Monnaie du Pays : ' + d.currencies[0].name + '<br>Symbole de la Monnaie : <b>' + d.currencies[0].symbol + '</b><br>');
+                    // $('#zone').append('<hr>');
+
+                });
+                console.log(compteur);
+                // Chaînage sur la fonction de recherche et d'affichage pour la capture des erreurs éventuelles !!!    
+            }).fail(function(xhr, textStatus, msg) {
+                switch (xhr.status) {
+                    case 404:
+                        $('#message').show();
+                        $('#message').html("Code 404: service introuvable <br>Relancer une recherche avec le code sur 2 lettres <i>(ex: FR)</i> proposé par la liste de l'auto-complétion<br>Vérifiez que vous avez entré un nom de Pays");
+                        break;
+                    case 502:
+                        $('#message').show();
+                        $('#message').html("Code 502: problème de passerelle");
+                        break;
+
+                    case 0:
+                        $('#message').show();
+                        $('#message').html("serveur inaccessible OU problème de connexion OU requête interdite");
+                        break;
+
+                    default:
+                        $('#message').show();
+                        $('#message').html("cas d’erreur non géré");
+                        break;
+                }
+            });
+
+        }
+
+        function lire_carte_pays(param) {
+
+            $.getJSON('https://restcountries.eu/rest/v2/name/' + param + '?fullText=true', function(data) {
+
+                $('#zone1').css('visibility', "visible");
+                $('#zone1').empty();
+
+                $.each(data, function(index, d) {
+
+                    var code2 = d.alpha2Code.toLowerCase();
+                    var param1 = d.latlng[0];
+                    var param2 = d.latlng[1];
+
+                    console.log(param1);
+                    console.log(param2);
+
+                    google.maps.event.addDomListener(window, 'load', init_map(param1, param2));
+
+                    //$('#zone1').append('<img src= CartesPays/' + code2 + '.jpg width="580px" height="auto"/>');
+                });
+
+            });
+
+        }
+
+        function lire_message_texte() {
+            $.ajax("message.txt")
+                .done(function mafonction(data) {
+                    var msg = data;
+                    $('#zone').html('<div></div>').html('<p>' + msg + '</p>');
+                    setTimeout(lire_message_texte, 4000);
+                    console.log("lecture message");
+                })
+                .fail(function() {
+                    alert("error");
+                });
+        }
+    </script>
+</head>
+
+<body>
+    <h1>Tous Les Pays</h1>
+    <div id="recherche">
+        <label for="name_pays">Nom du Pays :</label>
+        <input type="text" id="name_pays" name="name_pays" />
+        <button id="lecture">Lancer la lecture</button>
+        <div id="message"></div>
+    </div>
+    <div id="conteneur">
+        <div id="zone"></div>
+        <div id="zone1"></div>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>Receptionning</title>
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <div id="maDiv">
+        <h2>Deuxième page</h2>
+        <p>
+            Informations reçues :
+        </p>
+        <span id="recu"></span>
+    </div>
+</body>
+<script>
+    // découper sur ? ==> tableau à 2 postes
+    var infos = (decodeURI(location.href).split("?"))[1];
+    // découper sur & ==> tableau à n postes (ici n=2)
+    // (on pouvait aussi parcourir le tableau tab avec une boucle for)
+    var tab = infos.split("&");
+    // les valeurs sont dans le 2° poste de chacun des tableaux
+    var txt = decodeURI((tab[0].split("="))[1]);
+    var number = decodeURI((tab[1].split("="))[1]);
+    // afficher dans le span
+    document.getElementById('recu').innerHTML = "Texte : " + txt + "<br> Nombre: " + number;
+</script>
+
+</html>

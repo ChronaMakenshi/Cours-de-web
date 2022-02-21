@@ -1,0 +1,73 @@
+body {
+    background-image: url(../img/bg.jpg);
+    font-size: 1.5em;
+    color: azure;
+}
+
+h1 {
+    font-family: 'Shadows Into Light', cursive;
+    font-size: 2.5em;
+    color: fuchsia;
+    text-align: center;
+}
+
+form {
+    display: flex;
+}
+
+div>p {
+    display: flex;
+}
+
+form input:not([type=submit]):not([type=reset]) {
+    flex: 1;
+}
+
+.tderreur {
+    width: 350px;
+}
+
+#envoyer,
+#annuler {
+    background-color: fuchsia;
+    color: white;
+}
+
+.div1 {
+    width: 33%;
+    margin: auto;
+}
+
+.div3 {
+    width: 33%;
+    margin: auto;
+}
+
+
+/* Ecriture d'une classe error pour donner forme aux messages d'erreur */
+
+.erreur {
+    display: inline-block;
+    color: #FF4F4F;
+    padding: 10px;
+    font-size: 15px;
+}
+
+@media (max-width: 600px) {
+    form {
+        flex-direction: column;
+    }
+    form p {
+        display: block;
+    }
+    label {
+        display: block;
+        text-align: left;
+    }
+    form>div {
+        width: auto;
+    }
+    input {
+        width: 100%;
+    }
+}

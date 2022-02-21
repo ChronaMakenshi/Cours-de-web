@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Le Mini Pokedex</title>
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
+    <link rel="icon" type="image/png" href="img/Marill.png">
+    <script src="https://code.jquery.com/jquery-3.5.1.js"
+        integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+    <script>
+        $(document).ready(function () {
+
+            $("#pokeInput").on("change", function () {
+                if ($(this).val() < 1 || $(this).val() >= 808) {
+                    $("#msg").html("Vous dépassez les limites !!!");
+                } else {
+                    $("#msg").html("");
+                }
+            });
+
+
+            $("#chercher").on("click", function () {
+
+                var param = $("#pokeInput").val();
+
+                // padStart() permet de compléter ici à 3 chiffres la chaine param en 
+                // concaténant des 0 en préfixe.
+                var paramImg;
+                paramImg = param.padStart(3, "0");
+
+                var pokeIMG = "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/" + paramImg + ".png";
+
+                var url = "https://pokeapi.co/api/v2/pokemon-species/" + param;
+
+                $.getJSON(url, function (data) {
+
+                    console.log(data);
+
+                    var pokeID = data.id;
+
+                    // La méthode filter() Permet de filtrer les éléments du tableau flavor_text_entries dont 
+                    // la propriété language.name contient la chaîne de caractère "fr".
+                    // La méthode filter retourne alors un tableau filtré pokemon des descriptions. (pokemon[0] qui permet d'accéder 
+                    // à sa propriété flavor_text, la première description en français ...)
+                    // Même chose pour déterminer le nom en français du Pokemon et sa famille. 
+
+                    var pokemon = data.flavor_text_entries.filter(item => item.language.name.includes("fr"));
+
+                    var pokeName = data.names.filter(item => item.language.name.includes("fr"));
+                    pokeName = pokeName[0].name;
+
+                    var pokeFamille = data.genera.filter(item => item.language.name.includes("fr"));
+                    pokeFamille = pokeFamille[0].genus;
+
+                    if (pokemon.length === 1) {
+                        var pokeText0 = pokemon[0].flavor_text;
+                        var pokeText1 = "";
+                    } else {
+                        var pokeText0 = pokemon[0].flavor_text;
+                        var pokeText1 = pokemon[1].flavor_text;
+                        // Tant que les textes de description sont les mêmes, on passe au suivant 
+                        // et on l'affiche ... !!!
+                        var i = 0;
+                        while (i < pokemon.length) {
+                            if (pokeText0 === pokeText1) {
+                                pokeText1 = pokemon[i + 1].flavor_text;
+                            }
+                            i = i + 1;
+                        }
+                    }
+
+                    var pokeTxCapture = data.capture_rate;
+                    var pokeForme = data.shape.name;
+                    var pokeColor = data.color.name;
+
+                    var html = "";
+                    html += '<h2>#' + pokeID + ' ' + pokeName + '</h2>';
+                    html += '<h3> Taux de Capture : ' + pokeTxCapture + ' % </h2>';
+                    html += '<h4> Famille : ' + pokeFamille + '</h3>';
+
+                    html += "<br>";
+                    html += "<div class=row>";
+                    html += "<div id=divtext class=col-lg-6>" + pokeText0 + "<br>" + pokeText1 + "</div>";
+                    html += "<div id=divimg class=col-lg-6><img class=img-fluid id=mapokeimg src='" + pokeIMG + "' </div>";
+                    html += '</div>';
+
+                    $("#pokeDetails").css({
+                        "border": "4px solid " + pokeColor
+                    });
+
+                    $("#tableDetail").show();
+                    $("#pokeDetails").empty();
+                    $("#pokeDetails").show();
+                    $("#pokeDetails").append(html);
+
+                });
+            });
+        });
+    </script>
+</head>
+
+<body>
+    <div class="container" id="PokeForm">
+        <h1 id="grandtitre">Le Mini Pokédex</h1><br>
+        <div class="row">
+            <table class=" table table-striped table-dark">
+                <tr>
+                    <td><label for="pokeInput">ID du Pokemon (de 1 à 807) : </label></td>
+                    <td><input class="rounded" type="number" min="1" max="807" name="pokeInput" id="pokeInput"
+                            placeholder="ID" autocomplete="off"></td>
+                    <td><span id="msg"></span></td>
+                    <td><button class="btn btn-secondary float-right" id="chercher">Chercher</button></td>
+                </tr>
+            </table>
+            <table class="table table-striped table-dark" id="tableDetail">
+                <tr>
+                    <td>
+                        <div id="pokeDetails"></div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</body>
+
+</html>

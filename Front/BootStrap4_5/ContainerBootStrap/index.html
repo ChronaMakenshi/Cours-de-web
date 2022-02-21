@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="img/Pokemon.png">
+    <title>Présentation</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <h1>Présentation des Container BootStrap</h1>
+    <br>
+    <div id="resolution">width: <span id="width"></span> px </div>
+    <br>
+    <!-- <div class="container">
+        <div class="row">
+            <div class="col-4"><strong>container</strong> Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+                Voluptatem, ducimus?<b>4 Colonnes</b></div>
+            <div class="col-3">Lorem ipsum dolor sit amet consectetur adipisicing elit.<b>3 Colonnes</b></div>
+            <div class="col-5">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dolores in iusto omnis
+                placeat porro inventore.<b>5 Colonnes</b></div>
+        </div>
+    </div> -->
+    <div class="container-xl">
+        <div class="row">
+            <div class="col-4"><strong>container-xl</strong> Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+                Voluptatem, ducimus?<b>4 Colonnes</b></div>
+            <div class="col-3">Lorem ipsum dolor sit amet consectetur adipisicing elit.<b>3 Colonnes</b></div>
+            <div class="col-5">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dolores in iusto omnis
+                placeat porro inventore.<b>5 Colonnes</b></div>
+        </div>
+    </div>
+
+    <div class="container-lg">
+        <div class="row">
+            <div class="col-4"><strong>container-lg</strong> Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+                Voluptatem, ducimus?<b>4 Colonnes</b></div>
+            <div class="col-3">Lorem ipsum dolor sit amet consectetur adipisicing elit.<b>3 Colonnes</b></div>
+            <div class="col-5">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dolores in iusto omnis
+                placeat porro inventore.<b>5 Colonnes</b></div>
+        </div>
+    </div>
+
+    <div class="container-md">
+        <div class="row">
+            <div class="col-4"><strong>container-md</strong> Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+                Voluptatem, ducimus?<b>4 Colonnes</b></div>
+            <div class="col-3">Lorem ipsum dolor sit amet consectetur adipisicing elit.<b>3 Colonnes</b></div>
+            <div class="col-5">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dolores in iusto omnis
+                placeat porro inventore.<b>5 Colonnes</b></div>
+        </div>
+    </div>
+
+    <div class="container-sm">
+        <div class="row">
+            <div class="col-4"><strong>container-sm</strong> Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+                Voluptatem, ducimus?<b>4 Colonnes</b></div>
+            <div class="col-3">Lorem ipsum dolor sit amet consectetur adipisicing elit.<b>3 Colonnes</b></div>
+            <div class="col-5">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dolores in iusto omnis
+                placeat porro inventore.<b>5 Colonnes</b></div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0"
+        crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function () {
+
+            
+            // Affichage de la largeur de la fenêtre au départ.
+            let width = $(window).width();
+            $('#width').text(width);
+           
+            
+            // Affichage de la largeur de la fenêtre lorsqu'il y a redimensionnement de la
+            // fenêtre.
+            function detectScreen() {
+                $(window).resize(function () {
+                    width = $(window).width();
+                    getScreen();
+                });
+
+                function getScreen() {
+                    return { 'width': getWidth() };
+                }
+            }
+
+            function getWidth() { 
+                $('#width').text(width);
+                return width;
+            }
+            
+            detectScreen();
+
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,59 @@
+body{
+	background-image:url(../img/bg.jpg);
+	/*background-repeat: no-repeat;*/
+	font-size: 100%;
+}
+
+h1 {
+	font-family: 'Fredericka the Great', cursive;
+	font-size: 4em;
+	color: #F50EB6;
+	margin: 15px;
+	text-align: center;
+}
+
+
+h2 {
+
+	font-family: 'Fredericka the Great', cursive;
+	font-size: 3em;
+	color: #F50EB6;
+	margin: 15px;
+}
+
+caption {
+	font-size: 1em;
+	color: #F50EB6;
+}
+
+a:visited, a:active, a:hover, a:link{
+	color: #F20DE1;
+	text-decoration-line: none;
+}
+
+th
+{
+	background-color:#282828;
+	color : #F20DE1;
+
+}
+
+.btn-sample { 
+	color: #ffffff; 
+	background-color: #BD1BB8; 
+	border-color: #C430D1; 
+} 
+
+.MonTableau
+{
+	margin: 0 auto;
+	width: 600px;
+}
+
+.ajoutR{
+	
+	font-size: 1em;
+	color: #F50EB6;
+	text-align: right;
+}
+

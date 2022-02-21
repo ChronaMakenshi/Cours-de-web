@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Utilisation de JSViews</title>
+    <script src="js/jquery.js"></script>
+    <script src="js/jsviews.js"></script>
+</head>
+
+<body>
+    <h1>Utilisation de JSViews</h1>
+    <script id="myTmpl" type="text/x-jsrender">
+        <input data-link="{toFull:first last:fromFull}" /><br/><br/> Prénom: <em>{^{>first}}</em><br/> Nom: <b>{^{>last}}</b>
+    </script>
+
+    <div id="page"></div>
+
+    <script>
+        var myTmpl = $.templates("#myTmpl"),
+            data = {
+                first: "Sacha",
+                last: "RESTOUEIX"
+            };
+
+        $.views.converters({
+            toFull: function(first, last) {
+                return first + " " + last;
+            },
+            fromFull: function(fullname) {
+                var names = fullname.split(" ");
+                var last = names.pop();
+                var first = names.join(" ");
+                return [first, last]; // Return array for binding back to the two arguments
+            }
+        });
+
+        myTmpl.link("#page", data);
+    </script>
+
+</body>
+
+</html>

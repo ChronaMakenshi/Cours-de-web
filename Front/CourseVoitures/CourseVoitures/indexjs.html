@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course de Voitures en JS</title>
+    <link rel="icon" type="image/png" href="img/favicon.png">
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
+</head>
+<body>
+
+    <img src='img/marquage_sol_gazon_finish.png' width='650px' height='auto'><img src='img/marquage_sol_gazon.png' width='650px' height='auto'>
+
+    <div id="monBoutonGo"><input type="button" id="monGo" value="Go !">&nbsp;<input type="button" id="monStop" value="Stop !"></div>
+
+<script>
+    var monID = null;
+    var monGo   = document.getElementById("monGo");
+    var monStop = document.getElementById("monStop");
+
+   
+    class Voiture {
+        constructor(x, y, img) {
+            this.x = x;
+            this.y = y;
+            this.dessiner(img);
+        };
+    }
+
+    Voiture.prototype.dessiner = function(img) {
+
+        var monimg = document.createElement("img");
+        this.monElt = monimg;
+
+        this.monElt.src = img;
+        this.monElt.style.width = "300px";
+        this.monElt.style.position = "absolute";
+        this.monElt.style.left = this.x+"px";
+        this.monElt.style.top = this.y+"px";
+
+        document.body.appendChild(this.monElt);
+    }
+
+    Voiture.prototype.deplacerAGauche = function(distance) {
+        this.x -= distance;
+        this.monElt.style.left = this.x+"px";
+        this.monElt.style.top = this.y+"px";
+
+    }
+
+    var car1 = new Voiture(1000, 105, "img/car1.png");
+    var car2 = new Voiture(1000, 280, "img/car2.png");
+
+    monGo.addEventListener("click",function() {
+
+        monID = setInterval(function() {
+            car1.deplacerAGauche(Math.random() * 15);
+            car2.deplacerAGauche(Math.random() * 15);
+        }, 20);
+
+    });
+
+    monStop.addEventListener("click",function() {
+        clearInterval(monID);
+    });
+
+    
+
+</script>
+</body>
+</html>

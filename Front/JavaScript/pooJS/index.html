@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <title>La POO en JvaScript (ES6)</title>
+
+</head>
+
+<body>
+    <h1>La POO en JvaScript (ES6)</h1>
+    <script>
+        class Personne {
+            constructor(nom, prenom, age) {
+
+                this.nom = nom;
+                this.prenom = prenom;
+                this.age = age;
+            }
+            getName() {
+
+                return this.prenom + " " + this.nom;
+            }
+            setAge(annee) {
+
+                return this.age = 2019 - annee;
+            }
+        }
+        class Employe extends Personne {
+            constructor(nom, prenom, age, societe) {
+
+                super(nom, prenom, age);
+
+                this.societe = societe;
+            }
+            lireSociete() {
+
+                return this.societe;
+            }
+        }
+
+        // Instanciation d'un objet Personne et appel de méthodes.
+        var moi = new Personne("Restoueix", "Sacha", 51);
+
+        console.log("Renvoi des valeurs d'un objet Personne");
+        console.log(moi.getName());
+        console.log(moi.setAge(1968));
+        console.log("***************************************");
+
+
+        // Instaniation d'un objet Employe et appel de méthodes.
+        var nouveaumoi = new Employe("Durand", "Pierre", 26, "AFPA");
+        console.log("Renvoi des valeurs d'un objet Employe");
+        console.log(nouveaumoi.getName());
+        console.log(nouveaumoi.setAge(1993));
+        console.log(nouveaumoi.lireSociete());
+
+
+        // Selon les spécifications EcmaScript 6
+        // class CompteBancaire {
+
+        //     constructor(titulaire, solde, devise) {
+        //         this.titulaire = titulaire;
+        //         this.solde = solde;
+        //         this.devise = devise;
+        //     }
+
+        //     crediter(montant) {
+
+        //         this.solde += montant;
+        //     }
+
+        //     debiter(montant) {
+
+        //         this.solde -= montant;
+        //     }
+        // }
+
+
+        // Selon les spécifications EcmaScript 5
+        // function CompteBancaire(titulaire, solde, devise) {
+
+        //     this.titulaire = titulaire;
+        //     this.solde = solde;
+        //     this.devise = devise;
+
+        // }
+
+        // CompteBancaire.prototype.crediter = function(montant) {
+
+        //     this.solde += montant;
+
+        // }
+
+        // CompteBancaire.prototype.debiter = function(montant) {
+
+        //     this.solde -= montant;
+        // }
+
+
+        // var comptebancaire = new CompteBancaire("restoueix", 8000, "€");
+
+        // comptebancaire.crediter(500);
+        // comptebancaire.debiter(300);
+
+        // console.log("Le Solde du compte bancaire de M(me) " + comptebancaire.titulaire +
+        //     " est de " + comptebancaire.solde + " " + comptebancaire.devise);
+    </script>
+
+</body>
+
+</html>

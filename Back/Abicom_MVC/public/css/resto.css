@@ -1,0 +1,32 @@
+body {
+    background-image: url(../img/fond.png);
+    color: white;
+}
+
+h1 {
+    color: salmon;
+    text-align: center;
+    font-family: 'Potta One', cursive;
+}
+
+td {
+    color: white;
+}
+
+tbody {
+    background-color: silver;
+}
+
+input {
+    width: 100%;
+    color: black;
+}
+
+a {
+    display: inline-block;
+    padding: 1rem 2.5rem;
+    border-radius: 100px;
+    border: 1px solid #ededed;
+    color: white;
+    background-color: blue;
+}

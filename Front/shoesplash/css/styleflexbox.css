@@ -1,0 +1,90 @@
+* {
+	box-sizing: border-box;
+	transition: all 0.2s ease 0s;
+}
+
+
+body{
+	font-family: "Open Sans";
+	font-size: 0.8em;
+	background-color: #F2F2F2;
+	color: rgb(24, 22, 22);
+}
+
+img{
+	max-width: 100%;
+}
+
+
+.topbar{
+    background-color: black;
+    font-size: 20px;
+    color:rgb(226, 173, 224);
+    text-align: center;
+    padding: 6px;
+}
+
+.container{
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    background-color: #F6D4F5;
+    padding-bottom: 30px;
+}
+
+nav{
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-around ;
+    flex-basis : 100%;
+    text-align: center;
+}
+
+.container nav a{
+    text-transform: uppercase;
+    text-decoration: none;
+    font-size: 20px;
+    color: rgb(24, 22, 22);
+    padding: 10px 15px;	
+}
+
+header .container > nav a:hover {
+	background-color: rgb(53, 50, 50);
+	color:white;
+	transition: all 0.1s ease 0s;	
+}
+
+p > span{
+	display: block;
+	font-weight: bold;
+	text-align: right;
+}
+
+#cart i{
+	color:rgba(221, 143, 231, 0.548);
+	font-size: 50px;
+	margin: 10px;
+}
+
+#cart p{
+    display: inline-block;
+}
+
+header #cart{
+	color: rgb(24, 22, 22);
+    font-size: 1.2em;
+   
+}
+
+@media screen and (max-width: 860px) {
+
+    header .container > nav{
+		flex-direction: column;
+		text-align: center;
+    }
+    
+    #cart {
+		display: none;
+	}
+
+}

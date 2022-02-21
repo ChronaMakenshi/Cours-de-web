@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Formulaire et JQuery</title>
+    <link href="css/bootstrap.css" rel="stylesheet" />
+    <style>
+        body {
+            background-image: url("./img/bg.jpg");
+        }
+        
+        h1 {
+            text-align: center;
+            color: white;
+        }
+        
+        .erreur {
+            color: rgba(216, 54, 25, 0.973);
+        }
+        
+        .tderreur {
+            width: 35%;
+        }
+    </style>
+    <script src="js/jquery-3.4.1.js"></script>
+    <script>
+        $(document).ready(function() {
+            var patternMail = /^[a-z0-9\-_.]+@[a-z0-9\-_.]+\.[a-z]{2,3}$/i;
+
+            $(".erreur").hide();
+
+            $("#envoyer").on("click", function(e) {
+
+                if ($("#nom").val() == "") {
+                    $(".erreur").hide(1000);
+                    e.preventDefault();
+                    let monErreur = $("#nom").parent().siblings(".tderreur").children(".erreur");
+                    monErreur.show(500);
+                    monErreur.html("<b>Vous devez rentrer un Nom !!!</b>");
+
+                } else if ($("#prenom").val() == "") {
+                    $(".erreur").hide(1000);
+                    e.preventDefault();
+                    let monErreur = $("#prenom").parent().siblings(".tderreur").children(".erreur");
+                    monErreur.show(500);
+                    monErreur.html("<b>Vous devez rentrer un Prénom !!!</b>");
+
+                } else if (!$("#email").val().match(patternMail)) {
+
+                    $(".erreur").hide(1000);
+                    e.preventDefault();
+                    let monErreur = $("#email").parent().siblings(".tderreur").children(".erreur");
+                    monErreur.show(500);
+                    monErreur.html("<b>Vous devez rentrer une Adresse Email Valide !!!</b>");
+
+                } else {
+
+                    $(".erreur").hide(1000);
+                    return true;
+                }
+            });
+            $("#annuler").on("click", function() {
+
+                $(".erreur").hide(1000);
+
+            });
+        });
+    </script>
+</head>
+
+<body>
+    <h1>Formulaire en JQuery</h1>
+    <br>
+    <br>
+    <form method="post" action="#">
+        <div class="container">
+            <div class="row">
+                <table class="table table-bordered table-dark ">
+                    <tr>
+                        <td><label for="nom">Nom : </label></td>
+                        <td><input type="text" id="nom" name="nom" class="champ" autocomplete="off"></td>
+                        <td class="tderreur"><span class="erreur">Vous avez des erreurs !!!</span></td>
+                    </tr>
+                    <tr>
+                        <td><label for="prenom">Prénom : </label></td>
+                        <td><input type="text" id="prenom" name="prenom" class="champ" autocomplete="off"></td>
+                        <td class="tderreur"><span class="erreur">Vous avez des erreurs !!!</span></td>
+                    </tr>
+                    <tr>
+                        <td><label for="email">Email : </label></td>
+                        <td><input type="text" id="email" name="email" class="champ" autocomplete="off"></td>
+                        <td class="tderreur"><span class="erreur">Vous avez des erreurs !!!</span></td>
+                    </tr>
+                    <tr>
+                        <td><input type='submit' class="btn btn-sample" id='envoyer' name='envoyer' value='Envoyer' /></td>
+                        <td><input type='reset' class="btn btn-sample" id='annuler' name='annuler' value='Annuler' /></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </form>
+</body>
+
+</html>

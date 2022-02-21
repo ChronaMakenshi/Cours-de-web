@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Evénement JQuery</title>
+    <link rel="icon" type="image/png" href="img/jquery-logo.png">
+    <link href="css/bootstrap.css" rel="stylesheet" />
+    <link href="css/style.css" rel="stylesheet" type="text/css" />
+    <script src="js/jquery.js"></script>
+    <script>
+        // Gestion des évènements en JQuery
+        $(document).ready(function() {
+
+            $("#switcher-defaultJQ").on("click", function() {
+                $("body").removeClass("narrow");
+                $("body").removeClass("large");
+                $("#switcherJQuery button").removeClass("textForm");
+                $(this).addClass("textForm");
+            });
+
+            $("#switcher-largeJQ").on("click", function() {
+                $("body").removeClass("narrow");
+                $("body").addClass("large");
+                $("#switcherJQuery button").removeClass("textForm");
+                $(this).addClass("textForm");
+            });
+
+            $("#switcher-narrowJQ").on("click", function() {
+                $("body").addClass("narrow");
+                $("body").removeClass("large");
+                $("#switcherJQuery button").removeClass("textForm");
+                $(this).addClass("textForm");
+            });
+
+            // Gestionnaire d'événements sur div switcherJQuery
+            $("#switcherJQuery").on("mouseenter", function() {
+                $(this).addClass("hover");
+            });
+
+            $("#switcherJQuery").on("mouseleave", function() {
+                $(this).removeClass("hover");
+            });
+
+        });
+
+        // Gestion des événements en JavaScript
+        window.onload = function() {
+
+            var btnDefaultJS = document.getElementById("switcher-defaultJS");
+            btnDefaultJS.addEventListener("click", supprimeClasse, false);
+
+            function supprimeClasse() {
+                document.body.className = "";
+            }
+
+            var btnLargeJS = document.getElementById("switcher-largeJS");
+            btnLargeJS.addEventListener("click", largeTexte, false);
+
+            function largeTexte() {
+                document.body.addClass = "large";
+                document.body.removeClass = "narrow";
+            }
+
+            // Gestionnaire d'événements sur div switcherJS
+            var divSwitcherJS = document.getElementById("switcherJS");
+            divSwitcherJS.addEventListener("mouseenter", onDiv, false);
+            divSwitcherJS.addEventListener("mouseleave", offDiv, false);
+
+            function onDiv() {
+                divSwitcherJS.className = "hover";
+            }
+
+            function offDiv() {
+                divSwitcherJS.className = "";
+            }
+
+        }
+    </script>
+</head>
+
+<body>
+    <h1>Les Evénements JS/JQ</h1><br><br><br><br>
+    <div id="switcherJQuery">
+        <h3>Sélecteur de style en JQuery</h3>
+        <button id="switcher-defaultJQ">Par défaut (JQuery)</button>
+        <button id="switcher-narrowJQ">Colonne étroite (JQuery)</button>
+        <button id="switcher-largeJQ">Grande police (JQuery)</button>
+    </div>
+    <div id="switcherJS">
+        <h3>Sélecteur de style en JavaScript</h3>
+        <button id="switcher-defaultJS">Par défaut (JavaScript)</button>
+        <button id="switcher-narrowJS">Colonne étroite (JavaScript)</button>
+        <button id="switcher-largeJS">Grande police (JavaScript)</button>
+    </div>
+    <br><br><br><br>
+    <p>Les Evénements en JavaScript / JQuery</p>
+    <p>Les événements sont des actions de l'utilisateur, qui vont pouvoir donner lieu à une interactivité. L'événement par excellence est le clic de souris, car c'est le seul que le HTML gère. Grâce à <mark>Javascript/JQuery</mark> il est possible d'associer
+        des fonctions, des méthodes à des événements tels que le passage de la souris au-dessus d'une zone, le changement d'une valeur, ... Ce sont les gestionnaires d'événements qui permettent d'associer une action à un événement. </p>
+</body>
+
+</html>

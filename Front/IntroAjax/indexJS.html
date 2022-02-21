@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Requête AJAX en JavaScript</title>
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <h1>Requête AJAX en JavaScript</h1>
+    <br><br><br><br>
+    <div class="container">
+        <div class="row">
+            <div class="col-6"><button class= "btn btn-warning" id="btnReqAjax">Exécuter Requête Ajax</button></div>
+            <div class="col-6"><ul id="maliste"></ul></div>
+        </div>
+    </div>
+  <script>
+      let btnReqAjax = document.getElementById("btnReqAjax");
+      let maliste = document.getElementById("maliste");
+
+      btnReqAjax.addEventListener("click", function(){
+
+        let ajax = new XMLHttpRequest();
+        let fluxHTML="";
+        let obj;
+
+        ajax.open("GET", "test.json", true);
+        ajax.send();
+
+        ajax.addEventListener("readystatechange", function(){
+
+            if(this.readyState == 4 && this.status == 200){
+
+                console.log(this.responseText);
+                obj = JSON.parse(this.responseText);
+
+                let tabFiltre = obj.filter(elt => elt.type === "Félin");
+                console.log(tabFiltre);
+
+                tabFiltre.forEach(element => {
+                    fluxHTML += "<li>"+ element.nom + "</li>";                   
+                });
+
+                maliste.innerHTML = fluxHTML;
+            }
+
+        });
+
+
+      });
+
+  </script>
+</body>
+</html>

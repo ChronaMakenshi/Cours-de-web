@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Serialisation de Formulaire</title>
+    <style>
+        div {
+            padding: 10px;
+        }
+        
+        label {
+            display: inline-block;
+            min-width: 100px;
+        }
+        
+        span {
+            color: red;
+        }
+        
+        #resultat {
+            visibility: visible;
+        }
+    </style>
+    <script src="js/jquery-3.4.1.js"></script>
+    <script>
+        $(document).ready(function() {
+
+            $("#envoyer").on("click", function(e) {
+                // Le Navigateur ne peut pas envoyer le Formulaire 
+                e.preventDefault();
+                console.log("Données sérialisées envoyées par le Formulaire : " + $("#form").serialize());
+
+                if ($("#prenom").val().length === 0) {
+                    $("#prenom").after("<span>Merci de remplir ce champ</span>");
+
+                } else {
+
+                    $.ajax({
+                        url: 'traitement.php',
+                        type: 'POST',
+                        data: $("#form").serialize(),
+                        dataType: "html",
+                        success: function(reponse, status) {
+                            $("#prenom").next().empty();
+                            console.log("Le Status renvoyé par la requête Ajax : " + status);
+                            $("#resultat").html("Retour du serveur : " + reponse);
+
+                        },
+
+                        error: function(resultat, status, erreur) {
+                            erreur = "Script serveur non trouvé !!!";
+                            console.log("Message d'Erreur : " + erreur);
+
+                        },
+
+                        complete: function(resultat, status) {
+
+                            console.log("Le Status renvoyé par la requête Ajax : " + status);
+
+                        }
+
+                    });
+
+                }
+            });
+
+        });
+    </script>
+</head>
+
+<body>
+    <h1>Sérialisation de Formulaire</h1>
+    <span id="resultat"></span>
+    <form id="form">
+        <div>
+            <label for="prenom">Prénom :</label>
+            <input type="text" name="prenom" id="prenom" autocomplete="off">
+        </div>
+        <div>
+            <label for="mail">Mail :</label>
+            <input type="text" name="mail" id="mail" autocomplete="off">
+        </div>
+        <button id="envoyer">Envoyer</button>
+    </form>
+</body>
+
+</html>

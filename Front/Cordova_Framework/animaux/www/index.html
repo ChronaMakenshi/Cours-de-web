@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="utf-8">
+    <!-- <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *; img-src 'self' data: content:;"> -->
+    <meta name="format-detection" content="telephone=no">
+    <meta name="msapplication-tap-highlight" content="no">
+    <meta name="viewport" content="initial-scale=1, width=device-width, viewport-fit=cover">
+    <meta name="color-scheme" content="light dark">
+
+    <link rel="stylesheet" href="css/jquery.mobile-1.4.5.css" />
+    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
+    <script src="js/jquery.js"></script>
+    <script src="js/jquery.mobile-1.4.5.js"></script>
+    <title>Les Animaux</title>
+   
+
+</head>
+
+<body>
+
+    <div data-role="page" id="info-page" data-content-theme="b">
+        <div data-role="header" data-theme="b">
+            <h1> Liste d'Animaux</h1>
+        </div>
+        <div data-role="content">
+            <ul data-role="listview" id="prof-list" data-divider-theme="a" data-inset="true" data-filter="true"
+                data-filter-placeholder="Rechercher...">
+                
+            </ul>
+        </div>
+        <div data-role="footer" class="ui-bar" data-theme="b" data-inset="true">
+            <h4>&copy; 2020 JQuery Mobile – Les Animaux</h4>
+        </div>
+    </div>
+
+    <div data-role="page" id="details-page" data-content-theme="b">
+        <div data-role="header" data-theme="b">
+            <a href="#" data-rel="back" data-role="button">Retour</a>
+            <h1>Page de Détail</h1>
+        </div>
+        <div data-role="content"></div>
+        <div data-role="footer" class="ui-bar" data-theme="b" data-inset="true">
+            <h4>&copy; 2020 JQuery Mobile – Les Animaux</h4>
+        </div>
+    </div>
+
+
+    <script src="cordova.js"></script>
+    <script src="js/index.js"></script>
+    <script>
+        var animaux = [
+            {
+                "id": 1,
+                "nom": "Eléphant",
+                "description": "L'éléphant d'Afrique, qui peut atteindre 7 tonnes, est le plus gros animal terrestre actuel, mais il est loin derrière la Baleine bleue (Balaenoptera musculus) qui peut peser jusqu'à 200 tonnes et dépasser 30 mètres de long ",
+                "src": "img/Elephant.jpg"
+            },
+            {
+                "id": 2,
+                "nom": "Girafe",
+                "description": "La Girafe Bla bla bla ...",
+                "src": "img/Girafe.jpg"
+            },
+            {
+                "id": 3,
+                "nom": "Tigre",
+                "description": "Le Tigre Bla bla bla ...",
+                "src": "img/Tigre.jpg"
+            },
+            {
+                "id": 4,
+                "nom": "Colibri",
+                "description": "Le Colibri Bla bla bla ...",
+                "src": "img/Colibri.png"
+
+            },
+            {
+                "id": 5,
+                "nom": "Perroquet",
+                "description": "Le Perroquet Bla bla bla ...",
+                "src": "img/Perroquet.png"
+
+            },
+            {
+                "id": 6,
+                "nom": "Grenouille Verte",
+                "description": "La Grenouille Verte Bla bla bla ...",
+                "src": "img/Grenouille_Verte.jpg"
+
+            },
+            {
+                "id": 7,
+                "nom": "Requin",
+                "description": "Le Requin Bla bla bla ...",
+                "src": "img/Requin.jpg"
+
+            },
+            {
+                "id": 8,
+                "nom": "Bec en Sabot",
+                "description": "Le Bec en Sabot Bla bla bla ...",
+                "src": "img/Bec_en_Sabot.jpg"
+
+            },
+            {
+                "id": 9,
+                "nom": "Grenouille Fraise",
+                "description": "La Grenouille Fraise Bla bla bla ...",
+                "src": "img/Grenouille_Fraise.jpg"
+
+            },
+            {
+                "id": 10,
+                "nom": "Narval",
+                "description": "Le Narval Bla bla bla ...",
+                "src": "img/Narval.jpg"
+
+            },
+            {
+                "id": 11,
+                "nom": "Frison",
+                "description": "Le Frison Bla bla bla ...",
+                "src": "img/Frison.jpg"
+
+            }];
+
+        // Ici on délègue le type d'évènement : pageinit à l'élèment #info-page et on écrit la fonction callback
+        $(document).on("pageinit", "#info-page", function () {
+
+            var li = "<li data-role='list-divider' data-theme='b' role='heading'>Animaux</li>";
+            $.each(animaux, function (i, name) {
+                li += '<li><a href="#" id="' + i + '" class="info-go ui-btn ui-btn-icon-right ui-icon-carat-r" data-transition="flip">' + name.nom + '</a></li>';
+            });
+            
+            $("#prof-list").append(li);
+
+            $("#prof-list").on("click", ".info-go", function(e){
+                e.preventDefault();
+                window.navigator.vibrate(500);
+                $("#details-page").data("animaux", animaux[this.id]);
+                
+                //$.mobile.defaultPageTransition = "flip";
+                $.mobile.defaultPageTransition = "slide";
+                //$.mobile.loadPage("#details-page");
+
+                $.mobile.changePage("#details-page");
+            });
+
+            // Le même comportement obtenu avec les promesses en JQuery
+            // $("#prof-list").append(li).promise().done(function () {
+            //     $(this).on("click", ".info-go", function (e) {
+            //         e.preventDefault();
+            //         window.navigator.vibrate(500);
+            //         $("#details-page").data("animaux", animaux[this.id]);
+            //         $.mobile.changePage("#details-page");
+            //     });
+
+            //     $(this).listview("refresh");
+            // });
+        });
+
+        $(document).on("pagebeforeshow", "#details-page", function () {
+            var animaux = $(this).data("animaux");
+            var info_view = "";
+            for (var key in animaux) {
+                
+                info_view += '<div class="ui-grid-a">';
+                info_view += '<div class="ui-block-a">';
+                info_view += '<div class="ui-bar field" style="font-weight : bold; text-align: left;">' + key + '</div>';
+                info_view += '</div>';
+                info_view += '<div class="ui-block-b">';
+                if (key === "src") {
+                    info_view += '<div class="ui-bar value" style="width : 100%"><img src="' + animaux[key] + '"/></div>';
+                } else {
+                    info_view += '<div class="ui-bar value" style="width : 100%">' + animaux[key] + '</div>';
+                }
+                info_view += '</div>';
+                info_view += '</div>';
+            }
+            $(this).find("[data-role=content]").html(info_view);
+        });
+    </script>
+</body>
+
+</html>

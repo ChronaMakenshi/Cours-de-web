@@ -1,0 +1,93 @@
+#menu {
+    margin: 0;
+    padding: 0;
+    font: bold 1em "georgia", verdana;
+    list-style-type: none;
+    float: left;
+    width: 20%;
+}
+
+#menu a {
+    display: block;
+    margin: 5%;
+    color: #508768;
+    background-color: #BDD7B5;
+    text-decoration: none;
+    line-height: 2em;
+    width: 80%;
+    border: 1px solid blue;
+    text-align: center;
+    border-radius: 10px;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    box-shadow: 8px 8px 12px #aaa;
+    -moz-box-shadow: 8px 8px 12px #aaa;
+    -webkit-box-shadow: 8px 8px 12px #aaa;
+}
+
+#menu a:hover, #menu a:focus {
+    color: #BDD7B5;
+    background-color: #508768;
+}
+
+body {
+    background-color: #7D775C;
+}
+
+ul {
+    list-style-type: none;
+}
+
+#container {
+    margin-left: auto;
+    margin-right: auto;
+    font-family: Georgia;
+    border: 1px groove #808080;
+    font: 75% Georgia;
+    line-height: 1.7;
+    color: #555753;
+    padding-left: 70px;
+    position: relative;
+    background-color: #FFFFFF;
+    border-radius: 10px;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    box-shadow: 8px 8px 12px #aaa;
+    -moz-box-shadow: 8px 8px 12px #aaa;
+    -webkit-box-shadow: 8px 8px 12px #aaa;
+    /* filter: progid:DXImageTransform.Microsoft.Shadow(color='#aaaaaa', Direction=135, Strength=12); */
+    font-weight: normal;
+    width: 70%;
+    float: right;
+}
+
+h2 {
+    font-size: x-large;
+    letter-spacing: 1px;
+    margin-bottom: 0;
+    color: #7D775C;
+    font-weight: bold;
+    font-style: oblique;
+    text-align: center;
+}
+
+h3 {
+    font: normal 1.3em georgia, sans-serif;
+    letter-spacing: 1px;
+    color: #7D775C;
+    font-weight: bold;
+}
+
+li {
+    padding-top: 12px;
+}
+
+.vert {
+    color: #006600;
+}
+
+#duree {
+    color: #990033;
+    font-size: x-large;
+    text-decoration: underline;
+}

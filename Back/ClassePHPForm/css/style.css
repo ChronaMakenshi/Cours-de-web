@@ -1,0 +1,32 @@
+body {
+    font-family: "Comic Sans MS";
+    width: 800px;
+    margin: auto;
+}
+
+h1 {
+    font-weight: bold;
+    font-size: 150%;
+    color: white;
+    text-align: center;
+    background-color: rgb(94, 96, 230);
+    padding: 15px;
+}
+
+fieldset {
+    background-color: lightgray;
+}
+
+legend {
+    text-align: center;
+    background-color: lightgray;
+}
+
+input {
+    padding: 8px;
+}
+
+b,
+input[type=submit] {
+    margin: 20px;
+}

@@ -1,0 +1,42 @@
+body {
+    background-image: url("../img/bg.jpg");
+    margin: 0px;
+    padding: 0px;
+    font-family: 'Shadows Into Light', cursive;
+}
+
+h1 {
+    text-align: center;
+    color: rgb(18, 143, 18);
+    font-size: 50px;
+}
+
+.container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 70%;
+    margin: auto;
+}
+
+img {
+    background-color: white;
+    padding: 8px;
+    margin: 2px;
+    border: 1px solid black;
+}
+
+.paysage {
+    width: 200px;
+    object-fit: cover;
+}
+
+.portrait {
+    width: 200px;
+    object-fit: cover;
+}
+
+.carre {
+    width: 200px;
+    height: 200px;
+}

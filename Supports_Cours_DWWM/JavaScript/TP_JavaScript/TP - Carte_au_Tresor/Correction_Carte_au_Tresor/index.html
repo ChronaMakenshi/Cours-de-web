@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>La Chasse au Tresor</title>
+    <link rel="icon" type="image/png" href="img/maptresor8.png">
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
+</head>
+
+<body>
+    <h1 id="titre-principal">La Chasse au Tresor</h1>
+    <br>
+    <div id="contenu">
+        <p id="nbClics"></p>
+        <p id="distance"></p>
+        <canvas id="myCanvas" width="600" height="424"></canvas>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <!-- <script src="js/jquery.js"></script> -->
+
+    <script>
+        var canvas = document.getElementById("myCanvas");
+        var ctx = canvas.getContext("2d");
+
+        var img = new Image();
+        img.src = "img/maptresor8.png";
+        img.onload = function() {
+            ctx.drawImage(img, 0, 0);
+        }
+
+        // Générer un nombre aléatoire situé entre 0 et dimension
+        var creerNombreAleatoire = function(dimension) { // dimension = 370
+            return Math.floor(Math.random() * dimension) + 40; // Ajouter 40 pour être sure d'avoir un 
+            // Nb aléatoire dans [40-410[
+        }
+
+        // Calculer la distance entre un événement de clic et la cible
+        var calculerDistance = function(evenement, cible) {
+            console.log("X clic: " + evenement.offsetX);
+            console.log("Y clic: " + evenement.offsetY);
+
+
+            var diffX = Math.abs(evenement.offsetX - cible.x);
+            var diffY = Math.abs(evenement.offsetY - cible.y);
+            return Math.sqrt((diffX * diffX) + (diffY * diffY));
+        };
+
+        // Générer une chaîne de caractères correspondant à la distance
+        var creerIndiceDistance = function(distance) {
+
+            console.log("Distance : " + distance);
+
+            if (distance < 8) {
+                return "Tu as retrouvé le trésor en " + clics + " clics !";
+            } else if (distance < 10) {
+                return "Tu brûles !";
+            } else if (distance < 20) {
+                return "Tu chauffes vraiment !";
+            } else if (distance < 40) {
+                return "Tu chauffes un peu plus !";
+            } else if (distance < 80) {
+                return "Tu chauffes !";
+            } else if (distance < 160) {
+                return "Tu refroidis !";
+            } else if (distance < 320) {
+                return "Tu refroidis vraiment !";
+            } else {
+                return "Tu gèles !";
+            }
+        };
+
+        // Définition des variables
+        var largeur = 520; // 600-80  largeur de l'image de fond - taille de l'image du trésor
+        var hauteur = 520; // 600-80
+        var clics = 0;
+        var clicsLimit = 30;
+
+        // Créer la position de la cible de manière aléatoire
+        var cible = {
+            x: creerNombreAleatoire(largeur),
+            y: creerNombreAleatoire(hauteur)
+        };
+
+        console.log(cible.x);
+        console.log(cible.y);
+
+        // Message Game Over dans le Canvas
+        function finPartie() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            document.getElementById("myCanvas").style.backgroundColor = "#2F3235";
+            ctx.fillStyle = '#F50EB6';
+            ctx.font = '50px sans-serif';
+            ctx.fillText('Game Over', ((canvas.width / 2) - (ctx.measureText('Game Over').width / 2)), 100);
+        }
+
+        // Fonction cercle pour dessiner un cercle plein ou vide (coeur de cible)
+        var cercle = function(x, y, rayon, cerclePlein) {
+            ctx.beginPath();
+            ctx.arc(x, y, rayon, 0, Math.PI * 2, false);
+            if (cerclePlein) {
+                ctx.fill();
+            } else {
+                ctx.stroke();
+            }
+        };
+
+        // Dessin dans le Canvas du coffre au trésor ou du coeur de cible
+        function drawCible() {
+
+            // Chargement de l'image du tresor aux dimensions 80*80
+            var img = new Image();
+            img.src = "img/tresor2.png";
+
+            ctx.beginPath();
+            img.onload = function() {
+                ctx.drawImage(img, cible.x - 40, cible.y - 40, 80, 80); // image de 80*80
+            }
+            ctx.closePath();
+
+            // Chargement du coeur de cible, cercle plein rose et contour blanc
+            // ctx.lineWidth = 4;						// Epaisseur du trait de dessin
+            // //ctx.strokeStyle = "#060100";			// Couleur du contour du cercle
+            // ctx.strokeStyle = "#ffffff";			// Couleur du contour du cercle
+            // ctx.fillStyle = "#F50EB6";				// Couleur du remplissage du cercle
+            // cercle(cible.x, cible.y, 8, true);		// Dessin du cercle plein
+            // cercle(cible.x, cible.y, 8, false);		// Dessin du cercle vide
+            // ctx.closePath();
+        }
+
+        // Ajouter un gestionnaire de clics à l'élément Canvas
+        $("#myCanvas").click(function(evenement) {
+            clics++;
+
+            var nbClics = Math.abs(clicsLimit - clics);
+
+            if (nbClics === 0) {
+                // On donne la solution pendant 2s
+                // Après 2s on affiche Game Over
+                drawCible();
+                setInterval(finPartie, 2000);
+                document.getElementById("nbClics").innerHTML = "Réponse ... et fin de partie!!!";
+                document.getElementById("distance").innerHTML = "";
+                return;
+            }
+
+            // Calculer la distance entre un événement de clic et la cible
+            var distance = calculerDistance(evenement, cible);
+
+            // Convertir la distance en un indice au joueur
+            var indiceDistance = creerIndiceDistance(distance);
+
+            // Compléter l'élément #distance avec l'indice au joueur
+            $("#distance").text(indiceDistance);
+            // Afficher le nombre de cliques qui restent au joueur
+            $("#nbClics").text("Nombre de clics : " + nbClics + "/" + clicsLimit);
+
+            // Si le clic est très proche de la cible, tracer le coeur de cible
+            if (distance < 8) {
+                document.getElementById("nbClics").innerHTML = "";
+                drawCible();
+            }
+        });
+    </script>
+</body>
+
+</html>

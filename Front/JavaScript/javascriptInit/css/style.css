@@ -1,0 +1,23 @@
+#container {
+    width: 300px;
+    height: 200px;
+    position: relative;
+}
+
+#bloc {
+    width: 100px;
+    height: 100px;
+    position: absolute;
+    background-color: cornflowerblue;
+    left: 10px;
+    top: 30px;
+}
+
+.pink {
+    color: rgb(224, 21, 224);
+    list-style: none;
+}
+
+.red {
+    color: red;
+}

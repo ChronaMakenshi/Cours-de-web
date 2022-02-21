@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Course de Voitures en JQuery</title>
+    <link rel="icon" type="image/png" href="img/favicon.png">
+    <link href="css/bootstrap.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
+</head>
+
+<body>
+    <img src='img/marquage_sol_gazon_finish.png' width='650px' height='auto'><img src='img/marquage_sol_gazon.png' width='650px' height='auto'>
+
+    <div id="monBoutonGo"><input type="button" id="monGo" value="Go !">&nbsp;<input type="button" id="monStop" value="Stop !"></div>
+
+    <script src="js/jquery.js"></script>
+    <script>
+        var monID = null;
+
+        // Déclaration d'une fonction constructeur en conformité avec ES5
+        // var Voiture = function(x, y, img) {
+        //     this.x = x;
+        //     this.y = y;
+        //     this.dessiner(img);
+        // };
+
+        // Déclaration d'une classe en conformité avec ES6
+        class Voiture {
+                constructor(x, y, img) {
+                this.x = x;
+                this.y = y;
+                this.dessiner(img);
+            };
+        }
+
+        Voiture.prototype.dessiner = function(img) {
+            var voitureHtml = "<img src='" + img + "' width='300px'>";
+            this.voitureElement = $(voitureHtml);
+            console.log(voitureHtml);
+            console.log(this.voitureElement);
+
+            this.voitureElement.css({
+                position: "absolute",
+                left: this.x,
+                top: this.y
+            });
+
+            $("body").append(this.voitureElement);
+        };
+
+        Voiture.prototype.deplacerAGauche = function(distance) {
+            this.x -= distance;
+            this.voitureElement.css({
+                left: this.x,
+                top: this.y
+            });
+        }
+
+        var car1 = new Voiture(1000, 105, "img/car1.png");
+        var car2 = new Voiture(1000, 280, "img/car2.png");
+
+        $("#monGo").click(function() {
+            monID = setInterval(function() {
+                car1.deplacerAGauche(Math.random() * 15);
+                car2.deplacerAGauche(Math.random() * 15);
+            }, 20);
+
+        });
+
+        $("#monStop").click(function() {
+            clearInterval(monID);
+        });
+    </script>
+</body>
+
+</html>

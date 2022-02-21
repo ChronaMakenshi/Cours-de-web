@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Les Objets en JS</title>
+    <script>
+        window.addEventListener("load", function(){
+
+            function Animal(pgenre, ppattes, pordre){
+
+                this.genre = pgenre;
+                this.pattes = ppattes;
+                this.ordre = pordre
+
+                this.afficher = function(){
+
+                    return console.log("La désignation de l'animal est un  "+this.genre+ " il possède " +this.pattes+ " pattes et c'est un " + this.ordre);
+                }
+
+            }
+
+            let canard = new Animal("Canard", 2, "Oiseau");
+            canard.afficher();
+            Animal.prototype.nom = "Saturnin";
+            console.log(canard);
+
+            let felix = new Animal("Chat", 4, "Mammifère");
+
+            console.log(felix);
+            felix.nom = "Pussy";
+            //Animal.prototype.nom ="Pussy";
+
+            console.log(felix.nom);
+
+            
+
+        });
+    </script>
+</head>
+<body>
+    <h1>Les Objets en JS</h1>
+    
+</body>
+</html>

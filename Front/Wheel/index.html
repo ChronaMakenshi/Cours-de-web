@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Canvas : Color Wheel - animation</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="icon" type="image/png" href="Roue.png">
+    <link rel="stylesheet" type="text/css" href="style.css" />
+    <script type="text/javascript" src="jquery.js"></script>
+    <style type="text/css">
+        #canvas_div {
+            float: left;
+        }
+
+        #controls {
+            margin-left: 520px;
+        }
+    </style>
+</head>
+<body>
+    <div id="page">
+        <h1 id="montitre">La Roue Colorée</h1>
+        <div id="content">
+            <h3>Canvas : La Roue Colorée</h3>
+            <div id="canvas_div">
+                <canvas id="mycanvas" width="400px" height="400px"></canvas>
+            </div>
+            <div id="controls">
+                <h2>Step = <span id="step_val">1</span></h2>
+                <input id="step" type="range" min="1" max="36" value="1" />
+                <div class="spacer"></div>
+
+                <h2>Speed = <span id="speed_val">15</span></h2>
+                <input id="speed" type="range" min="1" max="30" value="15" />
+                <div class="spacer"></div>
+
+                <h2>Color offset = <span id="offset_val">0</span></h2>
+                <input id="offset" type="range" min="2" max="255" value="0" />
+                <div class="spacer"></div>
+
+                <h2>Saturation = <span id="saturation_val">75</span> %</h2>
+                <input id="saturation" type="range" min="1" max="100" value="75" />
+                <div class="spacer"></div>
+
+                <h2>Brightness = <span id="brightness_val">50</span> %</h2>
+                <input id="brightness" type="range" min="1" max="100" value="50" />
+                <div class="spacer"></div>
+            </div>
+            <div class="clear"></div>
+        </div><!-- content -->
+    </div><!-- page -->
+    <script>
+        var ctx, canvas
+        var radius
+        var frame = 0
+        var step = 1
+        var speed = 15
+        var saturation = 75, brightness = 50
+        var offset = 0
+
+        function init() {
+            canvas = document.getElementById('mycanvas')
+            ctx = canvas.getContext('2d')
+            ctx.lineWidth = 3
+
+            radius = (canvas.width + canvas.height) / 4.2
+            //console.log(radius);
+            loop();
+        }
+
+        function loop() {
+            ctx.fillStyle = 'rgba(0,0,0,.05)'
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            ctx.save()
+            ctx.translate(canvas.width / 2, canvas.height / 2)
+
+            var color
+            var alpha
+            var x, y
+
+            for (var i = 0; i < 360; i += 360 / step) {
+                alpha = frame + i / 360 * Math.PI * 2
+                ctx.strokeStyle = 'hsl(' + (offset + i) + ', ' + saturation + '%, ' + brightness + '%)'
+
+                x = Math.cos(alpha) * radius
+                y = Math.sin(alpha) * radius
+
+                ctx.beginPath()
+                ctx.moveTo(0, 0)
+                ctx.lineTo(x, y)
+                ctx.stroke()
+
+            }
+            ctx.restore()
+            frame += speed / 1000
+            //console.log("frame : "+frame)
+            if (frame >= 360) { frame = 0 }
+
+            setTimeout(function () { loop(); }, 50)
+            
+        }
+
+
+        $('#step').change(function () {
+            step = parseInt($('#step').val())
+            $('#step_val').text(step)
+        })
+
+        $('#speed').change(function () {
+            speed = parseInt($('#speed').val())
+            $('#speed_val').text(speed)
+        })
+
+        $('#saturation').change(function () {
+            saturation = parseInt($('#saturation').val())
+            $('#saturation_val').text(saturation)
+        })
+
+        $('#brightness').change(function () {
+            brightness = parseInt($('#brightness').val())
+            $('#brightness_val').text(brightness)
+        })
+
+        $('#offset').change(function () {
+            offset = parseInt($('#offset').val())
+            $('#offset_val').text(offset)
+        })
+
+        $(window).load(function () {
+            init()
+        })
+    </script>
+</body>
+</html>

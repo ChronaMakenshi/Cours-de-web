@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Etude de l'Objet Event</title>
+    <link rel="icon" type="image/png" href="img/jquery-logo.png">
+    <link href="css/bootstrap.css" rel="stylesheet" />
+    <link href="css/style.css" rel="stylesheet" type="text/css" />
+    <script src="js/jquery.js"></script>
+     <script>
+        var tabContacts = [
+            {   
+                "id" : 1,
+                "nom": "Restoueix",
+                "email":"sacha8milo@gmail.com",
+                "tel": "0678541957"
+            },
+            {
+                "id" : 2,
+                "nom": "Bidule",
+                "email":"bidule@yahoo.com",
+                "tel": "0679566321"
+            },
+            {
+                "id" : 3,
+                "nom": "Machin",
+                "email":"machin@hotmail.com",
+                "tel": "0689415217"
+            },
+            {
+                "id" : 4,
+                "nom": "Truc",
+                "email":"truc@orange.fr",
+                "tel": "0689324785"
+            }
+        ]
+        var dHtml = "<ul id='maliste'>";
+        $(document).ready(function () {
+            $.each(tabContacts, function (i, item) {
+                dHtml += '<li><a href="#" id="' + item.id + '"  class="maligne">Nom : ' + item.nom + '</a></li>';
+            });
+            dHtml +="</ul>";
+
+            $("#listeContacts").append(dHtml).promise().done(function () {
+                $(this).on("click", function (e) {
+                    var target = $(e.target);
+                    console.log(e.target);
+                    console.log(target.attr("id"));
+                    alert(target.attr("id"));
+                });
+            });
+        });
+    </script>
+</head>
+<body>
+<h1>Utilité de l'Objet Event</h1>
+<br><br>
+<div id="listeContacts">
+</div>
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <title>JQuery</title>
+    <style>
+        .conteneur {
+            border: 6px solid rgb(112, 218, 117);
+            margin: 20px;
+            padding: 20px;
+            width: 300px;
+        }
+        
+        span {
+            background-color: orangered;
+            color: white;
+            font-size: large;
+        }
+    </style>
+    <link href="css/bootstrap.css" rel="stylesheet" />
+
+    <script src="js/jquery-3.4.1.js"></script>
+    <script>
+        $(document).ready(function() {
+
+            $(".conteneur").prepend("<p>Paragraphe ajouté avec <span>prepend()</span></p>");
+            $(".conteneur").append("<ul><li>n°1</li><li>n°2</li></ul> Liste ajoutée avec <span>append()</span>");
+
+        });
+    </script>
+
+</head>
+
+<body>
+    <div class="conteneur">
+        <p><b>Un paragraphe écrit en HTML</b></p>
+        <p><b>Un autre paragraphe écrit en HTML</b></p>
+    </div>
+</body>
+
+</html>

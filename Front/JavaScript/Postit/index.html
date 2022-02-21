@@ -1,0 +1,65 @@
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>Post-It</title>
+    <style type="text/css">
+        body {
+            background-color: "#ffffff";
+        }
+        
+        #PostIt {
+            position: absolute;
+            left: 153px;
+            top: 40px;
+            width: 187px;
+            height: 50px;
+            z-index: 1;
+            background-color: #FFFF66;
+            border: 1px none #000000;
+            visibility: hidden;
+        }
+    </style>
+</head>
+
+<body>
+    <h3>Post-It</h3>
+    <input type="button" id="btnCache" value="Cache" />
+    <input type="button" id="btnAffiche" value="Affiche" />
+    <div id="PostIt">Ceci est un Post It</div>
+    <br /><br /><a id="parTexte">Merci de bien vouloir me survoler</a>
+
+    <script>
+        // Fonction en auto-exécution qui permet d'implémenter les gestionnaires d'évènements
+        (function() {
+
+            // bouton cache
+            var btnCache = document.getElementById("btnCache");
+            btnCache.addEventListener("click", cache, false);
+            // boutton affiche
+            var btnAffiche = document.getElementById("btnAffiche");
+            btnAffiche.addEventListener("click", function() {
+                affiche('Vous avez cliqué sur le bouton Affiche')
+            }, false);
+
+            // div de texte sensible
+            var parTexte = document.getElementById("parTexte");
+            parTexte.addEventListener("mouseover", function() {
+                affiche('C\'est gentil de me survoler...')
+            }, false);
+            parTexte.addEventListener("mouseout", cache, false);
+
+            function affiche(texte) {
+                document.getElementById('PostIt').innerHTML = texte;
+                document.getElementById('PostIt').style.visibility = 'visible';
+            };
+
+            function cache() {
+                document.getElementById('PostIt').style.visibility = 'hidden';
+            };
+
+        }());
+    </script>
+</body>
+
+</html>

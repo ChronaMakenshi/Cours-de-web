@@ -1,0 +1,22 @@
+body {
+    margin: 0px;
+    padding: 0px;
+    background-image:url(../img/bg.jpg);
+    color: rgb(224, 20, 173);
+}
+
+h1 {
+	text-align: center;
+	color: rgb(224, 20, 173);
+}
+
+h3 {
+	text-align: center;
+	color: rgb(252, 247, 251);
+}
+
+#monContainer {
+    margin:0 auto;
+    width:200px;
+}
+

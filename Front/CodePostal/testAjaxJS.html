@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Ajax en JavaScript</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <h1>Requête Ajax en JavaScript</h1>
+    <div id="center">
+        <div class="container">
+            <div class="row">
+                <div class="col-4"><button id="btnRechercher">Requête Ajax</button></div>
+                <div class="col-8"><ul id="maListe"></ul></div>
+            </div>
+        </div>
+    </div>
+    <script>
+        let btnRechercher  = document.getElementById("btnRechercher");
+        let maListe   = document.getElementById("maListe");
+        
+        btnRechercher.addEventListener("click", function(){
+
+            let ajax = new XMLHttpRequest();
+            let fluxHTML = "";
+            let obj;
+
+            ajax.open('GET', 'test.json', true);
+            ajax.send();
+           
+            ajax.addEventListener("readystatechange", function(){
+
+                if (this.readyState == 4 && this.status == 200) {
+
+                    console.log(this.responseText);
+                    obj = JSON.parse(this.responseText);
+                    console.log(obj);
+
+                    const tabResult = obj.filter(elt => elt.type === "Félin").sort((a,b) => {
+                        var nameA = a.nom.toUpperCase();
+                        var nameB = b.nom.toUpperCase();
+                        if (nameA < nameB) {
+                            return -1;
+                        }
+                        if (nameA > nameB) {
+                            return 1;
+                        }
+                        return 0;
+                    });
+
+                    for (var i = 0; i < tabResult.length; i++) {
+                        
+                        fluxHTML += "<li>" + tabResult[i].nom + "</li>";
+                    }
+
+                    maListe.innerHTML = fluxHTML;
+                }
+
+            });
+         
+        });
+    </script>    
+</body>
+</html>

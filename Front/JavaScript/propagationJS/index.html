@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Propagation d'évènements en JavaScript</title>
+    <link rel="icon" type="image/png" href="img/logo_JavaScript.png">
+    <link href="css/bootstrap.css" rel="stylesheet" />
+    <link href="css/style.css" rel="stylesheet" type="text/css" />
+    <script>
+        window.addEventListener("load", function() {
+
+            var mona = document.getElementById("monLien");
+            var monp = document.getElementById("monPara");
+            var madiv = document.getElementById("maDiv");
+
+            mona.addEventListener("click", function(e) {
+
+                e.stopPropagation();
+                alert("Clic sur mon lien <a>");
+                console.log("Id d'ou vient l'évènement :" + e.currentTarget.id);
+            }, false);
+
+            monp.addEventListener("click", function(e) {
+                e.stopPropagation();
+                alert("Clic sur mon lien <p>");
+
+            }, false);
+
+            madiv.addEventListener("click", function() {
+                
+                alert("Clic sur mon lien <div>");
+
+            }, false);
+        });
+    </script>
+</head>
+
+<body>
+    <h1>Propagation d'événements en JavaScript</h1>
+    <div id="maDiv">
+        <p id="monPara">
+            <a href="#" id="monLien">Cliquez-moi</a>
+        </p>
+    </div>
+</body>
+
+</html>

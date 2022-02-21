@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <title>JQuery Mobile</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="css/jquery.mobile-1.4.5.css" />
+    <script src="js/jquery.js"></script>
+    <script src="js/jquery.mobile-1.4.5.js"></script>
+
+    <link rel="icon" type="image/png" href="img/jquery-logo.png">
+</head>
+
+<body>
+    <div data-role="page" id="page1">
+        <div data-role="header">
+            <h1>Titre - Page 1</h1>
+        </div><!-- /header -->
+
+        <div data-role="content">
+            <p>Contenu de la première page.</p>
+            <p>Afficher la <a href="#page2">Page n°2</a></p>
+            <a href="page1.html" data-transition="slideup" data-ajax="true">Effet pop</a><br>
+            <a href="page1.html" data-rel="dialog">Boite de Dialogue (Effet Pop)</a><br>
+            <a href="page1.html" data-rel="dialog" data-transition="flip">Boite de Dialogue (Effet Flip)</a>
+        </div><!-- /content -->
+
+        <div data-role="footer">
+            <h4>&copy; 2020 JQuery Mobile – Un beau pied de page</h4>
+        </div><!-- /footer -->
+
+    </div><!-- /page 1 -->
+
+    <div data-role="page" id="page2">
+        <div data-role="header">
+            <h1>Titre - Page 2</h1>
+        </div><!-- /header -->
+        <div data-role="content">
+            <p>Contenu de la seconde page.</p>
+            <p><a href="#page1">Retour à la page 1</a></p>
+        </div><!-- /content -->
+        <div data-role="footer">
+            <h4>&copy; 2020 JQuery Mobile – Un beau pied de page</h4>
+        </div><!-- /footer -->
+    </div><!-- /page 2 -->
+</body>
+
+</html>

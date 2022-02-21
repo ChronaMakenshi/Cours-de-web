@@ -1,0 +1,40 @@
+body {
+    margin: 0px;
+    padding: 0px;
+    background-image:url(../img/bg.jpg);
+    color: rgb(228, 220, 226);
+}
+
+h1 {
+	text-align: center;
+	color: rgb(228, 220, 226);
+}
+
+body.large {
+    color: rgb(31, 219, 147);
+    font-size: 1.2em;
+}
+
+body.narrow {
+    color: rgb(228, 220, 226);
+    width: 500px;
+}
+
+#switcherJQuery {  
+    float: left;
+    color: darkcyan;
+}
+
+#switcherJS {
+    float: right;
+    color: rgb(221, 224, 18);
+}
+
+.textForm{
+    font-weight: bold;
+}
+
+.hover {
+    cursor: pointer;
+    background-color: rgb(152, 169, 170);
+}

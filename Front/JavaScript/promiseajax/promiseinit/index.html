@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Promesse en JQuery et Ajax</title>
+    <link rel="icon" type="image/png" href="img/jquery-logo.png">
+    <link href="css/bootstrap.css" rel="stylesheet" />
+    <link href="css/style.css" rel="stylesheet" type="text/css" />
+    <script src="js/jquery-3.4.1.js"></script>
+    <script src="js/jquery.cycle.all.js"></script>
+    <script src="js/jquery.easing.1.3.js"></script>
+    <script>
+        $(document).ready(function() {
+
+            var url = 'http://localhost/TP_DWWM/Front/JavaScript/promiseajax/promiseinit/data/';
+            var files = ['1.json', '2.json'];
+            var promises = [];
+
+            // Permet de récupérer la valeur du paramétre passé dans l'URL en invoquant
+            // son nom.
+            $.urlParam = function(name) {
+                var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.href);
+                if (results == null) {
+                    return null;
+                } else {
+                    return results[1] || 0;
+                }
+            }
+
+            // Affichage dans la console de la valeur du paramétre "param" de l'URL
+            //console.log($.urlParam('param'));
+
+            // Puisque le DOM est chargé, on place un gestionnaire d'événements
+            // sur les clics. On peut déléguer à l'élément <a> le clic.
+            // Ceci permet de récupérer l'id de l'élément <img> 
+            $("#grenouilles").on("click", "a", function(e) {
+                var target = $(e.target);
+                console.log(target.attr("id"));
+                //console.log(e.currentTarget);
+                //alert(target.attr("id"));
+                window.location.href = "http://localhost/TP_DWWM/Front/JavaScript/promiseajax/promiseinit/index.html?param=" + target.attr("id");
+            });
+
+            function loadDistantFile(url) {
+                // Création d'une promesse avec passage de sa fonction executeur avec ses 
+                // 2 paramétres resolve et reject, qui sont 2 fonctions, l'une, resolve() est 
+                // appelée en cas de réussite de la promesse, l'autre, reject() est appelée
+                // lorsque cette tâche échoue.
+                return new Promise(function(resolve, reject) {
+                    // Ou avec utilisation d'une fonction Arrow ...
+                    //return new Promise((resolve, reject) => {
+                    $.getJSON(url)
+                        .done(function(data) {
+                            resolve(data);
+                        })
+                        .fail(function() {
+                            reject(Error('Impossible d\'ouvrir le fichier ' + url));
+                        })
+                });
+            }
+
+            function getGrenouillesNames(data) {
+                var fluxHTML = "";
+                // S'il n'y a pas de valeur pour le paramétre on affiche la liste ...
+                if ($.urlParam('param') === null) {
+                    console.log('Tous les fichiers ont été lus avec succès !');
+                    console.log(data);
+                    data.forEach(function(fileContent, fileIndex) {
+                        console.log('Contenu du fichier n°' + (fileIndex + 1) + ' : ');
+                        console.log(fileContent);
+                        $.each(fileContent, function(grenouilleIndex, grenouille) {
+                            //$('#grenouilles').append("<div class='enfant'><a href='#'><img id=" + grenouille.id + " class='monImage' src='data/" + grenouille.src + "'></a><h6>" + grenouille.name + "</h6></div>");
+                            $('#grenouilles').append("<div class='enfant'><a href='#'><img id=" + grenouille.id + " class='monImage' src='data/" + grenouille.src + "'></a><h6>" + grenouille.name + "</h6></div>").cycle({
+                                fx: 'shuffle',
+                                // shuffle: { 
+                                //     top:  -150, 
+                                //     left:  150 
+                                // }, 
+                                easing: 'easeInOutBack',
+                                delay: -2000
+                            });
+                        });
+                    });
+                    // ... sinon on affiche la page de detail.
+                } else {
+                    var selectIndex = $.urlParam('param');
+                    var selectImp, selectNew;
+                    console.info('Tous les fichiers ont été lus avec succès !');
+                    console.info(data);
+                    console.log("param : " + selectIndex);
+
+                    if (selectIndex <= 6) {
+                        selectImp = 0;
+                        selectNew = selectIndex - 1;
+                    } else {
+                        selectImp = 1;
+                        selectNew = selectIndex % 7;
+                    };
+
+                    fluxHTML += "<img id=" + data[selectImp][selectNew].id + " class='monImageDetail' src='data/" + data[selectImp][selectNew].src + "' width='450px' >";
+                    fluxHTML += "<div id='detail_container'>";
+                    fluxHTML += "<h4>" + data[selectImp][selectNew].name + "</h4><b>Description : </b>" + data[selectImp][selectNew].description + "<br><br>";
+                    fluxHTML += "<button type='submit' onclick='history.go(-1);'>Retour</button><br><br>";
+                    fluxHTML += "</div>";
+
+                    console.log("data : " + data[selectImp][selectNew].id);
+                    $('#grenouilles').append(fluxHTML);
+                }
+            }
+
+            files.forEach(function(fileName) {
+                promises.push(loadDistantFile(url + fileName));
+            });
+
+            // La méthode all() permet d'interroger toutes les promesses
+            // si une seule d'entre-elles n'est pas tenue => Message Erreur
+            Promise.all(promises).then(getGrenouillesNames).catch(function(error) {
+                console.log(error);
+                console.error('Au moins 1 fichier n\'a pas pu être lu !');
+            });
+        });
+    </script>
+</head>
+
+<body>
+    <h1>Promesse en JQuery et Ajax</h1>
+    <h2>(Ma collection de Batraciens)</h2>
+    <br><br>
+    <div id="grenouilles" class="contenir"></div>
+</body>
+
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tests JQuery</title>
+    <link rel="stylesheet" href="css/normalize.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="js/jquery.transit.js"></script>
+    <script>
+        $(window).on("load", function () {
+
+            $("p").on("click", function () {
+
+                console.log($(this).hasClass("off"));
+                
+                if ($(this).hasClass("off")) {
+
+                    $(this).css({
+                        "background-color": "green"
+                    });
+                    $(this).removeClass("off").addClass("on");
+
+                    $(this).children("span").html("On");
+
+                } else {
+
+                    $(this).css({
+                        "background-color": "red"
+                    });
+                    $(this).removeClass("on").addClass("off");
+                    $(this).children("span").html("Off");
+                }
+
+            });  
+
+        });  
+    </script>
+</head>
+
+<body>
+    <p class="off">Angular<span>Off</span></p>
+    <p class="off">Ionic<span>Off</span></p>
+    <p class="off">WordPress<span>Off</span></p>
+    <p class="on">HTML<span>On</span></p>
+    <p class="off">CSS<span>Off</span></p>
+    <p class="on">JQuery<span>On</span></p>
+</body>
+
+</html>

@@ -1,0 +1,33 @@
+{"Organisme": {
+    "id": "mairie-09001-01",
+    "codeInsee": 9001,
+    "dateMiseAJour": "2014-10-16",
+    "pivotLocal": "mairie",
+    "Nom": "Mairie d'Aigues-Juntes",
+    "EditeurSource": "La Direction de l'information légale et administrative (Premier ministre)",
+    "Adresse": {
+        "type": "géopostale",
+        "Ligne": "Village",
+        "CodePostal": 9240,
+        "NomCommune": "Aigues-Juntes",
+        "Localisation": {
+            "Latitude": 43.0564,
+            "Longitude": 1.4717,
+            "Précision": 6
+        },
+        "Accessibilité": {"type": "DEM"}
+    },
+    "CoordonnéesNum": {
+        "Téléphone": "+33 5 61 68 95 29",
+        "Télécopie": "+33 5 61 68 95 29",
+        "Email": "aiguesj@micso.fr"
+    },
+    "Ouverture": {"PlageJ": {
+        "début": "lundi",
+        "fin": "lundi",
+        "PlageH": {
+            "début": "14:00:00",
+            "fin": "17:00:00"
+        }
+    }}
+}}

@@ -1,0 +1,106 @@
+OpenQuizzDB
+
+-----
+
+Bonjour et merci de l'intérêt que vous portez à OpenQuizzDB.
+
+Vous trouverez ci-dessous un complément d'informations relatif au téléchargement que vous venez d'effectuer sur notre site internet.
+
+L'équipe d'OpenQuizzDB met tout en œuvre pour régulièrement ajouter de nouveaux quizz à son site internet et satisfaire ainsi les nombreux internautes qui nous suivent.
+
+Pour plus d'informations sur les services proposés par OpenQuizzDB, nous vous invitons à vous rendre régulièrement sur notre site officiel à l'adresse suivante :
+
+http://www.openquizzdb.org
+
+-----
+
+L'archive que vous venez de télécharger gratuitement vous propose un quizz complet extrait de notre base de données, et ce sous six formats distincts, en fonction de l'utilisation que souhaitez en faire.
+
+Pour chaque format :
+
+- La première proposition de réponse est toujours la bonne réponse à la question posée (excepté pour les formats PDF, XML et JSON).
+
+- Une gestion des difficultés est gérée sur trois niveaux : débutant, confirmé et expert.
+
+- Une anecdote, illustrant la question et/ou la réponse, est disponible pour chacune des questions du quizz.
+
+
+1) Format PDF :
+
+Ce format est principalement destiné à un usage familial.
+
+Conçus pour être imprimés (en recto-verso) sur une feuille A4 puis pliés en accordéon, nos documents PDF représentent le contenu idéal pour animer vos dîners en famille et vos soirées entre amis.
+
+Une grille de jeu, également fournie dans cette archive (au format PDF), vous permettra de plus facilement comptabiliser les points.
+
+Pour jouer, c'est très simple! Dans un premier temps, énoncez la question sans divulguer les propositions de réponse. Les joueurs qui pensent connaître le réponse l'inscrivent sur la grille de jeu et cochent la case 2 PTS. Énoncez ensuite les quatre propositions de réponse. Les autres joueurs inscrivent alors la réponse qui leur semble correcte et cochent la case 1 PT. En fin de partie, totalisez les points et désignez le grand vainqueur.
+
+Facile et ludique !
+
+
+2) Format SQL (MySQL) :
+
+Ce format est utile pour insérer les questions/réponses directement dans votre base de données, si vous gérez un site de quizz, un IRC Bot ou si vous développez une application pour smartphone ou tablette.
+
+Le dernier champ représente le mot-clé à utiliser pour accéder à la page Wikipédia francophone correspondante.
+
+
+3) Format CSV :
+
+Un fichier CSV est un fichier texte (par opposition aux formats dit "binaires"). Chaque ligne correspond à une rangée du tableau et les cellules d'une même rangée sont séparées par un point-virgule.
+
+Ce format est quant à lui destiné aux amateurs de tris et de recherches, qu'ils pourront aisément effectuer via leur tableur.
+
+Pour chaque question, le fichier propose un lien vers une page Wikipédia. Cette page ne vous renvoie pas systématiquement vers la bonne réponse mais propose parfois une piste de réponse.
+
+Au besoin, nous vous invitons à vous rendre sur le site du projet francophone LibreOffice.org pour y télécharger le logiciel de bureautique LibreOffice.org.
+
+http://fr.libreoffice.org/
+
+
+4) Format XML :
+
+L'Extensible Markup Language est un métalangage informatique de balisage générique dit « extensible » car il permet de définir différents espaces de noms.
+
+L'objectif initial est de faciliter l'échange automatisé de contenus complexes (arbres, texte riche, ...) entre systèmes d'informations hétérogènes (interopérabilité).
+
+
+5) Format JSON :
+
+Ce cinquième format vous permet, comme le SQL, d'intégrer rapidement et facilement les questions/réponses dans votre moteur de jeu.
+
+JavaScript Object Notation (JSON) est un format de données textuelles dérivé de la notation des objets du langage JavaScript. Il permet de représenter de l'information structurée comme le permet XML par exemple. 
+
+A l'inverse des autres formats de fichiers, les propositions de réponse sont ici volontairement mélangées.
+
+La structure de notre fichier JSON reste toutefois identique pour tous les quizz que nous proposons. Vous pouvez ainsi utiliser la même routine d'importation.
+
+
+6) Format TXT :
+
+Ce sixième et dernier format vous permet d'avoir un affichage "standard" des questions contenues dans le quizz.
+
+-----
+
+Pour rappel, nos quizz sont proposés sous licence Creative Commons CC BY-SA :
+
+http://creativecommons.org/licenses/by-sa/4.0/deed.fr
+
+-----
+
+Nous espérons que ces quelques lignes vous auront aidé à mieux comprendre les différents formats proposés.
+
+OpenQuizzDB est constamment à la recherche de nouveaux collaborateurs, tant au niveau de la rédaction de nouvelles questions/réponses qu'au niveau de la supervision des correctifs à apporter.
+Le temps que vous pourrez y consacrer nous est précieux!
+Les membres du projet OpenQuizzDB vous attendent pour partager, avec vous, une expérience de vie exceptionnelle, ambitieuse et novatrice...
+
+Bon amusement et bon travail!
+
+-----
+
+Philippe Bresoux
+Fondateur
+p.bresoux@openquizzdb.org
+
+Site internet :
+http://www.openquizzdb.org

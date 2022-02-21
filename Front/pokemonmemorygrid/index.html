@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="img/dessus.png">
+    <title>Pokémon Memory Grid</title>
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="js/jquery.transit.js"></script>
+    <script>
+        $(window).on("load", function () {
+
+            var cards = new Array(8);
+            var TabPokeNameSelected = [];
+            var TabID = [];
+            var NbClick = 1;
+            var Score = 0;
+
+            function getRandomIntInclusive(min, max) // Renvoyer un entier aléaoire compris entre min et max 
+            {
+                min = Math.ceil(min);
+                max = Math.floor(max);
+                return Math.floor(Math.random() * (max - min + 1)) + min;
+            }
+
+            function makeTab() // Créer un tableau de 8 entiers aléatoires sans doublon
+            {
+                for (i = 0; i < 8; i++) {
+                    cards[i] = getRandomIntInclusive(1, 325);
+                    while (testTab(i)) {
+                        cards[i] = getRandomIntInclusive(1, 325);
+                    }
+                }
+                return cards;
+            }
+
+            function testTab(i) // Test le tableau afin de ne pas avoir de doublons
+            {
+                for (j = (i - 1); j >= 0; j--) {
+                    if (cards[i] == cards[j])
+                        return (true);
+                }
+                return (false);
+            }
+
+            function randomize(tab) { // Mélanger un tableau par l'algorithme de Fisher 
+                var i, j, tmp;
+                for (i = tab.length - 1; i > 0; i--) {
+                    j = Math.floor(Math.random() * (i + 1));
+                    tmp = tab[i];
+                    tab[i] = tab[j];
+                    tab[j] = tmp;
+                }
+                return tab;
+            }
+
+            var TabPokemon = []; // Pour créer une table vide
+            var Tab8Unique = [];
+            Tab8Unique = makeTab();
+
+            //console.log(Tab8Unique);
+
+            for (var i = 0; i < 8; i++) {
+                TabPokemon.push({
+                    name: "Pokemon" + Tab8Unique[i],
+                    img: "img/Pokemon" + Tab8Unique[i] + ".png"
+                });
+            }
+
+            var Tab16 = TabPokemon.concat(TabPokemon);
+            var gameGrid = randomize(Tab16);
+
+            // Une autre façon de trier un Tableau en utilisant la fonction sort() et en lui passant une fonction 
+            // qui a une chance sur deux d'être négative, sort() va comparer chaque élément un à un. 
+            // On aura alors une chance sur deux que l'élément en train d'être vérifié soit inférieur 
+            // (donc placé avant) l'élément précédent.
+            // var gameGrid = TabPokemon.concat(TabPokemon).sort(function () {
+            //     return 0.5 - Math.random();
+            // });
+
+            // Initialisation de la Grille de jeu
+            for (var i = 1; i < 17; i++) {
+                //console.log("GameGrid[" + i + "] : " + gameGrid[i - 1].name);
+
+                $('#p' + i).attr('name', gameGrid[i - 1].name);
+                $('#p' + i).attr('class', "off");
+                $("#p" + i).css({
+                    "background": "url(img/dessus.png) no-repeat center center / contain",
+                    "background-color": "rgb(153, 146, 146)",
+                    "background-color": "rgb(75, 70, 70)",
+                    "background-size": "cover"
+                });
+            }
+
+            $("div[name*=Pokemon]").on("click", function (e) {
+
+                if($(this).hasClass("off")){
+
+                    NbClick += 1;
+                    Score += 1;
+
+                    var name = e.target.getAttribute("name");
+                    var id = e.target.getAttribute("id");
+                    var idnumber = name.split("Pokemon");
+
+                    console.log(id);
+
+                    $(this).filter('#' + id).addClass("selected");
+                    $(this).filter('#' + id).removeClass("off");
+                    $(this).filter('#' + id).addClass("on");
+
+                    TabPokeNameSelected.push(parseInt(idnumber["1"]));
+                    TabID.push(id);
+
+                    console.log(TabPokeNameSelected);
+                    console.log(TabID);
+
+                    if (TabPokeNameSelected.length === 2) {
+
+                        if(TabPokeNameSelected[0] === TabPokeNameSelected[1]) {
+
+                            $("div[name=Pokemon" + TabPokeNameSelected[0] + "]").each(function () {
+                                $(this).addClass("match");
+                            });
+                            Score -= 2;
+
+                        }else{
+
+                            $("div[id=" + TabID[0] + "]").addClass("different");
+                            $("div[id=" + TabID[1] + "]").addClass("different");
+
+                        }
+
+                        TabPokeNameSelected = [];
+                        TabID = [];
+                    }
+
+                    if (NbClick % 2 == 0) {
+
+                        $("div[name*=Pokemon]").filter(".match").each(function () {
+                            $(this).css({
+                                visibility: "hidden"
+                            });
+
+                            $(this).removeClass("on");
+                            $(this).addClass("off");
+
+                        });
+
+                        $("div[name*=Pokemon]").filter(".selected.different").each(function () {
+                            $(this).css({
+                                background: "url(img/dessus.png) no-repeat center center / contain",
+                                backgroundColor: "rgb(153, 146, 146)",
+                                backgroundColor: "rgb(75, 70, 70)",
+                                backgroundSize: "cover",
+                                animation: "spinoff 1s ease"
+                            });
+
+                            $(this).removeClass("selected");
+                            $(this).removeClass("different");
+
+                            $(this).removeClass("on");
+                            $(this).addClass("off");
+
+                        });
+                        NbClick = 2;
+                    }
+
+                    $("#score").text(Score);
+
+                    $(this).css({
+                        animation: "spinon 1.2s ease",
+                    }).transition({}, {
+                        complete: function () {
+                            $(this).css({
+                                background: "url(img/Pokemon" + parseInt(idnumber["1"]) + ".png) no-repeat center center / contain",
+                                backgroundColor: "rgb(75, 70, 70)"
+                            })
+                        }
+                    });
+
+                }
+
+            });
+
+        });
+    </script>
+</head>
+
+<body>
+    <h1>Pokémon Memory Grid </h1>
+    <p>Handicap : <span id="score">0</span></p>
+    <section>
+        <div id="gridext">
+            <div id="grid">
+                <div id="p1"></div>
+                <div id="p2"></div>
+                <div id="p3"></div>
+                <div id="p4"></div>
+                <div id="p5"></div>
+                <div id="p6"></div>
+                <div id="p7"></div>
+                <div id="p8"></div>
+                <div id="p9"></div>
+                <div id="p10"></div>
+                <div id="p11"></div>
+                <div id="p12"></div>
+                <div id="p13"></div>
+                <div id="p14"></div>
+                <div id="p15"></div>
+                <div id="p16"></div>
+            </div>
+        </div>
+    </section>
+</body>
+
+</html>

@@ -1,0 +1,26 @@
+body {
+    margin: 0px;
+    padding: 0px;
+    background-image:url(../img/bg.jpg);
+    color: rgb(224, 20, 173);
+}
+
+h1, h2 {
+	text-align: center;
+}
+
+h6 {
+    color: white;
+    text-align:center;
+}
+
+#images{
+    margin:0 auto;
+    width:70%;
+}
+
+#mesimages{
+    border: 3px solid white;
+    width: auto;
+    height: auto;
+}

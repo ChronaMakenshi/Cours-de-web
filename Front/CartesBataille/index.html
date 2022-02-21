@@ -1,0 +1,432 @@
+<!doctype html>
+<html lang="fr">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://fonts.googleapis.com/css?family=Rye" rel="stylesheet">
+    <title class="degrade">La Bataille</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" type="image/png" href="img/Joker.png">
+
+    <script>
+        window.addEventListener("load", function() {
+
+            var Cartes = [{
+                "id": 1,
+                "nom": "AsCoeur",
+                "point": 11,
+                "force": 8
+            }, {
+                "id": 2,
+                "nom": "AsCarreau",
+                "point": 11,
+                "force": 8
+            }, {
+                "id": 3,
+                "nom": "AsPique",
+                "point": 11,
+                "force": 8
+            }, {
+                "id": 4,
+                "nom": "AsTrefle",
+                "point": 11,
+                "force": 8
+            }, {
+                "id": 5,
+                "nom": "SeptCoeur",
+                "point": 0,
+                "force": 1
+            }, {
+                "id": 6,
+                "nom": "SeptCarreau",
+                "point": 0,
+                "force": 1
+            }, {
+                "id": 7,
+                "nom": "SeptPique",
+                "point": 0,
+                "force": 1
+            }, {
+                "id": 8,
+                "nom": "SeptTrefle",
+                "point": 0,
+                "force": 1
+            }, {
+                "id": 9,
+                "nom": "HuitCoeur",
+                "point": 0,
+                "force": 2
+            }, {
+                "id": 10,
+                "nom": "HuitCarreau",
+                "point": 0,
+                "force": 2
+            }, {
+                "id": 11,
+                "nom": "HuitPique",
+                "point": 0,
+                "force": 2
+            }, {
+                "id": 12,
+                "nom": "HuitTrefle",
+                "point": 0,
+                "force": 2
+            }, {
+                "id": 13,
+                "nom": "NeufCoeur",
+                "point": 0,
+                "force": 3
+            }, {
+                "id": 14,
+                "nom": "NeufCarreau",
+                "point": 0,
+                "force": 3
+            }, {
+                "id": 15,
+                "nom": "NeufPique",
+                "point": 0,
+                "force": 3
+            }, {
+                "id": 16,
+                "nom": "NeufTrefle",
+                "point": 0,
+                "force": 3
+            }, {
+                "id": 17,
+                "nom": "DixCoeur",
+                "point": 10,
+                "force": 4
+            }, {
+                "id": 18,
+                "nom": "DixCarreau",
+                "point": 10,
+                "force": 4
+            }, {
+                "id": 19,
+                "nom": "DixPique",
+                "point": 10,
+                "force": 4
+            }, {
+                "id": 20,
+                "nom": "DixTrefle",
+                "point": 10,
+                "force": 4
+            }, {
+                "id": 21,
+                "nom": "ValetCoeur",
+                "point": 10,
+                "force": 5
+            }, {
+                "id": 22,
+                "nom": "ValetCarreau",
+                "point": 10,
+                "force": 5
+            }, {
+                "id": 23,
+                "nom": "ValetPique",
+                "point": 10,
+                "force": 5
+            }, {
+                "id": 24,
+                "nom": "ValetTrefle",
+                "point": 10,
+                "force": 5
+            }, {
+                "id": 25,
+                "nom": "DameCoeur",
+                "point": 10,
+                "force": 6
+            }, {
+                "id": 26,
+                "nom": "DameCarreau",
+                "point": 10,
+                "force": 6
+            }, {
+                "id": 27,
+                "nom": "DamePique",
+                "point": 10,
+                "force": 6
+            }, {
+                "id": 28,
+                "nom": "DameTrefle",
+                "point": 10,
+                "force": 6
+            }, {
+                "id": 29,
+                "nom": "RoiCoeur",
+                "point": 10,
+                "force": 7
+            }, {
+                "id": 30,
+                "nom": "RoiCarreau",
+                "point": 10,
+                "force": 7
+            }, {
+                "id": 31,
+                "nom": "RoiPique",
+                "point": 10,
+                "force": 7
+            }, {
+                "id": 32,
+                "nom": "RoiTrefle",
+                "point": 10,
+                "force": 7
+            }];
+            // On effectue une copie du Tableau initial que l'on affecte au tableau TabOrdinateur
+            var TabOrdinateur = Cartes.slice(0);
+
+            console.log(TabOrdinateur);
+            var TabJoueur = [];
+            var TabTempBataille = [];
+            var ScoreOrdi = 0;
+            var ScoreJoueur = 0;
+
+            var prenom = prompt("Entrez votre Prénom :");
+            if (prenom != "") {
+                document.getElementById("Monprenom").innerHTML = prenom;
+            } else {
+                document.getElementById("Monprenom").innerHTML = "Vous";
+            }
+            document.getElementById("ScoreJoueur").innerHTML = 0;
+            document.getElementById("ScoreOrdi").innerHTML = 0;
+
+            //  Initialisation du Jeu - Distribution aléatoire des cartes - 16 Cartes pour le Joueur et 
+            //  16 pour l'Ordinateur. La méthode splice permet de retirer un élément du Tableau TabOrdinateur
+            //  et ceci de façon aléatoire dans ce cas, à chaque itération on pousse cet élément 
+            //  dans le tableau du Joueur TabJoueur. On obtient donc bien au final 2 Tableaux de 
+            //  16 valeurs distinctes. On va pouvoir commencer à travailler ...
+
+            while (TabJoueur.length < 16) TabJoueur.push(TabOrdinateur.splice(Math.floor(Math.random() * TabOrdinateur.length), 1)[0]);
+
+            console.log(TabOrdinateur);
+            console.log(TabJoueur);
+
+            // Récupération de l'objet Carte Rouge auquel on affecte un gestionnaire d'évènement
+            // sur l'évènement "click" et qui provoque l'exécution de la fonction ChangeCarte ... 
+            var recupCarte = document.getElementById("imgCarte");
+            recupCarte.addEventListener("click", ChangeCarte);
+
+            // Méthode qui est appelée à chaque fois que l'utilisateur clique sur le dos de la 
+            // Carte rouge.
+            function ChangeCarte() {
+
+                if ((TabJoueur.length !== 0) && (TabOrdinateur.length !== 0)) {
+
+                    console.log(TabOrdinateur);
+                    console.log(TabJoueur);
+
+                    document.getElementById("NombreCarteOrdi").innerHTML = TabOrdinateur.length;
+                    document.getElementById("NombreCarteJoueur").innerHTML = TabJoueur.length;
+
+                    document.getElementById("ScoreOrdi").innerHTML = ScoreOrdi;
+                    document.getElementById("ScoreJoueur").innerHTML = ScoreJoueur;
+
+                    var valuesTabJoueur = Object.values(TabJoueur);
+                    var carteJoueur = valuesTabJoueur[parseInt(Math.random() * valuesTabJoueur.length)];
+
+                    var valuesTabOrdinateur = Object.values(TabOrdinateur);
+                    var carteOrdinateur = valuesTabOrdinateur[parseInt(Math.random() * valuesTabOrdinateur.length)];
+
+                    var srcimgOrdinateur = carteOrdinateur["nom"];
+                    var srcimgJoueur = carteJoueur["nom"];
+
+                    var indexCarteJoueur = TabJoueur.indexOf(carteJoueur);
+                    var indexCarteOrdinateur = TabOrdinateur.indexOf(carteOrdinateur);
+
+                    var recupsrc = document.getElementById("imgCarte").getAttribute("src");
+
+                    if ((recupsrc === "img/backcartegrande.png") || (recupsrc === "img/backcartegrandebatrect.png")) {
+                        document.getElementById("imgMaCarte").src = "img/" + srcimgJoueur + ".png";
+                        document.getElementById("imgMaCarteOrdinateur").src = "img/" + srcimgOrdinateur + ".png";
+                    }
+
+                    if (carteJoueur["force"] > carteOrdinateur["force"]) {
+
+                        if (TabTempBataille.length !== 0) {
+
+                            var parent = document.getElementById("CarteBatailleJoueur");
+                            // On prend toutes les cartes de la table TabTempBataille et on les
+                            // insére dans la table TabJoueur. Ensuite on vide la Table TabTempBataille
+                            for (var i = 0; i < TabTempBataille.length; i++) {
+                                var tempBatCarte = TabTempBataille[i];
+                                var e = document.createElement("img");
+                                e.setAttribute("src", "img/" + tempBatCarte["nom"] + ".png");
+                                e.setAttribute("class", "BatPetiteImageOrdi");
+                                parent.appendChild(e);
+
+                                TabJoueur.push(tempBatCarte);
+                            }
+                            // On vide le Tableau temporaire TabTempBataille
+                            TabTempBataille = [];
+
+                        } else {
+                            var collection = document.getElementsByClassName("BatPetiteImageOrdi");
+
+                            for (var i = 0; i < collection.length; i++) {
+                                collection[i].style.display = 'none';
+                            }
+                        }
+
+                        document.getElementById("imgCarteOrdinateur").src = "img/backcartebleuegrande.png";
+                        document.getElementById("imgCarte").src = "img/backcartegrande.png";
+
+                        TabJoueur.push(carteOrdinateur);
+                        TabOrdinateur.splice(indexCarteOrdinateur, 1);
+
+                        ScoreJoueur += carteOrdinateur["point"];
+                        //document.getElementById("ScoreJoueur").innerHTML = ScoreJoueur;
+                    }
+
+                    if (carteJoueur["force"] < carteOrdinateur["force"]) {
+
+                        if (TabTempBataille.length !== 0) {
+                            // Afin d'afficher en miniatures les cartes mises en jeu lors d'une Bataille
+                            var parent = document.getElementById("CarteBatailleOrdi");
+
+                            // On prend toutes les cartes de la table TabTempBataille et on les
+                            // insére dans la table TabOrdinateur. Ensuite on vide la Table TabTempBataille
+                            for (var i = 0; i < TabTempBataille.length; i++) {
+                                var tempBatCarte = TabTempBataille[i];
+                                // Une miniature par carte de la table TabTempBataille
+                                var e = document.createElement("img");
+                                e.setAttribute("src", "img/" + tempBatCarte["nom"] + ".png");
+                                // Chaque miniature est dotée de la même classe pour pouvoir cacher
+                                // ces miniatures lors du coup suivant. 
+                                e.setAttribute("class", "BatPetiteImageOrdi");
+                                parent.appendChild(e);
+
+                                TabOrdinateur.push(tempBatCarte);
+                            }
+                            // On vide le Tableau temporaire TabTempBataille
+                            TabTempBataille = [];
+
+                        } else {
+                            var collection = document.getElementsByClassName("BatPetiteImageOrdi");
+                            for (var i = 0; i < collection.length; i++) {
+                                collection[i].style.display = 'none';
+                            }
+
+                        }
+
+                        document.getElementById("imgCarteOrdinateur").src = "img/backcartebleuegrande.png";
+                        document.getElementById("imgCarte").src = "img/backcartegrande.png";
+
+                        TabOrdinateur.push(carteJoueur);
+                        TabJoueur.splice(indexCarteJoueur, 1);
+
+                        ScoreOrdi += carteJoueur["point"];
+                        //document.getElementById("ScoreOrdi").innerHTML = ScoreOrdi;
+                    }
+                    // S'il n'y a plus assez de cartes pour engager une bataille on termine la partie ici
+                    if (carteJoueur["force"] === carteOrdinateur["force"]) {
+
+                        if (TabJoueur.length <= 2) {
+                            document.getElementById("OrdiGagnant").src = "img/CoupeGagnant50-44.png";
+                            TabJoueur.length = 0;
+                            alert("fin de partie !!!");
+                        } else {
+                            if (TabOrdinateur.length <= 2) {
+                                document.getElementById("JoueurGagnant").src = "img/CoupeGagnant50-44.png";
+                                TabOrdinateur.length = 0;
+                                alert("fin de partie !!!");
+                            } else {
+                                document.getElementById("imgCarteOrdinateur").src = "img/backcartebleuegrandebatrect.png";
+                                document.getElementById("imgCarte").src = "img/backcartegrandebatrect.png";
+
+                                var indexCarteJoueurBat = TabJoueur.indexOf(carteJoueur);
+                                var indexCarteOrdinateurBat = TabOrdinateur.indexOf(carteOrdinateur);
+
+                                TabTempBataille.push(carteJoueur);
+                                TabTempBataille.push(carteOrdinateur);
+
+                                TabJoueur.splice(indexCarteJoueurBat, 1);
+                                TabOrdinateur.splice(indexCarteOrdinateurBat, 1);
+
+                                var BatTabJoueur = Object.values(TabJoueur);
+                                var BatcarteJoueur = BatTabJoueur[parseInt(Math.random() * BatTabJoueur.length)];
+
+                                var BatTabOrdinateur = Object.values(TabOrdinateur);
+                                var BatcarteOrdinateur = BatTabOrdinateur[parseInt(Math.random() * BatTabOrdinateur.length)];
+
+                                // Récupération des index des cartes mises en jeu pour préparer la suppression
+                                // des cartes dans les tables respectives.
+                                var indexBatCarteJoueur = TabJoueur.indexOf(BatcarteJoueur);
+                                var indexBatCarteOrdinateur = TabOrdinateur.indexOf(BatcarteOrdinateur);
+
+                                TabTempBataille.push(BatcarteJoueur);
+                                TabTempBataille.push(BatcarteOrdinateur);
+
+                                TabJoueur.splice(indexBatCarteJoueur, 1);
+                                TabOrdinateur.splice(indexBatCarteOrdinateur, 1);
+                            }
+                        }
+                    }
+                } else {
+                    if (TabJoueur.length == 0) {
+                        document.getElementById("OrdiGagnant").src = "img/CoupeGagnant50-44.png";
+                        document.getElementById("NombreCarteOrdi").innerHTML = 32;
+                        document.getElementById("NombreCarteJoueur").innerHTML = 0;
+                    }
+                    if (TabOrdinateur.length == 0) {
+                        document.getElementById("JoueurGagnant").src = "img/CoupeGagnant50-44.png";
+                        document.getElementById("NombreCarteOrdi").innerHTML = 0;
+                        document.getElementById("NombreCarteJoueur").innerHTML = 32;
+                    }
+                }
+            }
+            // Gestion de l'identification du Joueur et initialisation des Scores
+            if (prenom != "") {
+                document.getElementById("Monprenom").innerHTML = prenom;
+            } else {
+                document.getElementById("Monprenom").innerHTML = "Sacha";
+            }
+            document.getElementById("ScoreJoueur").innerHTML = 0;
+            document.getElementById("ScoreOrdi").innerHTML = 0;
+
+        });
+    </script>
+</head>
+
+<body>
+    <h1>Jeu de la Bataille</h1>
+    <div id="carteOrdinateur">
+        <img class="imgCarteOrdinateur" id="imgCarteOrdinateur" src="img/backcartebleuegrande.png">
+        <img id="imgMaCarteOrdinateur">
+        <div id="infosOrdi">
+            <table>
+                <caption>Ordinateur</caption><img id="OrdiGagnant">
+                <tr>
+                    <td>Score : </td>
+                    <td id="ScoreOrdi"></td>
+                </tr>
+                <tr>
+                    <td>Nombre de Cartes : </td>
+                    <td id="NombreCarteOrdi"></td>
+                </tr>
+            </table>
+            <div id="CarteBatailleOrdi"></div>
+        </div>
+    </div>
+    <div id="carte">
+        <img class="imgCarte" id="imgCarte" src="img/backcartegrande.png">
+        <img id="imgMaCarte">
+        <div id="infosJoueur">
+            <table>
+                <caption id="Monprenom"></caption><img id="JoueurGagnant">
+                <tr>
+                    <td>Score : </td>
+                    <td id="ScoreJoueur"></td>
+                </tr>
+                <tr>
+                    <td>Nombre de Cartes : </td>
+                    <td id="NombreCarteJoueur"></td>
+                </tr>
+            </table>
+            <div id="CarteBatailleJoueur"></div>
+        </div>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,44 @@
+#html:hover {
+    color: red;
+}
+
+#css:hover {
+    color: rgb(74, 60, 202);
+}
+
+#javascript:hover {
+    color: rgb(218, 233, 14);
+}
+
+#jquery:hover {
+    color: rgb(52, 192, 47);
+}
+
+.container {
+    padding: 30px;
+}
+
+img {
+    float: left;
+}
+
+mark {
+    background-color: rgba(115, 12, 167, 0.431);
+}
+
+p {
+    text-align: justify;
+    font-size: x-large;
+    margin-left: 30px;
+}
+
+p::first-letter {
+    text-transform: capitalize;
+    color: rgb(224, 192, 213);
+    font-size: 130%;
+    font-weight: bolder;
+}
+
+.active{
+    font-weight: bold;
+}

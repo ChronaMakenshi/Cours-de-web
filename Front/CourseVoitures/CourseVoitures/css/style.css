@@ -1,0 +1,31 @@
+body {
+    margin: 0px;
+    padding: 0px;
+    background-image:url(../img/bg.jpg);
+    color: #F50EB6;
+}
+
+h1 {
+	text-align: center;
+	color: #F50EB6;
+}
+
+img {
+    margin: 0px;
+    padding: 0px;
+    border:none;
+}
+
+#monBoutonGo{
+    margin-left: 610px;
+}
+
+#monGo, #monStop {
+
+    color: #000000;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: large;
+    background-color: rgb(240, 200, 20);
+    border: none;
+
+}

@@ -1,0 +1,86 @@
+@import url('https://fonts.googleapis.com/css?family=Shadows+Into+Light&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Heebo&display=swap');
+body {
+    font-size: 12px;
+    font-family: 'Heebo', sans-serif;
+}
+
+.header>img {
+    float: left;
+}
+
+.header>h1 {
+    color: green;
+    font-family: 'Shadows Into Light', cursive;
+    font-weight: bold;
+    margin-top: 0.7em;
+}
+
+.navbar {
+    position: relative;
+    display: -ms-flexbox;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0;
+}
+
+.navbar-nav .nav-link {
+    padding-right: 0;
+    padding-left: 0;
+}
+
+ul {
+    width: 100%;
+}
+
+li {
+    width: 20%;
+    text-align: center;
+    font-size: 15px;
+}
+
+.section {
+    margin: 0;
+    padding: 0;
+}
+
+.titre {
+    background-color: #47FF1A;
+    margin: 0;
+    padding: 0;
+    color: white;
+    font-size: 34px;
+    padding-left: 0.7rem;
+}
+
+.text {
+    margin: 0;
+    padding: 0;
+    height: 240px;
+}
+.text>p {
+    margin: 1rem;
+}
+
+.footer {
+    background-color: lightgray;
+}
+
+.footer>a {
+    text-decoration: none;
+    color: purple;
+    margin-right: 1.2rem;
+}
+
+@media screen and (max-width: 768px) and (min-width: 600px) {
+
+
+    .header>h1 {
+        float: right;
+        font-size: 10px;
+    }
+   
+
+}

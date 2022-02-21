@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Casse Brique</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
+    <link rel="icon" type="image/png" href="img/casse_brique1.png">
+    <!--[if lt IE 9]><script type="text/javascript" src="js/excanvas.compiled.js"></script><![endif]-->
+</head>
+
+<body>
+    <h1 id="montitre" class="colorElement">Casse Brique en JavaScript</h1>
+    <!-- Chargement de l'image dans le DOM et masquage -->
+    <img id="imageBrique" src="img/Croco.png" style="display:none;" />
+    <br><br>
+    <div id="contenu">
+        <canvas id="myCanvas" width="480" height="320"></canvas>
+        <input type="button" id="monbouton" value="Jouer">
+        <label class="colorElement" for="couleurback">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Couleur du Fond :</label>
+        <input type="color" id="couleurback" value="#8d8787"> &nbsp;&nbsp;&nbsp;&nbsp;
+        <label class="colorElement" for="couleurtitre">&nbsp;&nbsp;Couleur des Eléments :</label>
+        <input type="color" id="couleurtitre" value="#F50EB6">
+    </div>
+    <script>
+        // Code JavaScript pour implémenter les divers fonctionnalités
+        // du Jeu et de l’interface utilisateur.
+        var canvas = document.getElementById("myCanvas");
+        var ctx = canvas.getContext("2d");
+
+        var interval = null;
+
+        var x = canvas.width / 2;
+        var y = canvas.height - 30;
+        var dx = 4;
+        var dy = -4;
+        var ballRadius = 10;
+        var colorRandom = "#F50EB6";
+
+        // Hauteur et Largeur de la palette, puis positionnement initilal de cette
+        // palette dans le Canvas
+        var paddleHeight = 10;
+        var paddleWidth = 100;
+        var paddleX = (canvas.width - paddleWidth) / 2;
+
+        // Gestion du déplacement de la palette - Clavier
+        var rightPressed = false;
+        var leftPressed = false;
+
+        var brickRowCount = 5; // 5 Briques par ligne
+        var brickColumnCount = 3; // 3 Briques par colonne
+        var brickWidth = 75; // Largeur d'une Brique
+        var brickHeight = 20; // Hauteur d'une Brique
+        var brickPadding = 10; // Ecart entre les Briques
+        var brickOffsetTop = 30; // Décalage superieur
+        var brickOffsetLeft = 30; // Décalage à gauche
+
+        var score = 0; // Initialisation du score à 0
+        var lives = 3; // Nombre de vies au départ
+        // Récupération dans le Local Storage de la couleur de fond du Canvas 
+        var recupColorBackLS = localStorage.colorSetting;
+        // Récupération dans le Local Storage de la couleur des éléments d'interface
+        var recupColorElementsLS = localStorage.colorElements;
+
+        //document.getElementById("imagePinguin").hide;
+        // Permet de récupérer la couleur contenue dans la variable localStorage.colorSetting
+        document.getElementById("myCanvas").style.backgroundColor = recupColorBackLS;
+        document.getElementById("couleurback").value = recupColorBackLS;
+
+        var maCollectionElements = document.getElementsByClassName("colorElement");
+        for (i = 0; i < maCollectionElements.length; i++) {
+            document.getElementsByClassName('colorElement')[i].style.color = recupColorElementsLS;
+        }
+        document.getElementById("couleurtitre").value = recupColorElementsLS;
+
+        var bricks = [];
+        for (var c = 0; c < brickColumnCount; c++) {
+            bricks[c] = [];
+            for (var r = 0; r < brickRowCount; r++) {
+                bricks[c][r] = {
+                    x: 0,
+                    y: 0,
+                    status: 1
+                };
+            }
+        }
+
+        // Permet de changer la couleur du Titre et des libellés hors Canvas de l'Interface
+        var recupElement = document.getElementById("couleurtitre");
+        recupElement.addEventListener("change", colorElement, false);
+
+        function colorElement(event) {
+            var maCollectionElements = document.getElementsByClassName("colorElement");
+            for (i = 0; i < maCollectionElements.length; i++) {
+                document.getElementsByClassName('colorElement')[i].style.color = event.target.value;
+            }
+            localStorage.colorElements = event.target.value;
+            document.location.reload();
+            //createCookie("colTitre",event.target.value,10);   
+        }
+
+        // Permet de changer la couleur de fond du Canvas.
+        var recupBack = document.getElementById("couleurback");
+        recupBack.addEventListener("change", selectColorPicker, false);
+
+        function selectColorPicker(event) {
+            document.getElementById("myCanvas").style.backgroundColor = event.target.value;
+            localStorage.colorSetting = event.target.value;
+            document.location.reload();
+        }
+
+        // Méthode qui permet d'obtenir une couleur aléatoire au format hexadecimal
+        // de la forme #XXXXXX
+        function getRandomColor() {
+            var letters = '0123456789ABCDEF';
+            var color = '#';
+            for (var i = 0; i < 6; i++) {
+                color += letters[Math.floor(Math.random() * 16)];
+            }
+            return color;
+        }
+        // Dessin dans le Canvas de la balle
+        function drawBall(paramColor) {
+            ctx.beginPath();
+            ctx.arc(x, y, ballRadius, 0, Math.PI * 2);
+            //ctx.fillStyle = getRandomColor();
+            //ctx.fillStyle = "#F50EB6";
+            ctx.fillStyle = paramColor;
+            ctx.fill();
+            ctx.closePath();
+        }
+        // Dessin dans le Canvas de la "raquette"
+        function drawPaddle(paramColor) {
+            ctx.beginPath();
+            ctx.rect(paddleX, canvas.height - paddleHeight, paddleWidth, paddleHeight);
+            ctx.fillStyle = paramColor;
+            ctx.fill();
+            ctx.closePath();
+        }
+
+        // Dessin sur le Canevas des Briques en tenant compte des différents paramétres
+        function drawBricks(paramColor) {
+            // Récupération de l'image insérée dans le DOM
+            var img = document.getElementById("imageBrique");
+            for (var c = 0; c < brickColumnCount; c++) {
+                for (var r = 0; r < brickRowCount; r++) {
+                    if (bricks[c][r].status == 1) {
+                        var brickX = (r * (brickWidth + brickPadding)) + brickOffsetLeft;
+                        var brickY = (c * (brickHeight + brickPadding)) + brickOffsetTop;
+                        bricks[c][r].x = brickX;
+                        bricks[c][r].y = brickY;
+
+                        // Afin d'utiliser une image en guise de Brique ;-)
+                        //ctx.beginPath();
+                        //ctx.drawImage(img, brickX, brickY, 80, 80);
+                        //ctx.closePath();
+
+                        ctx.beginPath();
+                        ctx.rect(brickX, brickY, brickWidth, brickHeight);
+                        ctx.fillStyle = paramColor;
+                        ctx.fill();
+                        ctx.closePath();
+                    }
+                }
+            }
+        }
+
+        function drawScore(paramColor) {
+            ctx.font = "16px Arial";
+            ctx.fillStyle = paramColor;
+            ctx.fillText("Score: " + score, 8, 20);
+        }
+
+        function drawLives(paramColor) {
+            ctx.font = "16px Arial";
+            ctx.fillStyle = paramColor;
+            ctx.fillText("Vies: " + lives, canvas.width - 65, 20);
+        }
+
+        function draw() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            drawBricks(recupColorElementsLS);
+            drawBall(recupColorElementsLS);
+            drawPaddle(recupColorElementsLS);
+            drawScore(recupColorElementsLS);
+            drawLives(recupColorElementsLS);
+            collisionDetection();
+
+            x += dx;
+            y += dy;
+
+            if (x + dx > canvas.width - ballRadius || x + dx < ballRadius) {
+                dx = -dx;
+                // Méthode JavaScript pour générer une couleur aléatoire de la balle à chaque
+                // collision.
+                //colorRandom = '#'+(Math.random()*0xFFFFFF<<0).toString(16);
+                //ctx.fillStyle = getRandomColor();
+
+            }
+            //if(y + dy > canvas.height-ballRadius || y + dy < ballRadius) {
+            //dy = -dy;
+            //colorRandom = '#'+(Math.random()*0xFFFFFF<<0).toString(16);
+            //ctx.fillStyle = getRandomColor();
+            //}
+            if (y + dy < ballRadius) {
+                dy = -dy;
+            } else if (y + dy > canvas.height - ballRadius) {
+
+                if (x > paddleX && x < paddleX + paddleWidth) {
+                    dy = -dy;
+                } else {
+                    lives--;
+                    if (!lives) {
+                        alert("GAME OVER");
+                        document.location.reload();
+
+                        // clearInterval(interval); // Needed for Chrome to end game
+                        // ctx.clearRect(0, 0, canvas.width, canvas.height);
+                        // ctx.fillStyle = '#F50EB6';
+                        // ctx.font = '50px sans-serif';
+                        // ctx.fillText('Game Over', ((canvas.width / 2) - (ctx.measureText('Game Over').width / 2)), 100);
+
+                    } else {
+                        x = canvas.width / 2;
+                        y = canvas.height - 30;
+                        dx = 4;
+                        dy = -4;
+                        paddleX = (canvas.width - paddleWidth) / 2;
+                    }
+                }
+            }
+
+            if (rightPressed && paddleX < canvas.width - paddleWidth) {
+                paddleX += 8;
+            } else if (leftPressed && paddleX > 0) {
+                paddleX -= 8;
+            }
+
+            requestAnimationFrame(draw);
+        } // Fin de la fonction draw()
+
+        document.addEventListener("keydown", keyDownHandler, false);
+        document.addEventListener("keyup", keyUpHandler, false);
+        document.addEventListener("mousemove", mouseMoveHandler, false);
+
+        function keyDownHandler(e) {
+            if (e.key == "Right" || e.key == "ArrowRight") {
+                rightPressed = true;
+            } else if (e.key == "Left" || e.key == "ArrowLeft") {
+                leftPressed = true;
+            }
+        }
+
+        function keyUpHandler(e) {
+            if (e.key == "Right" || e.key == "ArrowRight") {
+                rightPressed = false;
+            } else if (e.key == "Left" || e.key == "ArrowLeft") {
+                leftPressed = false;
+            }
+        }
+
+        function mouseMoveHandler(e) {
+            var relativeX = e.clientX - canvas.offsetLeft;
+            if (relativeX > 0 && relativeX < canvas.width) {
+                paddleX = relativeX - paddleWidth / 2;
+            }
+        }
+
+        function collisionDetection() {
+            for (var c = 0; c < brickColumnCount; c++) {
+                for (var r = 0; r < brickRowCount; r++) {
+                    var b = bricks[c][r];
+                    if (b.status == 1) {
+                        if (x > b.x && x < b.x + brickWidth && y > b.y && y < b.y + brickHeight) {
+                            dy = -dy;
+                            b.status = 0;
+                            score++;
+                            if (score == brickRowCount * brickColumnCount) {
+
+                                // clearInterval(interval);
+                                // ctx.clearRect(0, 0, canvas.width, canvas.height);
+                                // ctx.fillStyle = '#F50EB6';
+                                // ctx.font = '30px sans-serif';
+                                // ctx.fillText('Félicitations, vous avez gagné !', ((canvas.width / 2) - (ctx.measureText('Félicitations, vous avez gagné !').width / 2)), 100);
+
+                                alert("Félicitations, vous avez gagné !");
+                                document.location.reload();
+
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        //var recupMonBouton = document.getElementById("monbouton");
+        //recupMonBouton.addEventListener("click", ExecuteDraw, false);
+
+        function ExecuteDraw() {
+            //interval = setInterval(draw, 10);
+            //console.log(interval);
+        }
+        document.getElementById("monbouton").onclick = draw;
+    </script>
+</body>
+
+</html>

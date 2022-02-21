@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="fr">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+    <title>Validation de formulaire</title>
+</head>
+
+<body>
+    <h1>Validation de formulaire - BootStrap 5</h1>
+    <br><br>
+    <div class="container">
+        <!-- l'attribut novalidate permet de désactiver la validation par défaut du formulaire
+            puisque nous avons mis les attributs required
+        -->
+        <form class="needs-validation" novalidate>
+            <div class="form-row">
+                <div class="col-md-12 mb-3">
+                    <label for="nom">Nom</label>
+                    <input type="text" class="form-control" id="nom" name="nom" required
+                        pattern=^[A-Za-z0-9ÀÁÂÃÄÅàáâãäåÒÓÔÕÖØòóôõöøÈÉÊËèéêëÇçÌÍÎÏìíîïÙÚÛÜùúûüÿÑñ]{4,}>
+                    <div class="valid-feedback">Ok</div>
+                    <div class="invalid-feedback">Veuillez saisir un Nom Valide</div>
+                </div>
+                <div class="col-md-12 mb-3">
+                    <label for="prenom">Prénom</label>
+                    <input type="text" class="form-control" id="prenom" required
+                        pattern=^[A-Za-z0-9ÀÁÂÃÄÅàáâãäåÒÓÔÕÖØòóôõöøÈÉÊËèéêëÇçÌÍÎÏìíîïÙÚÛÜùúûüÿÑñ]{4,}>
+                    <div class="valid-feedback">Ok</div>
+                    <div class="invalid-feedback">Veuillez saisir un Prénom Valide</div>
+                </div>
+                <div class="col-md-12 mb-3">
+                    <label for="datenaiss">Date de Naissance</label>
+                    <input type="date" class="form-control" id="datenaiss" required>
+                    <div class="valid-feedback">Ok</div>
+                    <div class="invalid-feedback">Veuillez saisir une Date de Naissance</div>
+                </div>
+                <div class="col-md-12 mb-3">
+                    <label for="email">Email</label>
+                    <input type="text" class="form-control" id="email" required
+                        pattern=^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$>
+                    <div class="valid-feedback">Ok</div>
+                    <div class="invalid-feedback">Veuillez saisir un Email Valide</div>
+                </div>
+            </div>
+            <button class="btn btn-light" type="reset" id="annuler">Annuler</button>
+            <button class="btn btn-success" type="submit" id="submit">Envoyer</button>
+        </form>
+    </div>
+
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0"
+        crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  
+    <script src="script.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Etude des Promesses en JQuery</title>
+    <link rel="icon" type="image/png" href="img/jquery-logo.png">
+    <link href="css/bootstrap.css" rel="stylesheet" />
+    <link href="css/style.css" rel="stylesheet" type="text/css" />
+    <script src="js/jquery.js"></script>
+    <script>
+        $(document).ready(function() {
+            $("p.avecpromesse").fadeOut(1000).fadeIn(1000).promise()
+                .done(function() {
+                    $(this).css("color", "orange");
+                    console.log("L'animation est réussie.");
+                });
+
+            $("p.sanspromesse").fadeOut(1000).fadeIn(1000).css("color", "orange");
+
+        });
+    </script>
+</head>
+
+<body>
+    <h1>Etude des Promesses en JQuery</h1>
+    <br><br>
+    <div id="monContainer">
+        <h3>Avec Promesse</h3>
+        <p class="avecpromesse">paragraphe1</p>
+        <p class="avecpromesse">paragraphe2</p>
+        <br>
+        <br>
+        <h3>Sans Promesse</h3>
+        <p class="sanspromesse">paragraphe3</p>
+        <p class="sanspromesse">paragraphe4</p>
+    </div>
+</body>
+
+</html>

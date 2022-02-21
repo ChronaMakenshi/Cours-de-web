@@ -1,0 +1,77 @@
+body{
+    background-image: url(../img/fond.png);
+}
+
+.maspan{
+  padding-left : 10px;
+}
+
+header{
+    background-color: #FFE9A4;
+    padding: 10px;
+}
+
+header nav a {
+    font-family: "Oswald";
+    font-size: 1.2em;
+    color: darkorange;
+    text-decoration: none;
+    margin-left: 30px;
+    text-transform:uppercase;
+    
+}
+
+header nav a:hover {
+    text-decoration: none;
+    border-bottom : 1px solid darkorange;
+    color: darkorange;
+
+}
+
+h2{
+    font-family: "Oswald";
+    font-size: 1.6em;
+    color: darkorange;
+    font-weight: bolder;
+}
+
+article{
+    border: 20px solid white;
+    background-color: white;
+}
+
+article a {
+    background-color:darkorange;
+    color: white;
+    padding: 10px;
+    text-decoration: none;
+    font-family: "Oswald";
+    font-size: 18px;
+    float: right;
+   
+}
+
+article a:hover {
+    color: white;
+    background-color:rgb(192, 83, 44);
+
+}
+
+article img{
+    border: 10px solid white;
+}
+
+span, ul{
+    text-align: justify;
+    font-family: "Times";
+    color: rgb(138, 127, 138);
+    font-size: 22px;
+}
+
+footer{
+    text-align: center;
+    font-family: "Times";
+    font-size: 20px;
+    color: rgb(138, 127, 138);
+    padding: 20px;
+}

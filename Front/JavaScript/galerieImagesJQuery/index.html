@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Galerie Photos</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/css?family=Shadows+Into+Light" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" media="screen" href="css/style.css">
+    <script src="js/jquery.js"></script>
+    <script>
+        $(document).ready(function() {
+            $(".container>img").each(function() {
+                var width = $(this)[0].naturalWidth;
+                var height = $(this)[0].naturalHeight;
+                //console.log(width);
+                if (width > height) $(this).addClass("paysage");
+                if (width < height) $(this).addClass("portrait");
+                if (width == height) $(this).addClass("carre");
+            });
+
+        })
+    </script>
+</head>
+
+<body>
+    <h1>les Animaux de nos forêts</h1>
+    <div class="container">
+        <img src="img/Biche.jpg">
+        <img src="img/Blaireau.jpg">
+        <img src="img/Cerf.jpg">
+        <img src="img/Couleuvre.jpg">
+        <img src="img/Ecureuil.jpg">
+        <img src="img/Herisson.jpg">
+        <img src="img/Lapin.jpg">
+        <img src="img/Libellule.jpg">
+        <img src="img/Lievre.jpg">
+        <img src="img/Loup.jpg">
+        <img src="img/Loutre.jpg">
+        <img src="img/Lynx.jpg">
+        <img src="img/Mante_Religieuse.jpg">
+        <img src="img/Marcassin.jpg">
+        <img src="img/Ours.jpg">
+        <img src="img/OursAssis.jpg">
+        <img src="img/Pieride_du_chou.jpg">
+        <img src="img/Renard.jpg">
+        <img src="img/Renard1.jpg">
+        <img src="img/Sanglier.jpg">
+    </div>
+</body>
+
+</html>
